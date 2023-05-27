@@ -2,6 +2,7 @@
 
 require_once("DataRepository.php");
 require_once("./models/User.php");
+require_once("./utils/dataFetch.php");
 
 // TODO SQL statements should use prepared statement instead of raw SQL string
 class UserDataRepository implements DataRepository
@@ -16,28 +17,39 @@ class UserDataRepository implements DataRepository
     public function queryById($id): ?User
     {
         $query = "SELECT * FROM User WHERE user_id = ?";
-        $userRecord = $this->fetchRecord($query, 'i', $id);
+        $paramTypes = "i";
+        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
 
-        if (!$userRecord) {
-            return null;
+        $mysqli_result = $stmt->get_result();
+        if ($mysqli_result->num_rows <= 0) {
+            throw new mysqli_sql_exception("User with the given id is not found");
         }
 
-        return $this->mapRowIntoUserObj($userRecord);
+        $result = $mysqli_result->fetch_assoc();
+        $stmt->close();
+        return $this->mapRowIntoUserObj($result);
     }
 
     public function getLists(): ?array
     {
         $query = "SELECT * FROM User";
-        $userList = $this->fetchMultipleRecords($query);
+        $stmt = $this->connection->prepare($query);
 
-        if (empty($userList)) {
-            return [];
+        if (!$stmt->execute()) {
+            throw new mysqli_sql_exception("Error executing the given sql statement.");
         }
 
+        $mysqli_result = $stmt->get_result();
+        $userList = [];
+        while ($row = $mysqli_result->fetch_assoc()) {
+            $user = $this->mapRowIntoUserObj($row);
+            $userList[] = $user;
+        }
+        $stmt->close();
         return $userList;
     }
 
-    public function update($existingData, $newData)
+    public function update($existingData, $newData): int|string
     {
         $query = "UPDATE User SET first_name = ?, last_name = ?, username = ?, password = ?, email = ? WHERE username = ?";
         $fName = $newData->getFirstName();
@@ -47,21 +59,36 @@ class UserDataRepository implements DataRepository
         $email = $newData->getEmail();
         $existingUsername = $existingData->getUsername();
 
-        $this->executeQuery($query, 'ssssss', $fName, $lName, $username, $password, $email, $existingUsername);
+        $paramsType = 'ssssss';
+        $stmt = $this->prepareAndExecuteQuery($query, $paramsType, $fName, $lName, $username, $password, $email, $existingUsername);
+
+        $affectedRow = $stmt->affected_rows;
+        $stmt->close();
+        return $affectedRow;
     }
 
-    public function insert($data)
+    public function insert($data): int|string
     {
         $query = "INSERT INTO User (first_name, last_name, username, password, email) VALUES (?, ?, ?, ?, ?)";
-        $this->executeQuery($query, 'sssss', $data->getFirstName(), $data->getLastName(), $data->getUsername(), $data->getPassword(), $data->getEmail());
+        $paramTypes = "sssss";
+        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $data->getFirstName(), $data->getLastName(), $data->getUsername(), $data->getPassword(), $data->getEmail());
+
+        $affectedRow = $stmt->affected_rows;
+        $stmt->close();
+        return $affectedRow;
     }
 
-    public function remove($id): void
+    public function remove($id): int|string
     {
         $query = "DELETE FROM User WHERE user_id = ?";
-        $this->executeQuery($query, 'i', $id);
+        $paramTypes = "i";
+        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
+        $affectedRow = $stmt->affected_rows;
+        $stmt->close();
+        return $affectedRow;
     }
 
+    // Helper functions
     private function mapRowIntoUserObj($row): User
     {
         $user = new User($row["first_name"], $row["last_name"], $row["username"], $row["email"], $row["password"]);
@@ -69,46 +96,14 @@ class UserDataRepository implements DataRepository
         return $user;
     }
 
-    private function fetchRecord($query, ...$params): ?array
-    {
-        $stmt = $this->prepareAndExecuteQuery($query, ...$params);
-        $result = $stmt->get_result();
-
-        if ($result->num_rows <= 0) {
-            return null;
-        }
-
-        return $result->fetch_assoc();
-    }
-
-    private function fetchMultipleRecords($query): array
-    {
-        $stmt = $this->prepareAndExecuteQuery($query);
-        $result = $stmt->get_result();
-        $records = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $records[] = $this->mapRowIntoUserObj($row);
-        }
-
-        return $records;
-    }
-
-    private function executeQuery($query, ...$params): void
-    {
-        $stmt = $this->prepareAndExecuteQuery($query, ...$params);
-        $stmt->close();
-    }
-
-    private function prepareAndExecuteQuery($query, ...$params): mysqli_stmt
+    private function prepareAndExecuteQuery($query, $types, ...$params): mysqli_stmt
     {
         $stmt = $this->connection->prepare($query);
-        if ($stmt === false) {
-            throw new mysqli_sql_exception("Error during query preparation: " . $this->connection->error);
-        }
+        $stmt->bind_param($types, ...$params);
 
-        $stmt->bind_param(...$params);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            throw new mysqli_sql_exception("Error during the SQL statement execution.");
+        }
 
         return $stmt;
     }

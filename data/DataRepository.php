@@ -4,11 +4,11 @@ interface DataRepository
 {
     public function queryById($id);
 
-    public function getLists();
+    public function getLists(): ?array;
 
-    public function update($existingData, $newData);
+    public function update($existingData, $newData): int|string;
 
-    public function insert($data);
+    public function insert($data): int|string;
 
-    public function remove($id): void;
+    public function remove($id): int|string;
 }

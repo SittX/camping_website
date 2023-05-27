@@ -7,7 +7,7 @@ $user = new User("john", "doe", "JohnDoe", "johndoe@gmail.com", "johndoe123");
 
 // $userRepo->insert($user);
 // $userRepo->update($user, $newUser);
-// $userRepo->remove(8);
+// $userRepo->remove(3);
 
 // $currentUserList = $userRepo->getLists();
 // foreach ($currentUserList as $currentUser) {
@@ -30,14 +30,13 @@ $newCamp = new CampSite("Nay Pyi Taw", 5000, "Human testing camp");
 
 // $campSiteRepo->insert($oldCamp);
 // $campSiteRepo->update($oldCamp, $newCamp);
-// $campSiteRepo->update($oldCamp, $newCamp);
-// $campSiteRepo->remove(17);
+$campSiteRepo->remove(21);
 
-// $campList = $campSiteRepo->getLists();
-// foreach ($campList as $currentCamp) {
-//     echo $currentCamp->getSiteId();
-//     echo $currentCamp->getLocation();
-//     echo $currentCamp->getCost();
-//     echo $currentCamp->getDescription();
-//     echo "</br>";
-// }
+$campList = $campSiteRepo->getLists();
+foreach ($campList as $currentCamp) {
+    echo $currentCamp->getSiteId();
+    echo $currentCamp->getLocation();
+    echo $currentCamp->getCost();
+    echo $currentCamp->getDescription();
+    echo "</br>";
+}

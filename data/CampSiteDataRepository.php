@@ -5,7 +5,7 @@ require_once("./models/CampSite.php");
 
 class CampSiteDataRepository implements DataRepository
 {
-    private $connection;
+    private mysqli $connection;
 
     public function __construct($connection)
     {
@@ -15,15 +15,17 @@ class CampSiteDataRepository implements DataRepository
     public function queryById($id)
     {
         $query = "SELECT * FROM CampSite WHERE site_id = ?";
-        $stmt = $this->prepareAndExecuteQuery($query, 'i', $id);
+        $paramTypes = "i";
+        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
 
-        $result = $stmt->get_result();
-        if ($result->num_rows <= 0) {
+        $mysqli_result = $stmt->get_result();
+        if ($mysqli_result->num_rows <= 0) {
             throw new mysqli_sql_exception("Camp Site with the given id is not found");
         }
 
-        $campSiteData = $result->fetch_assoc();
-        return $this->mapRecordToCampSiteObject($campSiteData);
+        $result = $mysqli_result->fetch_assoc();
+        $stmt->close();
+        return $this->mapRecordToCampSiteObject($result);
     }
 
     public function getLists(): ?array
@@ -32,60 +34,57 @@ class CampSiteDataRepository implements DataRepository
         $stmt = $this->connection->prepare($query);
 
         if (!$stmt->execute()) {
-            return null;
+            throw new mysqli_sql_exception("Error executing the given sql statement.");
         }
 
-        $result = $stmt->get_result();
+        $mysqli_result = $stmt->get_result();
         $campSiteList = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $mysqli_result->fetch_assoc()) {
             $campSite = $this->mapRecordToCampSiteObject($row);
             $campSiteList[] = $campSite;
         }
+        $stmt->close();
         return $campSiteList;
     }
 
-    public function update($existingData, $newData)
+    public function update($existingData, $newData): int|string
     {
-        $existingLocation = $existingData->getLocation();
         $query = "UPDATE CampSite SET location = ?, cost = ?, description = ? WHERE location = ?;";
-        $stmt = $this->prepareAndExecuteQuery($query, 'siss', $newData->getLocation(), $newData->getCost(), $newData->getDescription(), $existingLocation);
+        $stmt = $this->prepareAndExecuteQuery($query, 'siss', $newData->getLocation(), $newData->getCost(), $newData->getDescription(), $existingData->getLocation());
+
+        $affectedRow = $stmt->affected_rows;
+        $stmt->close();
+        return $affectedRow;
     }
 
-    public function insert($data)
+    public function insert($data): int|string
     {
         $query = "INSERT INTO CampSite (location, cost, description) VALUES (?, ?, ?);";
-        $stmt = $this->prepareAndExecuteQuery($query, 'sis', $data->getLocation(), $data->getCost(), $data->getDescription());
+        $paramTypes = "sis";
+        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $data->getLocation(), $data->getCost(), $data->getDescription());
+
+        $affectedRow = $stmt->affected_rows;
+        $stmt->close();
+        return $affectedRow;
     }
 
-    public function remove($id): void
+    public function remove($id): int|string
     {
         $query = "DELETE FROM CampSite WHERE site_id = ?;";
-        $stmt = $this->prepareAndExecuteQuery($query, 'i', $id);
+        $paramTypes = "i";
+        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
+
+        $affectedRow = $stmt->affected_rows;
+        $stmt->close();
+        return $affectedRow;
     }
 
+    // Helper functions
     private function mapRecordToCampSiteObject($row): CampSite
     {
         $campsite = new CampSite($row['location'], $row['cost'], $row['description']);
         $campsite->setSiteId($row['site_id']);
         return $campsite;
-    }
-
-    // private function fetchMultipleRecords($query): array
-    // {
-    //     $stmt = $this->prepareAndExecuteQuery($query);
-    //     $result = $stmt->get_result();
-    //     $records = [];
-
-    //     while ($row = $result->fetch_assoc()) {
-    //         $records[] = $this->mapRecordToCampSiteObject($row);
-    //     }
-
-    //     return $records;
-    // }
-
-
-    private function fetchRecord($query, ...$params)
-    {
     }
 
     private function prepareAndExecuteQuery($query, $types, ...$params): mysqli_stmt
