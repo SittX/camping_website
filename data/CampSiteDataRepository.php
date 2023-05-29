@@ -1,7 +1,8 @@
 <?php
 
 require_once("DataRepository.php");
-require_once("./models/CampSite.php");
+require_once("../models/CampSite.php");
+require_once("../utils/DataRepositoryUtil.php");
 
 class CampSiteDataRepository implements DataRepository
 {
@@ -16,7 +17,7 @@ class CampSiteDataRepository implements DataRepository
     {
         $query = "SELECT * FROM CampSite WHERE site_id = ?";
         $paramTypes = "i";
-        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
 
         $mysqli_result = $stmt->get_result();
         if ($mysqli_result->num_rows <= 0) {
@@ -25,7 +26,7 @@ class CampSiteDataRepository implements DataRepository
 
         $result = $mysqli_result->fetch_assoc();
         $stmt->close();
-        return $this->mapRecordToCampSiteObject($result);
+        return $this->mapRowToCampSiteObject($result);
     }
 
     public function getLists(): ?array
@@ -40,7 +41,7 @@ class CampSiteDataRepository implements DataRepository
         $mysqli_result = $stmt->get_result();
         $campSiteList = [];
         while ($row = $mysqli_result->fetch_assoc()) {
-            $campSite = $this->mapRecordToCampSiteObject($row);
+            $campSite = $this->mapRowToCampSiteObject($row);
             $campSiteList[] = $campSite;
         }
         $stmt->close();
@@ -49,8 +50,9 @@ class CampSiteDataRepository implements DataRepository
 
     public function update($existingData, $newData): int|string
     {
-        $query = "UPDATE CampSite SET location = ?, cost = ?, description = ? WHERE location = ?;";
-        $stmt = $this->prepareAndExecuteQuery($query, 'siss', $newData->getLocation(), $newData->getCost(), $newData->getDescription(), $existingData->getLocation());
+        $query = "UPDATE CampSite SET location = ?, price = ?, description = ?,local_attraction=?, features = ?, notice_note = ?,pitch_type_id = ? WHERE site_id = ?;";
+        $paramTypes = "sissssii";
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $newData->getLocation(), $newData->getPrice(), $newData->getDescription(), $newData->getLocalAttraction(), $newData->getFeatures(), $newData->getNoticeNote(), $newData->getPitchTypeId(), $existingData->getSiteId());
 
         $affectedRow = $stmt->affected_rows;
         $stmt->close();
@@ -59,9 +61,9 @@ class CampSiteDataRepository implements DataRepository
 
     public function insert($data): int|string
     {
-        $query = "INSERT INTO CampSite (location, cost, description) VALUES (?, ?, ?);";
-        $paramTypes = "sis";
-        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $data->getLocation(), $data->getCost(), $data->getDescription());
+        $query = "INSERT INTO CampSite (location, price, description,local_attraction,features,notice_note,pitch_type_id) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        $paramTypes = "sissssi";
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $data->getLocation(), $data->getPrice(), $data->getDescription(), $data->getLocalAttraction(), $data->getFeatures(), $data->getNoticeNote(), $data->getPitchTypeId());
 
         $affectedRow = $stmt->affected_rows;
         $stmt->close();
@@ -72,7 +74,7 @@ class CampSiteDataRepository implements DataRepository
     {
         $query = "DELETE FROM CampSite WHERE site_id = ?;";
         $paramTypes = "i";
-        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
 
         $affectedRow = $stmt->affected_rows;
         $stmt->close();
@@ -80,22 +82,10 @@ class CampSiteDataRepository implements DataRepository
     }
 
     // Helper functions
-    private function mapRecordToCampSiteObject($row): CampSite
+    private function mapRowToCampSiteObject($row): CampSite
     {
-        $campsite = new CampSite($row['location'], $row['cost'], $row['description']);
+        $campsite = new CampSite($row['location'], $row['description'], $row['local_attraction'], $row['features'], $row['notice_note'], $row['pitch_type_id'], $row['price']);
         $campsite->setSiteId($row['site_id']);
         return $campsite;
-    }
-
-    private function prepareAndExecuteQuery($query, $types, ...$params): mysqli_stmt
-    {
-        $stmt = $this->connection->prepare($query);
-        $stmt->bind_param($types, ...$params);
-
-        if (!$stmt->execute()) {
-            throw new mysqli_sql_exception("Error during the SQL statement execution.");
-        }
-
-        return $stmt;
     }
 }

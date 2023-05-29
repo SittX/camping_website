@@ -1,12 +1,17 @@
-<?php include("inc/header.php") ?>
+<?php include("../inc/header.php") ?>
 <?php
 if (isset($_POST["login"])) {
     $name = $_POST["name"];
-    $result = mysqli_query($conn, "SELECT * FROM User WHERE username = '$name'");
-    $user = mysqli_fetch_assoc($result);
+    $user = $userRepo->searchByUsername($name);
 
-    $_SESSION["rank"] = $user["rank"];
-    $_SESSION["name"] = $user["username"];
+    $_SESSION["rank"] = $user->getRank();
+    $_SESSION["name"] = $user->getUsername();
+
+    if ($user->getRank() == "admin") {
+        echo "Welcome admin";
+    } else {
+        echo "Welcome user";
+    }
 }
 
 ?>
@@ -17,4 +22,4 @@ if (isset($_POST["login"])) {
     <input type="submit" name="login" value="login" id="submit">
 </form>
 
-<?php include("inc/footer.php") ?>
+<?php include("../inc/footer.php") ?>

@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-require_once("./classes/DatabaseConnection.php");
-require_once("./data/UserDataRepository.php");
-require_once("./data/CampSiteDataRepository.php");
+require_once("../classes/DatabaseConnection.php");
+require_once("../data/UserDataRepository.php");
+require_once("../data/CampSiteDataRepository.php");
+require_once("../models/User.php");
 
 $conn = new DatabaseConnection();
 $userRepo = new UserDataRepository($conn);

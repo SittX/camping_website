@@ -1,6 +1,6 @@
 <?php
-include("./inc/header.php");
-include("./role.php");
+include("../inc/header.php");
+include("../inc/accessControl.php");
 ?>
 
 <button>
@@ -16,5 +16,5 @@ include("./role.php");
 </button>
 
 <?php
-include("./inc/footer.php");
+include("../inc/footer.php");
 ?>

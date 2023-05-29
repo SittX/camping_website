@@ -1,6 +1,6 @@
 <?php
 if (!defined("DB_HOST")) {
-    require_once("./inc/config.php");
+    require_once("../inc/config.php");
 }
 
 final class DatabaseConnection

@@ -1,53 +1,58 @@
 <?php
-
-
 class User
 {
-    private $userId;
-    private $first_name;
-    private $last_name;
-    private $username;
-    private $email;
-    private $password;
+    private ?int $userId = null;
+    private string $first_name;
+    private string $last_name;
+    private string $username;
+    private string $email;
+    private string $password;
+    private ?string $rank = null;
 
-    public function __construct($first_name, $last_name, $username, $email, $password)
+    public function __construct($first_name, $last_name, $username, $email, $password, $rank = null)
     {
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->rank = "user";
     }
 
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
 
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->first_name;
     }
 
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->last_name;
     }
 
 
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getRank(): string
+    {
+        return $this->rank;
     }
 
     public function setUserId($userId): void
@@ -78,5 +83,10 @@ class User
     public function setPassword($password): void
     {
         $this->password = $password;
+    }
+
+    public function setRank($rank): void
+    {
+        $this->rank = $rank;
     }
 }

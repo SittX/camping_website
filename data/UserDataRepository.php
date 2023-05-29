@@ -1,8 +1,8 @@
 <?php
 
 require_once("DataRepository.php");
-require_once("./models/User.php");
-require_once("./utils/dataFetch.php");
+require_once("../models/User.php");
+require_once("../utils/DataRepositoryUtil.php");
 
 // TODO SQL statements should use prepared statement instead of raw SQL string
 class UserDataRepository implements DataRepository
@@ -14,11 +14,27 @@ class UserDataRepository implements DataRepository
         $this->connection = $connection->getConnection();
     }
 
+    public function searchByUsername($name)
+    {
+        $query = "SELECT * FROM User where username = ?";
+        $paramTypes = "s";
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $name);
+
+        $mysqli_result = $stmt->get_result();
+        if ($mysqli_result->num_rows <= 0) {
+            throw new mysqli_sql_exception("User with the given username is not found");
+        }
+
+        $result = $mysqli_result->fetch_assoc();
+        $stmt->close();
+        return $this->mapRowToUserObject($result);
+    }
+
     public function queryById($id): ?User
     {
         $query = "SELECT * FROM User WHERE user_id = ?";
         $paramTypes = "i";
-        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
 
         $mysqli_result = $stmt->get_result();
         if ($mysqli_result->num_rows <= 0) {
@@ -27,7 +43,7 @@ class UserDataRepository implements DataRepository
 
         $result = $mysqli_result->fetch_assoc();
         $stmt->close();
-        return $this->mapRowIntoUserObj($result);
+        return $this->mapRowToUserObject($result);
     }
 
     public function getLists(): ?array
@@ -42,7 +58,7 @@ class UserDataRepository implements DataRepository
         $mysqli_result = $stmt->get_result();
         $userList = [];
         while ($row = $mysqli_result->fetch_assoc()) {
-            $user = $this->mapRowIntoUserObj($row);
+            $user = $this->mapRowToUserObject($row);
             $userList[] = $user;
         }
         $stmt->close();
@@ -51,16 +67,17 @@ class UserDataRepository implements DataRepository
 
     public function update($existingData, $newData): int|string
     {
-        $query = "UPDATE User SET first_name = ?, last_name = ?, username = ?, password = ?, email = ? WHERE username = ?";
+        $query = "UPDATE User SET first_name = ?, last_name = ?, username = ?, password = ?, email = ?,rank = ? WHERE user_id = ?";
         $fName = $newData->getFirstName();
         $lName = $newData->getLastName();
         $username = $newData->getUsername();
         $password = $newData->getPassword();
+        $rank = $newData->getRank();
         $email = $newData->getEmail();
-        $existingUsername = $existingData->getUsername();
+        $existingUserId = $existingData->getUserId();
 
-        $paramsType = 'ssssss';
-        $stmt = $this->prepareAndExecuteQuery($query, $paramsType, $fName, $lName, $username, $password, $email, $existingUsername);
+        $paramsType = 'ssssssi';
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramsType, $fName, $lName, $username, $password, $email, $rank, $existingUserId);
 
         $affectedRow = $stmt->affected_rows;
         $stmt->close();
@@ -69,9 +86,9 @@ class UserDataRepository implements DataRepository
 
     public function insert($data): int|string
     {
-        $query = "INSERT INTO User (first_name, last_name, username, password, email) VALUES (?, ?, ?, ?, ?)";
-        $paramTypes = "sssss";
-        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $data->getFirstName(), $data->getLastName(), $data->getUsername(), $data->getPassword(), $data->getEmail());
+        $query = "INSERT INTO User(first_name, last_name, username, password, email,rank) VALUES (?, ?, ?, ?, ?, ?)";
+        $paramTypes = "ssssss";
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $data->getFirstName(), $data->getLastName(), $data->getUsername(), $data->getPassword(), $data->getEmail(), $data->getRank() ?? "user");
 
         $affectedRow = $stmt->affected_rows;
         $stmt->close();
@@ -82,29 +99,17 @@ class UserDataRepository implements DataRepository
     {
         $query = "DELETE FROM User WHERE user_id = ?";
         $paramTypes = "i";
-        $stmt = $this->prepareAndExecuteQuery($query, $paramTypes, $id);
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
         $affectedRow = $stmt->affected_rows;
         $stmt->close();
         return $affectedRow;
     }
 
     // Helper functions
-    private function mapRowIntoUserObj($row): User
+    private function mapRowToUserObject($row): User
     {
-        $user = new User($row["first_name"], $row["last_name"], $row["username"], $row["email"], $row["password"]);
+        $user = new User($row["first_name"], $row["last_name"], $row["username"], $row["email"], $row["password"], $row["rank"]);
         $user->setUserId($row["user_id"]);
         return $user;
-    }
-
-    private function prepareAndExecuteQuery($query, $types, ...$params): mysqli_stmt
-    {
-        $stmt = $this->connection->prepare($query);
-        $stmt->bind_param($types, ...$params);
-
-        if (!$stmt->execute()) {
-            throw new mysqli_sql_exception("Error during the SQL statement execution.");
-        }
-
-        return $stmt;
     }
 }
