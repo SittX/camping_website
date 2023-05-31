@@ -24,7 +24,7 @@ class PitchTypeDataRepository implements DataRepository
         $stmt->close();
         return $this->mapRowToPitchTypeObject($result);
     }
-    public function queryById($id)
+    public function searchById($id)
     {
         $query = "SELECT * FROM Review WHERE review_id = ?";
         $paramTypes = "i";

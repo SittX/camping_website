@@ -16,7 +16,7 @@ class User
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
-        $this->rank = "user";
+        $this->rank = $rank;
     }
 
     public function getUserId(): int

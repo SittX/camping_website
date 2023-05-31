@@ -2,7 +2,7 @@
 
 interface DataRepository
 {
-    public function queryById($id);
+    public function searchById($id);
 
     public function getLists(): ?array;
 

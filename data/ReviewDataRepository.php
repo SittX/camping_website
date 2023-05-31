@@ -11,7 +11,7 @@ class ReviewDataRepository implements DataRepository
     }
 
 
-    public function queryById($id)
+    public function searchById($id)
     {
         $query = "SELECT * FROM Review WHERE review_id = ?";
         $paramTypes = "i";

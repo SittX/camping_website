@@ -13,7 +13,7 @@ class CampSiteDataRepository implements DataRepository
         $this->connection = $connection->getConnection();
     }
 
-    public function queryById($id)
+    public function searchById($id)
     {
         $query = "SELECT * FROM CampSite WHERE site_id = ?";
         $paramTypes = "i";

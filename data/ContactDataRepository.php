@@ -10,7 +10,7 @@ class ContactDataRepository implements DataRepository
         $this->connection = $connection->getConnection();
     }
 
-    public function queryById($id)
+    public function searchById($id)
     {
         $query = "SELECT * FROM Contact WHERE contact_id = ?";
         $paramTypes = "i";

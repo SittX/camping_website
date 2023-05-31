@@ -30,7 +30,7 @@ class UserDataRepository implements DataRepository
         return $this->mapRowToUserObject($result);
     }
 
-    public function queryById($id): ?User
+    public function searchById($id): ?User
     {
         $query = "SELECT * FROM User WHERE user_id = ?";
         $paramTypes = "i";

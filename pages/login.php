@@ -4,8 +4,9 @@ if (isset($_POST["login"])) {
     $name = $_POST["name"];
     $user = $userRepo->searchByUsername($name);
 
-    $_SESSION["rank"] = $user->getRank();
-    $_SESSION["name"] = $user->getUsername();
+    $_SESSION["user_rank"] = $user->getRank();
+    $_SESSION["username"] = $user->getUsername();
+    $_SESSION["user_id"] = $user->getUserId();
 
     if ($user->getRank() == "admin") {
         echo "Welcome admin";
