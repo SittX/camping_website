@@ -1,0 +1,32 @@
+/* Button */
+.btn {
+    display: block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+/* Icon  */
+.icon {
+    padding: 0.5rem;
+    background-color: var(--light-grey);
+    border-radius: 10px;
+}
+
+/* Logo */
+.nav__logo {
+    margin-right: 1.5rem;
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 2rem;
+    height: 90px;
+    padding: 1.2rem 3rem;
+}

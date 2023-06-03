@@ -1,14 +1,11 @@
 <?php
-if (!defined("DB_HOST")) {
-    require_once("../inc/config.php");
-}
-
+require_once(dirname(__DIR__) . "/config.php");
 final class DatabaseConnection
 {
-    private $host;
-    private $username;
-    private $password;
-    private $dbName;
+    private string $host;
+    private string $username;
+    private string $password;
+    private string $dbName;
 
     public function __construct()
     {
@@ -22,7 +19,7 @@ final class DatabaseConnection
     {
         $connection =  new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
         if ($connection->error) {
-            die("Cannnot connect to the database");
+            die("Cannot connect to the database");
         }
 
         return $connection;

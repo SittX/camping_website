@@ -1,19 +1,21 @@
 <?php
-include("../inc/header.php");
-include("../inc/accessControl.php");
+require_once(dirname(__DIR__) . "/inc/header.php");
+include(INC_PATH . "checkUserRank.php");
+
+
 ?>
 
-<button>
-    Write a review
-</button>
-
-<button style="<?php echo $_SESSION["rank"] == "admin" ? "display:block" : "display:none"  ?>">
-    Delete a review
-</button>
-
-<button style="<?php echo $_SESSION["rank"] == "admin" ? "display:block" : "display:none"  ?>">
-    Update a view
-</button>
+<!--<button>-->
+<!--    Write a review-->
+<!--</button>-->
+<!---->
+<!--<button style="--><?php //echo $_SESSION["rank"] == "admin" ? "display:block" : "display:none"  ?><!--">-->
+<!--    Delete a review-->
+<!--</button>-->
+<!---->
+<!--<button style="--><?php //echo $_SESSION["rank"] == "admin" ? "display:block" : "display:none"  ?><!--">-->
+<!--    Update a view-->
+<!--</button>-->
 
 <form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post">
     <input type="text" name="title" namespace="Title">
@@ -22,6 +24,7 @@ include("../inc/accessControl.php");
 </form>
 
 
+
 <?php
-include("../inc/footer.php");
+include(INC_PATH . "footer.php");
 ?>

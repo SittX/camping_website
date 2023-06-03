@@ -1,57 +1,57 @@
 <?php
-include_once("../classes/DatabaseConnection.php");
+require_once(dirname(__DIR__)."/classes/DatabaseConnection.php");
 
 function uploadImage($campSiteID)
 {
     $db = new DatabaseConnection();
     $conn = $db->getConnection();
 
-    $uploadDir = "../uploads/";
+    $uploadDir = dirname(__DIR__). "/uploads/";
     $allowedFileExtensions = array('jpg', 'png', 'jpeg');
 
-    $statusMsg = $errorMsg = $insertValues = $errorUpload = $errorUploadType = '';
+    $statusMsg = $errorMsg = $insertSqlValues = $errorUpload  = '';
     $fileNames = array_filter($_FILES['files']['name']);
 
     if (empty($fileNames)) {
-        $statusMsg = 'Please select a file to upload.';
-        return;
+        return $statusMsg = 'Please select a file to upload.';
     }
 
     foreach ($_FILES['files']['name'] as $key => $val) {
         // File upload path 
         $fileName = basename($_FILES['files']['name'][$key]);
         $uploadFilePath = $uploadDir . $fileName;
-        // Check whether file type is valid 
         $fileExtension = pathinfo($uploadFilePath, PATHINFO_EXTENSION);
+
+        // Check whether file type is valid
         if (!in_array($fileExtension, $allowedFileExtensions)) {
-            $errorUploadType .= $_FILES['files']['name'][$key] . ' | ';
+            echo "File type is not supported";
             return;
         }
         // Upload file to server 
         $isUploaded = move_uploaded_file($_FILES["files"]["tmp_name"][$key], $uploadFilePath);
         if (!$isUploaded) {
-            $errorUpload .= $_FILES['files']['name'][$key] . ' | ';
+            echo "Error uploading file to the destination";
             return;
         }
-        $insertValues .= "('" . $fileName . "', $campSiteID),";
+        $insertSqlValues .= "('" . $fileName . "', $campSiteID),";
     }
 
 
-    if (empty($insertValues)) {
-        $statusMsg = "Upload failed! " . $errorMsg;
+    if (empty($insertSqlValues)) {
+        echo "File upload failed";
         return;
     }
 
     // Remove the comma of the last element
-    $insertValues = trim($insertValues, ',');
+    $insertSqlValues = trim($insertSqlValues, ',');
 
     // Insert image file name into database 
-    $result = $conn->query("INSERT INTO CampSiteImages(url,site_id) VALUES $insertValues");
+    $result = $conn->query("INSERT INTO CampSiteImages(url,site_id) VALUES $insertSqlValues");
     if ($result->num_rows < 0) {
         echo "Successfully saved data into the database";
     }
 
-    // $insert = $db->query("INSERT INTO CampSiteImages (url,site_id) VALUES $insertValues");
+    // $insert = $db->query("INSERT INTO CampSiteImages (url,site_id) VALUES $insertSqlValues");
     // if ($insert) {
     //     $statusMsg = "Successfully uploaded." . $errorMsg;
     // } else {

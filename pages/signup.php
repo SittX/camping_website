@@ -1,5 +1,6 @@
-<?php include "../inc/header.php" ?>
 <?php
+require_once(dirname(__DIR__) . "/inc/header.php");
+
 if (isset($_POST["submit"])) {
     $username = $fName = $lName = $email = "";
     if ($_POST["submit"]) {
@@ -10,11 +11,13 @@ if (isset($_POST["submit"])) {
         $password = $_POST['password'];
         $rank = "user";
 
-        $affectedRow = $userRepo->insert(new User($fName, $lName, $username, $email, $password, $rank));
-        if ($affectedRow == 1) {
-            $redirectPage = "./index.php";
-            header("Location: " . $redirectPage);
-            echo "new user created";
+        if (!empty($userRepo)) {
+            $affectedRow = $userRepo->insert(new User($fName, $lName, $username, $email, $password, $rank));
+            if ($affectedRow == 1) {
+                $redirectPage = "./index.php";
+                header("Location: " . $redirectPage);
+                echo "new user created";
+            }
         }
     }
 }
@@ -29,4 +32,4 @@ if (isset($_POST["submit"])) {
     <input type="submit" name="submit" value="submit">
 </form>
 
-<?php include "../inc/footer.php" ?>
+<?php include(INC_PATH . "footer.php");?>

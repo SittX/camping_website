@@ -1,12 +1,14 @@
-<?php include("../inc/header.php") ?>
 <?php
+require_once(dirname(__DIR__) . "/inc/header.php");
+
 if (isset($_POST["login"])) {
     $name = $_POST["name"];
-    $user = $userRepo->searchByUsername($name);
 
-    $_SESSION["user_rank"] = $user->getRank();
-    $_SESSION["username"] = $user->getUsername();
-    $_SESSION["user_id"] = $user->getUserId();
+    if (!empty($userRepo)) {
+        $user = $userRepo->searchByUsername($name);
+    }
+
+    $_SESSION["user"] = ["username"=>$user->getUsername(), "rank"=>$user->getRank(),"userId"=>$user->getUserId()];
 
     if ($user->getRank() == "admin") {
         echo "Welcome admin";
@@ -23,4 +25,4 @@ if (isset($_POST["login"])) {
     <input type="submit" name="login" value="login" id="submit">
 </form>
 
-<?php include("../inc/footer.php") ?>
+<?php include(INC_PATH . "footer.php") ?>

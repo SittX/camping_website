@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__DIR__) . "/config.php");
 include_once("../classes/DatabaseConnection.php");
 include_once("../data/UserDataRepository.php");
 include_once("../data/CampSiteDataRepository.php");
@@ -86,3 +87,8 @@ $contact = new Contact("Hello world", 1);
 $contactRepo = new ContactDataRepository($conn);
 
 // $contactRepo->insert($contact);
+
+include_once(dirname(__DIR__). "/utils/ImageUpload.php");
+// Image  upload
+
+uploadImage(1);

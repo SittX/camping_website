@@ -1,7 +1,7 @@
 <?php
 
 include("inc/header.php");
-include("role.php");
+include("inc/checkUserRank.php");
 ?>
 <h1>You are allowed to view this page.</h1>
 <?php
