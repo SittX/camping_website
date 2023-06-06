@@ -1,19 +1,20 @@
 <?php
 require_once(dirname(__DIR__) . "/config.php");
-include_once("../classes/DatabaseConnection.php");
-include_once("../data/UserDataRepository.php");
-include_once("../data/CampSiteDataRepository.php");
-include_once("../data/ReviewDataRepository.php");
-include_once("../data/PitchTypeDataRepository.php");
-include_once("../data/ContactDataRepository.php");
-include_once("../models/PitchType.php");
-include_once("../models/CampSite.php");
-include_once("../models/Review.php");
-include_once("../models/Contact.php");
+require_once(INC_PATH . "header.php");
+//include_once("../classes/DatabaseConnection.php");
+//include_once("../data/UserDataRepository.php");
+//include_once("../data/CampSiteDataRepository.php");
+//include_once("../data/ReviewDataRepository.php");
+//include_once("../data/PitchTypeDataRepository.php");
+//include_once("../data/ContactDataRepository.php");
+//include_once("../models/PitchType.php");
+//include_once("../models/CampSite.php");
+//include_once("../models/Review.php");
+//include_once("../models/Contact.php");
 
 $conn = new DatabaseConnection();
 
-$userRepo = new UserDataRepository($conn);
+// $userRepo = new UserDataRepository($conn);
 $newUser = new User("Kevin", "san", "kevin", "kevin@gmail.com", "kevin123");
 // $user = new User("john", "doe", "JohnDoe", "johndoe@gmail.com", "johndoe123");
 $admin = new User("admin", "admin", "admin", "admin@gmail.com", "admin123");
@@ -71,7 +72,7 @@ $admin->setRank("admin");
 /* Review */
 
 $review1 = new Review(4, "The campsite is very peaceful and quite. Would definitely coming back !", "Outer world !", 1, 2);
-$reviewRepo = new ReviewDataRepository($conn);
+// $reviewRepo = new ReviewDataRepository($conn);
 $reviewRepo->insert($review1);
 
 // $reviewRepo->remove(1);
@@ -84,11 +85,11 @@ $reviewRepo->insert($review1);
 /* Contact */
 
 $contact = new Contact("Hello world", 1);
-$contactRepo = new ContactDataRepository($conn);
+// $contactRepo = new ContactDataRepository($conn);
 
 // $contactRepo->insert($contact);
 
-include_once(dirname(__DIR__). "/utils/ImageUpload.php");
+include_once(dirname(__DIR__) . "/utils/ImageUpload.php");
 // Image  upload
 
 uploadImage(1);

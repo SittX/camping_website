@@ -1,8 +1,8 @@
 <?php
 
 require_once("DataRepository.php");
-require_once(MODEL_PATH. "User.php");
-require_once(UTILS_PATH. "DataRepositoryUtil.php");
+require_once(MODEL_PATH . "User.php");
+require_once(UTILS_PATH . "DataRepositoryUtil.php");
 
 // TODO SQL statements should use prepared statement instead of raw SQL string
 class UserDataRepository implements DataRepository

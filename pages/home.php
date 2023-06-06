@@ -20,7 +20,16 @@ if($stmt->execute()){
     }
 };
 $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" .DIRECTORY_SEPARATOR;
+
+// TODO : Fetch all images along with campsite information
+// TODO : Slideshow, Maps
+
 ?>
+<!--Page banner with some text-->
+
+<!--Top campsites and locations (slideshow)-->
+
+<!--About us ( paragraph + map side-by-side )-->
 
 <ul>
     <?php foreach($campSiteList as $campSite): ?>
