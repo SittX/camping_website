@@ -1,25 +1,33 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
-//require_once(INC_PATH . "checkUserRank.php");
 
-$db = new DatabaseConnection();
-$connection = $db->getConnection();
+// $db = new DatabaseConnection();
+// $connection = $db->getConnection();
 $reviewRepo = new ReviewDataRepository($connection);
 $reviewList = $reviewRepo->getLists();
 
-// TODO : Display reviews for all user types 
-
 // TODO : Allow to write review only if the user is logged in ( check user login status )
+if (isset($_POST["submit_review"])) {
+    if (!SessionManager::checkIfUserLoggedIn()) {
+        echo "Cannot make review if you aren't logged in";
+        // header("Location: login.php");
+        return;
+    }
+    print_r($_POST["rating"]);
+    $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"], $_SESSION["user"]["id"], 2);
+    $reviewRepo->insert($newReview);
+}
+
+// Check request URL parameters
+// var_dump($_GET);
 
 
 // Login style -> 
-
 /*
     Title
     Rating 
     Message
     USERNAME Reviewed-Time    
-
 
     e.g 
     Very welcome atmosphere
@@ -29,21 +37,6 @@ $reviewList = $reviewRepo->getLists();
 */
 ?>
 
-<!--<button>-->
-<!--    Write a review-->
-<!--</button>-->
-<!---->
-<!--<button style="--><?php //echo $_SESSION["rank"] == "admin" ? "display:block" : "display:none"  
-                        ?>
-<!--">-->
-<!--    Delete a review-->
-<!--</button>-->
-<!---->
-<!--<button style="--><?php //echo $_SESSION["rank"] == "admin" ? "display:block" : "display:none"  
-                        ?>
-<!--">-->
-<!--    Update a view-->
-<!--</button>-->
 <div>
     <?php foreach ($reviewList as $review) : ?>
         <div>
@@ -53,13 +46,20 @@ $reviewList = $reviewRepo->getLists();
     <?php endforeach; ?>
 </div>
 
-
-<form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post">
-    <input type="text" name="title" namespace="Title">
-    <textarea name="review_message" id="review_message" cols="30" rows="10"></textarea>
+<p class="review_form_status"></p>
+<form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+    <input type="text" name="title" placeholder="Title" class="form__input">
+    <textarea name="review_message" id="review_message" cols="30" rows="10" placeholder="review message"></textarea>
+    <!-- <input type="number" name="rating" id="rating" placeholder="rating"> -->
+    <select name="rating" id="cars">
+        <option value="1">Excellent</option>
+        <option value="2">Awesome</option>
+        <option value="3">Good</option>
+        <option value="4">Average</option>
+        <option value="5">Bad</option>
+    </select>
     <input type="submit" value="Submit" name="submit_review">
 </form>
-
 
 
 <?php

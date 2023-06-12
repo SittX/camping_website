@@ -2,7 +2,7 @@
 
 require_once("DataRepository.php");
 require_once(MODEL_PATH . "CampSite.php");
-require_once(UTILS_PATH. "DataRepositoryUtil.php");
+require_once(UTILS_PATH . "DataRepositoryUtil.php");
 
 class CampSiteDataRepository implements DataRepository
 {
@@ -25,6 +25,10 @@ class CampSiteDataRepository implements DataRepository
         }
 
         $result = $mysqli_result->fetch_assoc();
+        $siteId = $result["site_id"];
+        $result["images"] = $this->fetchImages($siteId);
+
+        var_dump($result);
         $stmt->close();
         return $this->mapRowToCampSiteObject($result);
     }
@@ -38,9 +42,14 @@ class CampSiteDataRepository implements DataRepository
             throw new mysqli_sql_exception("Error executing the given sql statement.");
         }
 
+        // Steps
+        // 1. Extract all the site_id from the associate array 
+        // 2. Fetch images for each site_id
+        // 3. Add images for each site associate array as "image" element before adding to "mapRowToCampSiteObject" method
         $mysqli_result = $stmt->get_result();
         $campSiteList = [];
         while ($row = $mysqli_result->fetch_assoc()) {
+            $row["images"] = $this->fetchImages($row["site_id"]);
             $campSite = $this->mapRowToCampSiteObject($row);
             $campSiteList[] = $campSite;
         }
@@ -87,6 +96,28 @@ class CampSiteDataRepository implements DataRepository
     {
         $campsite = new CampSite($row['location'], $row['description'], $row['local_attraction'], $row['features'], $row['notice_note'], $row['pitch_type_id'], $row['price']);
         $campsite->setSiteId($row['site_id']);
+        $campsite->setImages($row["images"]);
         return $campsite;
+    }
+
+    private function fetchImages($id)
+    {
+        $query = "SELECT * FROM CampSiteImages WHERE site_id = ?";
+        $paramTypes = "i";
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
+
+        $result = $stmt->get_result();
+        $images = [];
+
+        // If there is no images for the campsite return empty array
+        if ($result->num_rows < 0) {
+            return $images;
+        }
+
+        $images = [];
+        while ($row = $result->fetch_assoc()) {
+            $images[] = $row["url"];
+        }
+        return $images;
     }
 }

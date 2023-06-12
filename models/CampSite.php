@@ -1,6 +1,4 @@
 <?php
-
-
 class CampSite
 {
     private int $siteId;
@@ -11,6 +9,7 @@ class CampSite
     private string $noticeNote;
     private int $pitchTypeId;
     private float $price;
+    private $images;
 
     public function __construct(string $location, string $description, string $localAttraction, string $features, string $noticeNote, int $pitchTypeId, float $price)
     {
@@ -63,6 +62,11 @@ class CampSite
         return $this->price;
     }
 
+    public function getImages()
+    {
+        return $this->images;
+    }
+
     // Setters
     public function setSiteId(int $siteId): void
     {
@@ -102,5 +106,10 @@ class CampSite
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    public function setImages($images)
+    {
+        $this->images = $images;
     }
 }

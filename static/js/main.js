@@ -63,3 +63,11 @@ document.addEventListener("keydown", (e) => {
 
 // toggle hamburger menu
 hamburgerBtn.addEventListener("click", toggleHamburger);
+
+
+// Slider actions
+const carousel = document.querySelector(".carousel");
+firstImage = carousel.querySelectorAll("img")[0];
+arrowIcons = document.querySelectorAll(".wrapper i");
+
+let 

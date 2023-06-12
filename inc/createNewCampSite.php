@@ -24,7 +24,7 @@ if (isset($_POST['upload_image'])) {
 }
 ?>
 
-<h1>Image upload</h1>
+<h2>Create new campsite</h2>
 <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" enctype="multipart/form-data" class="form">
     <div class="form__group">
         <input type="text" name="description" id="description" placeholder="Description" class="form__input">

@@ -2,9 +2,9 @@
 require_once(dirname(__DIR__) . "/inc/header.php");
 // require_once(dirname(__DIR__) . "/classes/SessionManager.php");
 
-$db = new DatabaseConnection();
-$conn = $db->getConnection();
-$userRepo = new UserDataRepository($conn);
+// $db = new DatabaseConnection();
+// $conn = $db->getConnection();
+$userRepo = new UserDataRepository($connection);
 
 if (isset($_POST["login"])) {
     $username = $_POST["username"];

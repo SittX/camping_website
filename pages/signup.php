@@ -5,8 +5,8 @@ require_once(dirname(__DIR__) . "/inc/header.php");
 // ( success -> Show user created message , Failed or username already exists -> Show username already exists ) 
 $username = $fName = $lName = $email = "";
 if (isset($_POST["register"])) {
-    $db = new DatabaseConnection();
-    $connection = $db->getConnection();
+    // $db = new DatabaseConnection();
+    // $connection = $db->getConnection();
     $userRepo = new UserDataRepository($connection);
 
     $username = $_POST['username'];

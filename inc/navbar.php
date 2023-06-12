@@ -11,23 +11,23 @@ $campSiteList = $campSiteRepo->getLists();
 $campTypeList = $campTypeRepo->getLists();
 
 $destinationList = [];
-foreach($campSiteList as $campSite){
+foreach ($campSiteList as $campSite) {
     $destinationList[] = ["siteId" => $campSite->getSiteId(), "location" => $campSite->getLocation()];
 }
 
-function displayItemForAdmin(): string
+function displayItemForAdmin(): void
 {
-    return (SessionManager::checkAdmin()) ? "display:block;" : "display:none;";
-//    return (isset($_SESSION["user"]) && $_SESSION["user"]["rank"] == "admin") ? "display:block;" : "display:none;";
+    echo (SessionManager::checkAdmin()) ? "display:block;" : "display:none;";
+    //    return (isset($_SESSION["user"]) && $_SESSION["user"]["rank"] == "admin") ? "display:block;" : "display:none;";
 }
 
 function displayLoginAndLogout(): void
 {
-    if(SessionManager::checkIfUserLoggedIn()){
+    if (SessionManager::checkIfUserLoggedIn()) {
         echo '<a class="nav__link" href="' . PAGES_PATH . 'logout.php">
             <button class="btn btn--primary">Logout</button>
         </a>';
-    }else{
+    } else {
         echo '<a class="nav__link" href="' . PAGES_PATH . 'login.php">
             <button class="btn btn--primary">Login</button>
         </a>';
@@ -39,7 +39,7 @@ function displayLoginAndLogout(): void
     <div class="header__container">
         <div class="nav__start">
             <a class="nav__logo" href="<?php echo PAGES_PATH . "home.php" ?>">
-                <img src="https://github.com/Evavic44/responsive-navbar-with-dropdown/blob/main/assets/images/logo.png?raw=true" width="35" height="35" alt="Inc Logo" />
+                Logo
             </a>
 
             <nav class="nav">
@@ -58,7 +58,7 @@ function displayLoginAndLogout(): void
                                 <li role="menu item">
                                     <?php foreach ($destinationList as $destination) : ?>
                                         <a class="dropdown__link" href="#adobe-xd">
-                                            <?php echo $destination["location"]?>
+                                            <?php echo $destination["location"] ?>
                                         </a>
                                     <?php endforeach; ?>
                                 </li>
@@ -71,8 +71,8 @@ function displayLoginAndLogout(): void
 
                                 <li role="menu item">
                                     <?php foreach ($campTypeList as $campType) : ?>
-                                        <a class="dropdown__link" href="<?php echo PAGES_PATH . "information.php/#" . $campType->getDescription()?>">
-                                            <?php echo $campType->getDescription()?>
+                                        <a class="dropdown__link" href="<?php echo PAGES_PATH . "information.php/#" . $campType->getDescription() ?>">
+                                            <?php echo $campType->getDescription() ?>
                                         </a>
                                     <?php endforeach; ?>
                                 </li>
@@ -82,8 +82,9 @@ function displayLoginAndLogout(): void
                     <li><a class="nav__link" href="<?php echo PAGES_PATH . "reviews.php" ?>">Reviews</a></li>
                     <li><a class="nav__link" href="<?php echo PAGES_PATH . "contact.php" ?>">Contact Us</a></li>
                     <li><a class="nav__link" href="<?php echo PAGES_PATH . "home.php#about" ?>">About</a></li>
-                    <li style="<?php echo displayItemForAdmin(); ?>">
-                        <a class="nav__link" href="<?php echo ADMIN_PATH . "dashboard.php"?>">Admin dashboard</a>
+                    <li style="<?php displayItemForAdmin();
+                                ?>">
+                        <a class="nav__link" href="<?php echo ADMIN_PATH . "dashboard.php" ?>">Admin dashboard</a>
                     </li>
                 </ul>
             </nav>
@@ -93,7 +94,7 @@ function displayLoginAndLogout(): void
             <div class="nav__end-container">
                 <?php displayLoginAndLogout(); ?>
 
-                <a class="nav__link" href="<?php echo PAGES_PATH . "signup.php"?>">
+                <a class="nav__link" href="<?php echo PAGES_PATH . "signup.php" ?>">
                     <button class="btn btn--primary">Sign Up</button>
                 </a>
             </div>
