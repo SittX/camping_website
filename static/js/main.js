@@ -66,8 +66,34 @@ hamburgerBtn.addEventListener("click", toggleHamburger);
 
 
 // Slider actions
-const carousel = document.querySelector(".carousel");
-firstImage = carousel.querySelectorAll("img")[0];
-arrowIcons = document.querySelectorAll(".wrapper i");
+// const carousel = document.querySelector(".carousel");
+// firstImage = carousel.querySelectorAll("img")[0];
+// arrowIcons = document.querySelectorAll(".wrapper i");
 
-let 
+// Popup form
+function closeForm() {
+    var formPopupBg = document.querySelector('.popup-form__bg');
+    formPopupBg.classList.remove('is-visible');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    var btnOpenPopup = document.getElementById('btnOpenPopup');
+    var formPopupBg = document.querySelector('.popup-form__bg');
+
+    /* Contact Form Interactions */
+    btnOpenPopup.addEventListener('click', function (event) {
+        event.preventDefault();
+        console.log("Open btn clicked")
+        formPopupBg.classList.add('is-visible');
+    });
+
+    // close popup when clicking x or off popup
+    formPopupBg.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.classList.contains('popup-form__bg') || target.id === 'btnClosePopup') {
+            event.preventDefault();
+            formPopupBg.classList.remove('is-visible');
+        }
+    });
+});
+

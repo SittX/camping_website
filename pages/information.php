@@ -1,8 +1,6 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
-if (SessionManager::checkAdmin()) {
-    require_once(INC_PATH . "createNewCampSite.php");
-}
+
 
 // TODO : Display all the available campsites
 // TODO : Implement search box or filter for filtering campsite based on certain categories
@@ -21,6 +19,12 @@ $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
         <input type="submit" value="Search" name="search_campsite">
     </form>
 </section>
+
+<?php
+if (SessionManager::checkAdmin()) {
+    include(INC_PATH . "createNewCampSite.php");
+}
+?>
 
 <section>
     <?php foreach ($campSiteList as $campSite) : ?>
