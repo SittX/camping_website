@@ -1,20 +1,34 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
-// require_once(dirname(__DIR__) . "/classes/SessionManager.php");
-
-// $db = new DatabaseConnection();
-// $conn = $db->getConnection();
+require_once(INC_PATH . "lockUser.php");
+// TODO : Add login timer that restrict user from entering username and password after 3 failed attempts
+// TODO : Timeout should be 10 minutes ( testing : 10 secs )
 $userRepo = new UserDataRepository($connection);
+
+if (!isset($_SESSION["LoginCounter"])) {
+    $_SESSION["LoginCounter"] = 0;
+}
 
 if (isset($_POST["login"])) {
     $username = $_POST["username"];
-    $user = $userRepo->searchByUsername($username);
+    $password = $_POST["password"];
+    $user = $userRepo->searchUser($username, $password);
 
-    SessionManager::login($user);
+    if (!empty($user)) {
+        SessionManager::login($user);
+        return;
+    }
+    checkLoginCounter();
 }
 
-// TODO : Add login timer that restrict user from entering username and password after 3 failed attempts
-// TODO : Timeout should be 10 minutes ( testing : 10 secs )
+function checkLoginCounter()
+{
+    if ($_SESSION["LoginCounter"] >= 3 && !isset($_COOKIE["failedLogin"])) {
+        setcookie("failedLogin", 1, time() + 60, "/", "", false, true);
+        $_SESSION["LoginCounter"] = 0;
+    }
+    $_SESSION["LoginCounter"]++;
+}
 ?>
 
 

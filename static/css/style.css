@@ -42,6 +42,10 @@ a {
     color: inherit;
 }
 
+input:focus {
+    outline: none;
+}
+
 button {
     border: none;
     background-color: transparent;
@@ -265,4 +269,27 @@ figure {
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+/* Search box */
+.campsite__searchbox {
+    width: 100%;
+    margin: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.searchbox {
+    display: flex;
+}
+
+.searchbox__input {
+    width: 300px;
+    padding: 0.2rem;
+    border-style: none;
+    border-bottom: solid black 1px;
+    font-size: 1rem;
+    margin-right: 0.5rem;
 }

@@ -12,6 +12,7 @@ require_once(DATA_PATH . "ReviewDataRepository.php");
 require_once(DATA_PATH . "BookingDataRepository.php");
 require_once(MODEL_PATH . "User.php");
 require_once(MODEL_PATH . "PitchType.php");
+require_once(MODEL_PATH . "Booking.php");
 
 $db = new DatabaseConnection();
 $connection = $db->getConnection();
@@ -35,4 +36,6 @@ $connection = $db->getConnection();
 
 <body>
     <?php include_once("navbar.php") ?>
+    <?php // var_dump($_COOKIE); 
+    ?>
     <main class="main-container">

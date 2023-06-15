@@ -65,11 +65,6 @@ document.addEventListener("keydown", (e) => {
 hamburgerBtn.addEventListener("click", toggleHamburger);
 
 
-// Slider actions
-// const carousel = document.querySelector(".carousel");
-// firstImage = carousel.querySelectorAll("img")[0];
-// arrowIcons = document.querySelectorAll(".wrapper i");
-
 // Popup form
 function closeForm() {
     var formPopupBg = document.querySelector('.popup-form__bg');
@@ -96,4 +91,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// Searchbox filtering
+const searchboxInput = document.getElementById("searchbox-input");
+const campsites = document.querySelectorAll("#campsite__container .campsite")
+
+searchboxInput.addEventListener("input", e => {
+    let inputValue = searchboxInput.value.toLowerCase();
+
+    campsites.forEach(campsite => {
+        const locationValue = campsite.getAttribute("data-campsite-location").toLowerCase();
+        if (locationValue.includes(inputValue)) {
+            campsite.style.display = "block";
+            console.log(locationValue);
+        } else {
+            campsite.style.display = "none";
+        }
+    })
+
+})
 

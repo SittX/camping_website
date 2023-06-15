@@ -14,6 +14,23 @@ class UserDataRepository implements DataRepository
         $this->connection = $connection;
     }
 
+    public function searchUser($name, $password)
+    {
+        $query = "SELECT * FROM User where username = ? AND password = ?";
+        $paramTypes = "ss";
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $name, $password);
+
+        $mysqli_result = $stmt->get_result();
+        if ($mysqli_result->num_rows <= 0) {
+            return null;
+            // throw new mysqli_sql_exception("User with the given username is not found");
+        }
+
+        $result = $mysqli_result->fetch_assoc();
+        $stmt->close();
+        return $this->mapRowToUserObject($result);
+    }
+
     public function searchByUsername($name): User
     {
         $query = "SELECT * FROM User where username = ?";
