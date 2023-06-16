@@ -5,13 +5,13 @@ $bookingRepo = new BookingDataRepository($connection);
 // TODO : Refactor with a better logic for making carrying state data for the campsite id
 $siteId = 2;
 if (isset($_GET["site_id"])) {
-    // $siteId = $_GET["site_id"];
+    $siteId = $_GET["site_id"];
     $bookingCampSite = $campSiteRepo->searchById($siteId);
-    var_dump($bookingCampSite);
+    // var_dump($bookingCampSite);
 }
 
 if (isset($_POST["submit_booking"])) {
-    var_dump($_POST);
+    // var_dump($_POST);
     $booking = new Booking($_POST["check_in_date"], $_POST["check_out_date"], $_SESSION["user"]["id"], $siteId);
     $bookingRepo->insert($booking);
 }

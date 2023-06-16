@@ -4,6 +4,7 @@
 @import url("home.css");
 @import url("slider.css");
 @import url("popup.css");
+@import url("details.css");
 
 * {
     margin: 0;
@@ -292,4 +293,156 @@ figure {
     border-bottom: solid black 1px;
     font-size: 1rem;
     margin-right: 0.5rem;
+}
+
+/* Details styling  */
+.details__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#campsite-showcase__container {
+    width: 40%;
+}
+
+#campsite-showcase__container img {
+    width: 100%;
+}
+
+#product-details__container {
+    width: 60%;
+    margin-top: 40px;
+    padding-left: 30px;
+}
+
+.product-detials {
+    margin-bottom: 40px;
+}
+
+.h1 {
+    font-weight: 300;
+    font-size: 44px;
+    letter-spacing: -2px;
+}
+
+.h4 {
+    margin-top: 20px;
+    font-weight: 200;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: rgb(27, 25, 25);
+}
+
+.price {
+    margin-top: 20px;
+    font-weight: 200;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: rgb(27, 25, 25);
+}
+
+.value {
+    color: #009688;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.Description {
+    margin-top: 20px;
+    font-weight: 200;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: rgb(27, 25, 25);
+}
+
+.description {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #86939e;
+}
+
+.product-preview-div h3 {
+    margin-top: 20px;
+    font-weight: 200;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: rgb(27, 25, 25);
+}
+
+.preview-img-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-top: 20px;
+}
+
+.preview-img-div img {
+    margin: 5px;
+    width: 15%;
+    height: 30%;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.details__btn-container {
+    display: flex;
+    justify-content: start;
+    column-gap: 1rem;
+    padding: 1rem;
+}
+
+/* .preview-img-div img.active{
+      border: 2px solid #009688;
+  } */
+/* .active {
+    border: 2px solid #009688;
+} */
+
+.non {
+    border: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    .details__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #campsite-showcase__container {
+        width: 100%;
+    }
+
+    #campsite-showcase__container img {
+        width: 100%;
+    }
+
+    #product-details__container {
+        width: 100%;
+        margin-top: 40px;
+        padding-left: 15px;
+    }
+
+    .price,
+    .description,
+    .Description {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .h1 {
+        font-size: 30px;
+    }
+
+    .h4 {
+        font-size: 20px;
+        margin-top: 10px;
+    }
 }

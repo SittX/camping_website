@@ -111,3 +111,16 @@ searchboxInput.addEventListener("input", e => {
 
 })
 
+// Details page image preview actions
+var currentImageId = "img-0";
+
+function smallImageClicked(imgId) {
+    var showcaseImage = document.getElementById("showcase-image");
+    var previewImage = document.getElementById(imgId);
+    showcaseImage.src = previewImage.src;
+    var newEl = imgId;
+    previewImage.className = "detail-img active";
+    var currentOnActiveEl = document.getElementById(currentImageId);
+    currentOnActiveEl.className = "non";
+    currentActiveId = newEl;
+}

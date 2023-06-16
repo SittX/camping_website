@@ -28,7 +28,7 @@ class CampSiteDataRepository implements DataRepository
         $siteId = $result["site_id"];
         $result["images"] = $this->fetchImages($siteId);
 
-        var_dump($result);
+        // var_dump($result);
         $stmt->close();
         return $this->mapRowToCampSiteObject($result);
     }

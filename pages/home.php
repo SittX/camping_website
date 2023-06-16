@@ -1,11 +1,8 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
-// $database = new DatabaseConnection();
-// $connection = $database->getConnection();
 $campSiteRepo = new CampSiteDataRepository($connection);
 $campSiteList = $campSiteRepo->getLists();
 $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
-
 // TODO : Fetch all images along with campsite information
 // TODO : Slideshow, Maps
 ?>
@@ -18,7 +15,6 @@ $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
     </div>
 </section>
 
-
 <div id="captioned-gallery">
     <figure class="slider">
         <?php foreach ($campSiteList as $campSite) : ?>
@@ -30,10 +26,9 @@ $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
     </figure>
 </div>
 
-
 <!--About us ( paragraph + map side-by-side )-->
 <h3>About us</h3>
-<section class="about-us">
+<section class="about-us" id="about-us">
     <p>Welcome to ExploreCamps! We are your one-stop destination for booking and exploring a wide range of campsites
         across the country. With our user-friendly platform, you can easily find and reserve your perfect campsite in
         just a few clicks. We offer a diverse selection of campsites, complete with detailed information, amenities, and

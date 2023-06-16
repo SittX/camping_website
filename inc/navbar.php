@@ -12,7 +12,7 @@ $campTypeList = $campTypeRepo->getLists();
 
 $destinationList = [];
 foreach ($campSiteList as $campSite) {
-    $destinationList[] = ["siteId" => $campSite->getSiteId(), "location" => $campSite->getLocation()];
+    $destinationList[] = ["site_id" => $campSite->getSiteId(), "location" => $campSite->getLocation()];
 }
 
 function displayItemForAdmin(): void
@@ -38,15 +38,14 @@ function displayLoginAndLogout(): void
 <header id="header" aria-label="header">
     <div class="header__container">
         <div class="nav__start">
-            <a class="nav__logo" href="<?php echo PAGES_PATH . "home.php" ?>">
+            <a class="nav__logo" href="../pages/home.php">
                 Logo
             </a>
 
             <nav class="nav">
                 <ul class="nav__menu">
                     <li>
-                        <button class="nav__link dropdown__btn" data-dropdown="dropdown1" aria-haspopup="true"
-                            aria-expanded="false" aria-label="discover">
+                        <button class="nav__link dropdown__btn" data-dropdown="dropdown1" aria-haspopup="true" aria-expanded="false" aria-label="discover">
                             Discover
                         </button>
 
@@ -57,44 +56,39 @@ function displayLoginAndLogout(): void
                                 </li>
 
                                 <li role="menu item">
-                                    <?php // foreach ($destinationList as $destination) : 
+                                    <?php foreach ($destinationList as $destination) :
                                     ?>
-                                    <a class="dropdown__link" href="#adobe-xd">
-                                        <?php // echo $destination["location"] 
-                                        ?>
-                                    </a>
-                                    <?php // endforeach; 
+                                        <a class="dropdown__link" href="<?php echo '../pages/campsite_details.php?site_id=' . $destination["site_id"]; ?>">
+                                            <?php echo $destination["location"]
+                                            ?>
+                                        </a>
+                                    <?php endforeach;
                                     ?>
                                 </li>
                             </ul>
 
-                            <ul role="menu" class="dropdown__item">
+                            <ul role=" menu" class="dropdown__item">
                                 <li class="dropdown-title">
                                     <span class="dropdown__link-title">CampSite types</span>
                                 </li>
 
                                 <li role="menu item">
                                     <?php foreach ($campTypeList as $campType) : ?>
-                                    <a class="dropdown__link" href="<?php // echo PAGES_PATH . "information.php/#" . $campType->getDescription() 
-                                                                        ?>">
-                                        <?php // echo $campType->getDescription() 
-                                            ?>
-                                    </a>
+                                        <a class="dropdown__link" href="../pages/information.php <?php // echo PAGES_PATH . "information.php/#" . $campType->getDescription() 
+                                                                                                    ?>">
+                                            <?php echo $campType->getDescription() ?>
+                                        </a>
                                     <?php endforeach; ?>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li><a class="nav__link" href="<?php // echo PAGES_PATH . "reviews.php" 
-                                                    ?>">Reviews</a></li>
-                    <li><a class="nav__link" href="<?php // echo PAGES_PATH . "contact.php" 
-                                                    ?>">Contact Us</a></li>
-                    <li><a class="nav__link" href="<?php // echo PAGES_PATH . "home.php#about" 
-                                                    ?>">About</a></li>
+                    <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
+                    <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
+                    <li><a class="nav__link" href="../pages/home.php#about-us">About</a></li>
                     <li style="<?php displayItemForAdmin();
                                 ?>">
-                        <a class="nav__link" href="<?php // echo ADMIN_PATH . "dashboard.php" 
-                                                    ?>">Admin dashboard</a>
+                        <a class="nav__link" href="../admin/dashboard.php">Admin dashboard</a>
                     </li>
                 </ul>
             </nav>
@@ -104,8 +98,7 @@ function displayLoginAndLogout(): void
             <div class="nav__end-container">
                 <?php displayLoginAndLogout(); ?>
 
-                <a class="nav__link" href="<?php // echo PAGES_PATH . "signup.php" 
-                                            ?>">
+                <a class="nav__link" href="../pages/signup.php">
                     <button class="btn btn--primary">Sign Up</button>
                 </a>
             </div>
