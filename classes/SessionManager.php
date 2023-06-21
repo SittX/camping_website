@@ -19,7 +19,7 @@ class SessionManager
     {
         $_SESSION["user"] = ["username" => $user->getUsername(), "rank" => $user->getRank(), "id" => $user->getUserId()];
         $_SESSION["logged_in"] = true;
-        header("Location: ../pages/home.php");
+        // header("Location: ../pages/home.php");
     }
     public static function logout(): void
     {

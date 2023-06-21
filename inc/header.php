@@ -32,10 +32,13 @@ $connection = $db->getConnection();
     <!--    <link rel="stylesheet" href="../static/css/style.css">-->
     <link rel="stylesheet" href="<?php echo STATIC_PATH . "css/style.css" ?>">
     <script src="https://kit.fontawesome.com/c66bee47cf.js" crossorigin="anonymous"></script>
+    <!-- Google Translate service  -->
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 
 <body>
     <?php include_once("navbar.php") ?>
-    <?php // var_dump($_COOKIE); 
-    ?>
     <main class="main-container">
