@@ -8,61 +8,83 @@ $userRepo = new UserDataRepository($connection);
 $SITE_KEY = "6Ld_-bcmAAAAAITLLdHrs6VJPERiHKIo5WRGl_Fm";
 $SECRET_KEY = "6Ld_-bcmAAAAAHIji4wWC1MC2KSLBavfQZXDs-Kk";
 
-if (!isset($_SESSION["LoginCounter"])) {
-    $_SESSION["LoginCounter"] = 0;
+// if (isset($_POST['g-recaptcha-response'])) {
+//     $captcha = $_POST['g-recaptcha-response'];
+//     if (!$captcha) {
+//         // echo '<h2>Please check the the captcha form.</h2>';
+//         exit;
+//     }
+//     $ip = $_SERVER['REMOTE_ADDR'];
+
+//     // post request to server
+//     $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($SECRET_KEY) .  '&response=' . urlencode($captcha);
+
+//     $response = file_get_contents($url);
+//     $responseKeys = json_decode($response, true);
+
+//     // should return JSON with success as true
+//     // var_dump($response);
+//     if ($responseKeys["success"]) {
+//         // echo '<h2>reCaptcha verification succeed !</h2>';
+//         if (isset($_POST["login"])) {
+//             $username = $_POST["username"];
+//             $password = $_POST["password"];
+//             $user = $userRepo->searchUser($username, $password);
+//             var_dump($_COOKIE);
+//             if (!empty($user)) {
+//                 SessionManager::login($user);
+//                 return;
+//             }
+//             // echo "User is not found";
+//             checkLoginCounter();
+//         }
+//     } else {
+//         // echo '<h2>reCaptcha verification failed.</h2>';
+//     }
+// }
+
+// Check the duration of the timer set
+// var_dump($_SESSION);
+$lockDuration = 10; // Seconds
+if (isset($_SESSION["failedLogin"])) {
+    $duration = time() - $_SESSION["failedLogin"];
+    var_dump($duration);
+    if ($duration > $lockDuration) {
+        unset($_SESSION["failedLogin"]);
+        unset($_SESSION["loginAttempts"]);
+    }
 }
 
-if (isset($_POST['g-recaptcha-response'])) {
-    $captcha = $_POST['g-recaptcha-response'];
-    if (!$captcha) {
-        echo '<h2>Please check the the captcha form.</h2>';
-        exit;
-    }
-    $ip = $_SERVER['REMOTE_ADDR'];
+if (!isset($_SESSION["loginAttempts"])) {
+    $_SESSION["loginAttempts"] = 0;
+}
 
-    // post request to server
-    $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($SECRET_KEY) .  '&response=' . urlencode($captcha);
-
-    $response = file_get_contents($url);
-    $responseKeys = json_decode($response, true);
-
-    // should return JSON with success as true
-    var_dump($response);
-    if ($responseKeys["success"]) {
-        echo '<h2>reCaptcha verification succeed !</h2>';
-        if (isset($_POST["login"])) {
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            $user = $userRepo->searchUser($username, $password);
-
-            if (!empty($user)) {
-                SessionManager::login($user);
-                return;
-            }
-            checkLoginCounter();
-        }
+if (isset($_POST["login"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $user = $userRepo->searchUser($username, $password);
+    if (!empty($user)) {
+        SessionManager::login($user);
     } else {
-        echo '<h2>reCaptcha verification failed.</h2>';
+        $_SESSION["loginAttempts"] += 1;
     }
 }
-
-function checkLoginCounter()
-{
-    if ($_SESSION["LoginCounter"] >= 3 && !isset($_COOKIE["failedLogin"])) {
-        setcookie("failedLogin", 1, time() + 60, "/", "", false, true);
-        $_SESSION["LoginCounter"] = 0;
-    }
-    $_SESSION["LoginCounter"]++;
-}
-
 ?>
-
 
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
     <input type="text" name="username" id="username" placeholder="Username" class="form__input">
     <input type="text" placeholder="Password" name="password" class="form__input">
-    <input type="submit" name="login" value="Login" id="submit" class="btn btn--primary">
-    <div class="g-recaptcha" data-sitekey="<?php echo $SITE_KEY ?>"></div>
+
+    <?php if ($_SESSION["loginAttempts"] > 1) : ?>
+        <?php $_SESSION["failedLogin"] = time(); ?>
+        <?php include("timer.php"); ?>
+        <input type="submit" name="login" value="Login" id="submit" style="pointer-events:none" class="btn btn--primary">
+    <?php else : ?>
+        <input type="submit" name="login" value="Login" id="submit" class="btn btn--primary">
+    <?php endif ?>
+    <div class="g-recaptcha" data-sitekey="<?php echo $SITE_KEY
+                                            ?>"></div>
+
 </form>
 
 <?php include(dirname(__DIR__) . "/inc/footer.php") ?>

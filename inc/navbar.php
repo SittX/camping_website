@@ -44,60 +44,68 @@ function displayLoginAndLogout(): void
 
             <nav class="nav">
                 <ul class="nav__menu">
-                    <li>
-                        <button class="nav__link dropdown__btn" data-dropdown="dropdown1" aria-haspopup="true" aria-expanded="false" aria-label="discover">
+                    <!-- <li> -->
+                    <!-- <button class="nav__link dropdown__btn" data-dropdown="dropdown1" aria-haspopup="true"
+                            aria-expanded="false" aria-label="discover">
                             Discover
-                        </button>
+                        </button> -->
 
-                        <div id="dropdown1" class="dropdown">
-                            <ul role="menu" class="dropdown__item">
+                    <!-- <div id="dropdown1" class="dropdown"> -->
+                    <!-- <ul role="menu" class="dropdown__item">
                                 <li>
                                     <span class="dropdown__link-title">Popular destinations</span>
                                 </li>
 
                                 <li role="menu item">
-                                    <?php foreach ($destinationList as $destination) :
+                                    <?php // foreach ($destinationList as $destination) :
                                     ?>
-                                        <a class="dropdown__link" href="<?php echo '../pages/campsite_details.php?site_id=' . $destination["site_id"]; ?>">
-                                            <?php echo $destination["location"]
-                                            ?>
-                                        </a>
-                                    <?php endforeach;
+                                    <a class="dropdown__link"
+                                        href="<?php echo '../pages/campsite_details.php?site_id=' . $destination["site_id"]; ?>">
+                                        <?php // echo $destination["location"]
+                                        ?>
+                                    </a>
+                                    <?php // endforeach;
                                     ?>
                                 </li>
-                            </ul>
+                            </ul> -->
 
-                            <ul role=" menu" class="dropdown__item">
+                    <!-- <ul role=" menu" class="dropdown__item">
                                 <li class="dropdown-title">
                                     <span class="dropdown__link-title">CampSite types</span>
                                 </li>
 
                                 <li role="menu item">
-                                    <?php foreach ($campTypeList as $campType) : ?>
+                                    <?php // foreach ($campTypeList as $campType) : 
+                                    ?>
                                         <a class="dropdown__link" href="../pages/information.php <?php // echo PAGES_PATH . "information.php/#" . $campType->getDescription() 
                                                                                                     ?>">
-                                            <?php echo $campType->getDescription() ?>
+                                            <?php // echo $campType->getDescription() 
+                                            ?>
                                         </a>
-                                    <?php endforeach; ?>
+                                    <?php // endforeach; 
+                                    ?>
                                 </li>
-                            </ul>
-                        </div>
-                    </li>
+                            </ul> -->
+                    <!-- </div> -->
+                    <!-- </li> -->
+                    <li><a class="nav__link" href="../pages/information.php">Information</a></li>
                     <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
                     <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
                     <li><a class="nav__link" href="../pages/home.php#about-us">About</a></li>
-                    <li style="<?php displayItemForAdmin();
-                                ?>">
-                        <a class="nav__link" href="../admin/dashboard.php">Admin dashboard</a>
-                    </li>
+                    <?php
+                    if (SessionManager::checkAdmin()) :
+                    ?>
+                        <li><a class="nav__link" href="../admin/dashboard.php">Admin dashboard</a></li>
+                    <?php endif ?>
                 </ul>
             </nav>
         </div>
 
         <div class="nav__end">
             <div class="nav__end-container">
-                <?php displayLoginAndLogout(); ?>
-
+                <a class="nav__link" href="../pages/login.php" id="login-link">
+                    <button class="btn btn--primary" id="login-btn">Login</button>
+                </a>
                 <a class="nav__link" href="../pages/signup.php">
                     <button class="btn btn--primary">Sign Up</button>
                 </a>
@@ -109,3 +117,26 @@ function displayLoginAndLogout(): void
         </div>
     </div>
 </header>
+<script>
+    const loginBtn = document.getElementById('login-btn');
+
+    function toggleLoginBtn() {
+        console.log("Link is clicked");
+        console.log(isLoggedIn);
+        if (isLoggedIn) {
+            loginBtn.textContent = "Logout";
+        } else {
+            loginBtn.textContent = "Login";
+        }
+    }
+
+    loginBtn.addEventListener("click", () => {
+        isLoggedIn = !isLoggedIn;
+        toggleLoginBtn();
+    });
+
+    // const loginLink = document.getElementById("login-link");
+    // loginLink.addEventListener("click", () => {
+    //     console.log("Link is clicked");
+    // });
+</script>
