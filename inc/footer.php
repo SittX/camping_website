@@ -1,12 +1,13 @@
   <?php
     include_once(dirname(__DIR__) . "/config.php");
+    $pageName = basename($_SERVER["REQUEST_URI"], ".php");
     ?>
   </main>
   <footer id="footer">
       <div class="footer__container">
           <div class="footer__top-row">
               <div>
-                  you are here
+                  <?php echo "<p>You are at " . $pageName . " page</p>"; ?>
               </div>
 
               <div class="footer__item">
@@ -21,8 +22,7 @@
               <div class="footer__item">
                   <p class="footer__title">Contact Us</p>
                   <ul class="footer__link-container">
-                      <li><a class="footer__link" href="<?php echo PAGES_PATH . "contact.php" ?>"><button
-                                  class="btn btn--primary">Contact
+                      <li><a class="footer__link" href="<?php echo PAGES_PATH . "contact.php" ?>"><button class="btn btn--primary">Contact
                                   admin</button></a></li>
                       <!-- <li><a class="footer__link" href="<?php // echo PAGES_PATH . "" 
                                                                 ?>">Email</a></li> -->
@@ -56,12 +56,12 @@
   <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
   </script>
   <script type="text/javascript">
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-}
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+      }
   </script>
   </body>
 
