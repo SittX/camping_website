@@ -39,63 +39,27 @@ function displayLoginAndLogout(): void
     <div class="header__container">
         <div class="nav__start">
             <a class="nav__logo" href="../pages/home.php">
-                Logo
+                <div>
+                    <i class="fa-solid fa-tent"></i>
+                    <p>GWCS</p>
+                </div>
             </a>
 
             <nav class="nav">
                 <ul class="nav__menu">
-                    <!-- <li> -->
-                    <!-- <button class="nav__link dropdown__btn" data-dropdown="dropdown1" aria-haspopup="true"
-                            aria-expanded="false" aria-label="discover">
-                            Discover
-                        </button> -->
-
-                    <!-- <div id="dropdown1" class="dropdown"> -->
-                    <!-- <ul role="menu" class="dropdown__item">
-                                <li>
-                                    <span class="dropdown__link-title">Popular destinations</span>
-                                </li>
-
-                                <li role="menu item">
-                                    <?php // foreach ($destinationList as $destination) :
-                                    ?>
-                                    <a class="dropdown__link"
-                                        href="<?php echo '../pages/campsite_details.php?site_id=' . $destination["site_id"]; ?>">
-                                        <?php // echo $destination["location"]
-                                        ?>
-                                    </a>
-                                    <?php // endforeach;
-                                    ?>
-                                </li>
-                            </ul> -->
-
-                    <!-- <ul role=" menu" class="dropdown__item">
-                                <li class="dropdown-title">
-                                    <span class="dropdown__link-title">CampSite types</span>
-                                </li>
-
-                                <li role="menu item">
-                                    <?php // foreach ($campTypeList as $campType) : 
-                                    ?>
-                                        <a class="dropdown__link" href="../pages/information.php <?php // echo PAGES_PATH . "information.php/#" . $campType->getDescription() 
-                                                                                                    ?>">
-                                            <?php // echo $campType->getDescription() 
-                                            ?>
-                                        </a>
-                                    <?php // endforeach; 
-                                    ?>
-                                </li>
-                            </ul> -->
-                    <!-- </div> -->
-                    <!-- </li> -->
-                    <li><a class="nav__link" href="../pages/information.php">Information</a></li>
-                    <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
-                    <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
-                    <li><a class="nav__link" href="../pages/home.php#about-us">About</a></li>
                     <?php
                     if (SessionManager::checkAdmin()) :
                     ?>
-                        <li><a class="nav__link" href="../admin/dashboard.php">Admin dashboard</a></li>
+                        <li><a class="nav__link" href="../admin/dashboard.php">Dashboard</a></li>
+                        <li><a class="nav__link" href="../pages/information.php">Information</a></li>
+                        <li><a class="nav__link" href="../admin/adminReview.php">Reviews</a></li>
+                        <li><a class="nav__link" href="../admin/adminBooking.php">Bookings</a></li>
+                        <li><a class="nav__link" href="../admin/adminContact.php">User Contacts</a></li>
+                    <?php else : ?>
+                        <li><a class="nav__link" href="../pages/information.php">Information</a></li>
+                        <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
+                        <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
+                        <li><a class="nav__link" href="../pages/home.php#about-us">About</a></li>
                     <?php endif ?>
                 </ul>
             </nav>
