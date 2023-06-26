@@ -6,7 +6,6 @@ $campSiteList = $campSiteRepo->getLists();
 $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>
 <!-- Google translate element -->
-<div id="google_translate_element"></div>
 
 <!--Page banner with some text-->
 <section class="page_banner">

@@ -5,7 +5,7 @@
   </main>
   <footer id="footer">
       <section class="footer__top">
-          <div class="footer__column">
+          <div class="footer__column-title">
               <?php echo "<p class='you_are_here'>You are at " . $pageName . " page</p>"; ?>
           </div>
 
@@ -15,19 +15,41 @@
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "information.php" ?>">Information</a>
                   </li>
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "reviews.php" ?>">Reviews</a></li>
+                  <li><a class="footer__link" href="<?php echo PAGES_PATH . "wearable_technologies.php"?>">Wearable technologies</a></li>
               </ul>
           </div>
 
           <div class="footer__column">
               <p class="footer__column-title">Contact Us</p>
               <ul class="footer__link-container">
-                  <li><a class="footer__link" href="<?php echo PAGES_PATH . "contact.php" ?>"><button
-                              class="btn btn--primary">Contact
-                              admin</button></a></li>
+<!--                  <li><a class="footer__link" href="--><?php //echo PAGES_PATH . "contact.php" ?><!--"><button-->
+<!--                              class="btn btn--primary">Contact-->
+<!--                              admin</button></a></li>-->
+                  <li>
+                      <button class="btn btn--primary" id="sticky-form-open-btn">M</button>
+
+                      <!-- The form -->
+                      <div class="form-popup" id="myForm">
+                          <form action="/action_page.php" class="form-container">
+                              <h1>Login</h1>
+
+                              <label for="email"><b>Email</b></label>
+                              <input type="text" placeholder="Enter Email" name="email" required>
+
+                              <label for="psw"><b>Password</b></label>
+                              <input type="password" placeholder="Enter Password" name="psw" required>
+
+                              <button type="submit" class="btn">Login</button>
+                              <button type="button" class="btn cancel" id="sticky-form-close-btn">Close</button>
+                          </form>
+                      </div>
+                  </li>
+
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "privacyPolicy.php" ?>">Privacy Policy</a>
                   </li>
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "home.php#location_map" ?>">Site
                           location</a></li>
+                  <div id="google_translate_element"></div>
               </ul>
           </div>
       </section>

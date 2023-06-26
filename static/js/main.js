@@ -163,3 +163,24 @@ function smallImageClicked(imgId) {
     currentOnActiveEl.className = "non";
     currentActiveId = newEl;
 }
+
+const stickyFormOpenBtn = document.getElementById("sticky-form-open-btn");
+const stickyFormCloseBtn = document.getElementById("sticky-form-close-btn");
+console.log(stickyFormCloseBtn)
+console.log(stickyFormOpenBtn)
+function openForm() {
+    console.log("Open form");
+    document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}
+stickyFormOpenBtn.addEventListener("click",()=>{
+    console.log("Clicked form");
+   openForm();
+})
+
+stickyFormCloseBtn.addEventListener("click",()=>{
+   closeForm();
+})

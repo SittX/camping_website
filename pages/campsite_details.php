@@ -7,8 +7,6 @@ $site = $campSiteRepo->searchById($siteId);
 $images = $site->getImages();
 $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>
-
-<p class="testing-css">Hello world</p>
 <div class="details__container">
     <div id="campsite-showcase__container">
         <img id="showcase-image" src="<?php echo $imageDirPath . $images[0] ?>" class="detail-img">
