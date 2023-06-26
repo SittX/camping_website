@@ -15,29 +15,29 @@ foreach ($campSiteList as $campSite) {
     $destinationList[] = ["site_id" => $campSite->getSiteId(), "location" => $campSite->getLocation()];
 }
 
-function displayItemForAdmin(): void
-{
-    echo (SessionManager::checkAdmin()) ? "display:block;" : "display:none;";
-    //    return (isset($_SESSION["user"]) && $_SESSION["user"]["rank"] == "admin") ? "display:block;" : "display:none;";
-}
+//function displayItemForAdmin(): void
+//{
+//    echo (SessionManager::checkAdmin()) ? "display:block;" : "display:none;";
+//    //    return (isset($_SESSION["user"]) && $_SESSION["user"]["rank"] == "admin") ? "display:block;" : "display:none;";
+//}
 
-function displayLoginAndLogout(): void
-{
-    if (SessionManager::checkIfUserLoggedIn()) {
-        echo '<a class="nav__link" href="' . PAGES_PATH . 'logout.php">
-            <button class="btn btn--primary">Logout</button>
-        </a>';
-    } else {
-        echo '<a class="nav__link" href="' . PAGES_PATH . 'login.php">
-            <button class="btn btn--primary">Login</button>
-        </a>';
-    }
-}
+//function displayLoginAndLogout(): void
+//{
+//    if (SessionManager::checkIfUserLoggedIn()) {
+//        echo '<a class="nav__link" href="' . PAGES_PATH . 'logout.php">
+//            <button class="btn btn--primary">Logout</button>
+//        </a>';
+//    } else {
+//        echo '<a class="nav__link" href="' . PAGES_PATH . 'login.php">
+//            <button class="btn btn--primary">Login</button>
+//        </a>';
+//    }
+//}
 ?>
 
 <header id="header" aria-label="header">
     <div class="header__container">
-        <div class="nav__start">
+        <div class="header__left">
             <a class="nav__logo" href="../pages/home.php">
                 <div>
                     <i class="fa-solid fa-tent"></i>
@@ -46,7 +46,7 @@ function displayLoginAndLogout(): void
             </a>
 
             <nav class="nav">
-                <ul class="nav__menu">
+                <ul class="nav__link-container">
                     <?php
                     if (SessionManager::checkAdmin()) :
                     ?>
@@ -65,11 +65,17 @@ function displayLoginAndLogout(): void
             </nav>
         </div>
 
-        <div class="nav__end">
-            <div class="nav__end-container">
-                <a class="nav__link" href="../pages/login.php" id="login-link">
-                    <button class="btn btn--primary" id="login-btn">Login</button>
-                </a>
+        <div class="header__right">
+            <div class="container--flex">
+                <?php if(SessionManager::checkIfUserLoggedIn()):?>
+                    <a class="nav__link" href="../pages/logout.php" id="login-link">
+                        <button class="btn btn--primary" id="logout-btn">Logout</button>
+                    </a>
+                <?php else:?>
+                    <a class="nav__link" href="../pages/login.php" id="login-link">
+                        <button class="btn btn--primary" id="login-btn">Login</button>
+                    </a>
+                <?php endif?>
                 <a class="nav__link" href="../pages/signup.php">
                     <button class="btn btn--primary">Sign Up</button>
                 </a>
@@ -82,25 +88,22 @@ function displayLoginAndLogout(): void
     </div>
 </header>
 <script>
-    const loginBtn = document.getElementById('login-btn');
-
-    function toggleLoginBtn() {
-        console.log("Link is clicked");
-        console.log(isLoggedIn);
-        if (isLoggedIn) {
-            loginBtn.textContent = "Logout";
-        } else {
-            loginBtn.textContent = "Login";
-        }
-    }
-
-    loginBtn.addEventListener("click", () => {
-        isLoggedIn = !isLoggedIn;
-        toggleLoginBtn();
-    });
-
-    // const loginLink = document.getElementById("login-link");
-    // loginLink.addEventListener("click", () => {
-    //     console.log("Link is clicked");
-    // });
+    // // Get the login link and button elements
+    // const loginLink = document.getElementById('login-link');
+    // const loginButton = document.getElementById('login-btn');
+    //
+    // // Function to toggle the href attribute and button text
+    // function toggleLogin(event) {
+    //     event.preventDefault();
+    //     if (loginLink.getAttribute('href') === '../pages/login.php') {
+    //         loginLink.setAttribute('href', '../pages/logout.php');
+    //         loginButton.textContent = 'Logout';
+    //     } else {
+    //         loginLink.setAttribute('href', '../pages/login.php');
+    //         loginButton.textContent = 'Login';
+    //     }
+    // }
+    //
+    // // Add event listener to the login button
+    // loginButton.addEventListener('click', toggleLogin);
 </script>

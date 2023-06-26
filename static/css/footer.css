@@ -8,8 +8,8 @@
     padding: 1.5rem;
 }
 
-.footer__top-row,
-.footer__bottom-row {
+.footer__top,
+.footer__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,12 +22,12 @@
     row-gap: 0.5rem;
 }
 
-.footer__title {
+.footer__column-title {
     font-weight: 600;
     margin: 1rem 0;
 }
 
-.site-footer .social-icons a {
+.site-footer .social-links__container a {
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -41,13 +41,13 @@
     margin: 0
 }
 
-.social-icons {
+.social-links__container {
     padding-left: 0;
     margin-bottom: 0;
     list-style: none
 }
 
-.social-icons li {
+.social-links__container li {
     display: inline-block;
     margin-bottom: 4px
 }
@@ -60,7 +60,7 @@
     font-size: 13px
 } */
 
-.social-icons a {
+.social-links__container a {
     background-color: var(--white);
     color: var(--light-grey);
     font-size: 16px;
@@ -76,38 +76,38 @@
     transition: all .2s linear
 }
 
-.social-icons a:active,
-.social-icons a:focus,
-.social-icons a:hover {
+.social-links__container a:active,
+.social-links__container a:focus,
+.social-links__container a:hover {
     color: #fff;
     background-color: #29aafe
 }
 
-.social-icons.size-sm a {
+.social-links__container.size-sm a {
     line-height: 34px;
     height: 34px;
     width: 34px;
     font-size: 14px
 }
 
-.social-icons .facebook:hover {
+.social-links__container .facebook:hover {
     background-color: #3b5998
 }
 
-.social-icons .twitter:hover {
+.social-links__container .twitter:hover {
     background-color: #00aced
 }
 
-.social-icons .linkedin:hover {
+.social-links__container .linkedin:hover {
     background-color: #007bb6
 }
 
-.social-icons .instagram:hover {
+.social-links__container .instagram:hover {
     background-color: #ed5688
 }
 
 @media (max-width:1100px) {
-    .footer__bottom-row {
+    .footer__bottom {
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
@@ -120,7 +120,7 @@
 
 @media (max-width:600px) {
 
-    .social-icons li.title {
+    .social-links__container li.modal__title {
         display: block;
         margin-right: 0;
         font-weight: 600
@@ -131,11 +131,11 @@
     }
 
     .site-footer .copyright-text,
-    .site-footer .social-icons {
+    .site-footer .social-links__container {
         text-align: center
     }
 
-    .footer__top-row {
+    .footer__top {
         display: none;
     }
 }

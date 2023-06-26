@@ -44,7 +44,7 @@ figure {
     font-weight: 100;
 }
 
-#captioned-gallery {
+#slider__container {
     width: 100%;
     overflow: hidden;
 }

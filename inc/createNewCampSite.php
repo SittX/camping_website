@@ -13,9 +13,9 @@ $campSiteRepo = new CampSiteDataRepository($connection);
 // Fetch all the available pitch type
 $pitchTypeList = $pitchTypeRepo->getLists();
 
-if (isset($_POST['upload_image'])) {
+if (isset($_POST['create_campsite'])) {
     // Create the CampSite
-    echo "Pitch type ID : " . $_POST["pitch_type_id"];
+//    echo "Pitch type ID : " . $_POST["pitch_type_id"];
     $newCampSite = new CampSite($_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $_POST["pitch_type_id"], $_POST["price"]);
     $campSiteID = $campSiteRepo->insert($newCampSite);
 
@@ -23,74 +23,48 @@ if (isset($_POST['upload_image'])) {
     uploadImage($campSiteID);
 }
 ?>
-<button id="btnOpenPopup">Create new campsite</button>
+<button data-modal-target="#modal" class="btn btn--primary">Create new campsite</button>
+<div class="modal" id="modal">
+    <div class="modal-header">
+        <div class="modal__title">Create new campsite</div>
+        <button data-close-button class="close-button">&times;</button>
+    </div>
 
-<div class="popup-form__bg">
-    <div class="popup-form__container">
-        <button id="btnClosePopup" class="popup-form__closebtn">X</button>
-        <form action="<?php echo $_SERVER["PHP_SELF"]
-                        ?>" method="post" enctype="multipart/form-data" class="form">
-            <div class="form__group">
-                <input type="text" name="description" id="description" placeholder="Description" class="form__input">
-            </div>
-
-            <div class="form__group">
+    <div class="modal-body">
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data" class="form">
+            <div class="form__row">
+                <input type="text" class="form__input" name="site_name" id="site_name" placeholder="Site Name">
                 <input class="form__input" type="text" name="location" id="location" placeholder="Location">
             </div>
-            <div class="form__group">
+
+            <textarea name="description" id="description" cols="50" rows="5" placeholder="Description"></textarea>
+            <div class="form__row">
                 <input class="form__input" type="text" name="features" id="features" placeholder="features">
-            </div>
-            <div class="form__group">
-                <input class="form__input" type="text" name="local_attraction" id="local_attraction" placeholder="local_attraction">
-            </div>
-            <div class="form__group">
-                <input class="form__input" type="text" name="price" id="price" placeholder="price">
-            </div>
-            <div class="form__group">
-                <input class="form__input" type="text" name="notice_note" id="notice_note" placeholder="notice_note">
+                <input class="form__input" type="text" name="local_attraction" id="local_attraction" placeholder="Local attraction">
             </div>
 
-            <label for="cars">Choose a pitch type :</label>
-            <select name="pitch_type_id" id="pitch_type">
-                <?php foreach ($pitchTypeList as $pitchType) :
-                ?>
-                    <option value="<?php echo $pitchType->getPitchTypeId();
-                                    ?>"><?php echo $pitchType->getDescription()
-                                        ?>
-                    </option>
-                <?php endforeach;
-                ?>
-            </select>
+            <input class="form__input" type="number" name="price" id="price" placeholder="price">
+            <textarea name="notice_note" id="notice_note" cols="50" rows="5" placeholder="Notice Note"></textarea>
 
-            <input type="file" name="files[]" multiple>
-            <input type="submit" value="upload_image" name="upload_image">
+            <div class="form__row">
+                <label for="cars">Choose a pitch type :</label>
+                <select name="pitch_type_id" id="pitch_type">
+                    <?php foreach ($pitchTypeList as $pitchType) :
+                    ?>
+                        <option value="<?php echo $pitchType->getPitchTypeId();
+                                        ?>"><?php echo $pitchType->getDescription()
+                                            ?>
+                        </option>
+                    <?php endforeach;
+                    ?>
+                </select>
+            </div>
+
+            <input type="file" name="files[]">
+
+
+            <input type="submit" value="Create new campsite" name="create_campsite" class="btn btn--primary">
         </form>
     </div>
 </div>
-
-<!-- <button id="btnOpenForm">Open Form</button>
-
-<div class="form-popup-bg">
-    <div class="form-container">
-        <button id="btnCloseForm" class="close-button">X</button>
-        <form action="">
-            <div class="form-group">
-                <label for="">Name</label>
-                <input type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="">Company Name</label>
-                <input class="form-control" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="">E-Mail Address</label>
-                <input class="form-control" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="">Phone Number</label>
-                <input class="form-control" type="text" />
-            </div>
-            <button>Submit</button>
-        </form>
-    </div>
-</div> -->
+<div id="modal-bg"></div>

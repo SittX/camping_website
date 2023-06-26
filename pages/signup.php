@@ -26,32 +26,32 @@ if (isset($_POST["register"])) {
 
 <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" class="form">
     <div class="form__col">
-        <div class="form__group">
+        <div class="form__row">
             <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
             <input class="form__input" type="text" name="firstName" placeholder="Firstname" required />
         </div>
-        <div class="form__group">
+        <div class="form__row">
             <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
             <input class="form__input" type="text" name="lastName" placeholder="Lastname" required />
         </div>
     </div>
 
-    <div class="form__group">
+    <div class="form__row">
         <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
         <input class="form__input" type="text" name="username" placeholder="Username" required />
     </div>
 
-    <div class="form__group">
+    <div class="form__row">
         <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
         <input class="form__input" type="email" name="email" placeholder="Email" required />
     </div>
 
-    <div class="form__group">
+    <div class="form__row">
         <span><i aria-hidden="true" class="fa fa-lock"></i></span>
         <input class="form__input" type="password" name="password" placeholder="Password" required />
     </div>
 
-    <div class="form__group">
+    <div class="form__row">
         <span><i aria-hidden="true" class="fa fa-lock"></i></span>
         <input class="form__input" type="password" name="password" placeholder="Re-type Password" required />
     </div>

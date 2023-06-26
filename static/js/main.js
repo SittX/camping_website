@@ -67,30 +67,69 @@ hamburgerBtn.addEventListener("click", toggleHamburger);
 
 // Popup form
 function closeForm() {
-    var formPopupBg = document.querySelector('.popup-form__bg');
+    let formPopupBg = document.querySelector('.popup-form__bg');
     formPopupBg.classList.remove('is-visible');
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    var btnOpenPopup = document.getElementById('btnOpenPopup');
-    var formPopupBg = document.querySelector('.popup-form__bg');
+document.addEventListener('DOMContentLoaded',  ()=> {
+    const openPopupBtn = document.getElementById('open_popup_btn');
+    const popupBg = document.querySelector('.popup-form__bg');
 
     /* Contact Form Interactions */
-    btnOpenPopup.addEventListener('click', function (event) {
+    openPopupBtn.addEventListener('click', (event)=> {
         event.preventDefault();
         console.log("Open btn clicked")
-        formPopupBg.classList.add('is-visible');
+        popupBg.classList.add('is-visible');
     });
 
     // close popup when clicking x or off popup
-    formPopupBg.addEventListener('click', function (event) {
-        var target = event.target;
-        if (target.classList.contains('popup-form__bg') || target.id === 'btnClosePopup') {
+    popupBg.addEventListener('click', function (event) {
+        let target = event.target;
+        if (target.classList.contains('popup-form__bg') || target.id === 'close_popup_btn') {
             event.preventDefault();
-            formPopupBg.classList.remove('is-visible');
+            popupBg.classList.remove('is-visible');
         }
     });
 });
+
+
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('modal-bg')
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        console.log("Clicked");
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
+})
+
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+        closeModal(modal)
+    })
+})
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
+
+function openModal(modal) {
+    if (modal == null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+}
+
+function closeModal(modal) {
+    if (modal == null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
 
 // Searchbox filtering
 const searchboxInput = document.getElementById("searchbox-input");
