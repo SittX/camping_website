@@ -49,6 +49,8 @@
                   </li>
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "home.php#location_map" ?>">Site
                           location</a></li>
+                  <li><a class="footer__link" href="<?php echo PAGES_PATH . "rss.php" ?>">RSS Feed</a>
+                  </li>
                   <div id="google_translate_element"></div>
               </ul>
           </div>

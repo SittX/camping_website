@@ -3,7 +3,7 @@
     --black: #171717;
     --dark-grey: #333333;
     --medium-grey: #636363;
-    --light-grey: #cbcbcb;
+    --light-grey: rgba(238, 238, 238, 0.95);
     --primary-color: #4380fc;
     --warning-color: rgb(227, 71, 71);
     --white: white;
@@ -386,7 +386,7 @@ input:focus {
     background: none;
     font-size: 1.25rem;
     font-weight: bold;
-    color: white;
+    color: var(--white);
 }
 
 .modal-body {
@@ -413,6 +413,42 @@ input:focus {
     pointer-events: all;
 }
 
+/* Table */
+.table {
+    border: 1px solid var(--dark-grey);
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table__caption{
+    font-size: 1.5rem;
+}
+
+.table__header {
+    font-size: 1.2em;
+    margin: .5em 0 .75em;
+}
+
+.table__row {
+    background-color:var(--light-grey);
+    border: 1px solid var(--light-grey);
+    padding: .35em;
+}
+
+.table__column,
+.table__data {
+    padding: .625em;
+    text-align: center;
+}
+
+.table__column {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
 
 /* Home page */
 .page_banner {

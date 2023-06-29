@@ -16,7 +16,7 @@ $pitchTypeList = $pitchTypeRepo->getLists();
 if (isset($_POST['create_campsite'])) {
     // Create the CampSite
 //    echo "Pitch type ID : " . $_POST["pitch_type_id"];
-    $newCampSite = new CampSite($_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $_POST["pitch_type_id"], $_POST["price"]);
+    $newCampSite = new CampSite($_POST["site_name"],$_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $_POST["pitch_type_id"], $_POST["price"]);
     $campSiteID = $campSiteRepo->insert($newCampSite);
 
     // Upload image

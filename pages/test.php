@@ -49,13 +49,13 @@ $conn = $db->getConnection();
 
 
 // // CampSite Repository
-// // $camp1 = new CampSite("yangon", "Testing camp for introvert", "It is located near game center", "free wifi, 3 meals a day", "Be careful of GAMER!", 2, 29.99);
-// // $camp2 = new CampSite("NPT", "Another camp for extrovert", "It is located near meditation center", "paid wifi, 2 meals a day", "Be careful of Introvert!", 3, 19.99);
-// // $newCamp = new CampSite("MDY", "Testing", "Testing", "testin1, testing2", "testing method", 3, 50.99);
+  $camp1 = new CampSite("Mahar camper","Bago", "Testing camp for introvert", "It is located near game center", "free wifi, 3 meals a day", "Be careful of GAMER!", 2, 29.99);
+  $camp2 = new CampSite("The forest","NPT", "Feel the nature again!", "Deep in the forest", "adventurous locations, scary animals", "No cellphone allowed", 1, 22.99);
+ // $newCamp = new CampSite("MDY", "Testing", "Testing", "testin1, testing2", "testing method", 3, 50.99);
 
-// // $campSiteRepo = new CampSiteDataRepository($conn);
-// // $campSiteRepo->insert($camp1);
-// // $campSiteRepo->insert($camp2);
+  $campSiteRepo = new CampSiteDataRepository($conn);
+  $campSiteRepo->insert($camp1);
+  $campSiteRepo->insert($camp2);
 // // $oldCamp = $campSiteRepo->queryById(1);
 // // $campSiteRepo->update($oldCamp, $newCamp);
 // // $campSiteRepo->remove(1);

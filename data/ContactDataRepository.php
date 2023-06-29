@@ -5,9 +5,11 @@ require_once(MODEL_PATH. "Contact.php");
 class ContactDataRepository implements DataRepository
 {
     private mysqli $connection;
+    private UserDataRepository $userRepo;
     public function __construct(mysqli $connection)
     {
         $this->connection = $connection;
+        $this->userRepo = new UserDataRepository($connection);
     }
 
     public function searchById($id)
@@ -78,9 +80,14 @@ class ContactDataRepository implements DataRepository
         return $affectedRow;
     }
 
-    private function mapRowToContactObject($row)
+    private function mapRowToContactObject($row):Contact
     {
-        $contact = new Contact($row['contact_date'], $row['message'], $row['user_id']);
-        $contact->setContactId($row['contact_id']);
+            $dateTime = new DateTime($row["contact_date"]);
+            $user = $this->userRepo->searchById($row["user_id"]);
+            $contact = new Contact($row['message'], $row['status'],$dateTime,$user);
+            $contact->setContactId($row['contact_id']);
+            return $contact;
     }
+
+
 }

@@ -10,9 +10,12 @@ require_once(DATA_PATH . "ContactDataRepository.php");
 require_once(DATA_PATH . "PitchTypeDataRepository.php");
 require_once(DATA_PATH . "ReviewDataRepository.php");
 require_once(DATA_PATH . "BookingDataRepository.php");
+require_once(DATA_PATH . "RssDataRepository.php");
 require_once(MODEL_PATH . "User.php");
 require_once(MODEL_PATH . "PitchType.php");
 require_once(MODEL_PATH . "Booking.php");
+require_once(MODEL_PATH . "Rss.php");
+
 
 $db = new DatabaseConnection();
 $connection = $db->getConnection();

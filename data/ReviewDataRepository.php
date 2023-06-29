@@ -4,10 +4,14 @@ require_once(UTILS_PATH. "DataRepositoryUtil.php");
 class ReviewDataRepository implements DataRepository
 {
     private mysqli $connection;
+    private UserDataRepository $userRepo;
+    private CampSiteDataRepository $siteRepo;
 
     public function __construct(mysqli $connection)
     {
         $this->connection = $connection;
+        $this->userRepo = new UserDataRepository($connection);
+        $this->siteRepo = new CampSiteDataRepository($connection);
     }
 
 
@@ -82,7 +86,9 @@ class ReviewDataRepository implements DataRepository
 
     private function mapRowToReviewObject($row): Review
     {
-        $review = new Review($row['rating'], $row['message'], $row['title'], $row['user_id'], $row['site_id']);
+        $user = $this->userRepo->searchById($row["user_id"]);
+        $site = $this->siteRepo->searchById($row["site_id"]);
+        $review = new Review($row['rating'], $row['message'], $row['title'], $user, $site);
         $review->setReviewId($row['review_id']);
         return $review;
     }

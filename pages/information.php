@@ -1,19 +1,44 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
+//Use Implode and Explode
+//Implode -> Array to string
+//Explode -> String to Array
 
-
-// TODO : Display all the available campsites
-// TODO : Implement search box or filter for filtering campsite based on certain categories
 $campSiteRepo = new CampSiteDataRepository($connection);
+$reviewRepo = new ReviewDataRepository($connection);
+$bookingRepo = new BookingDataRepository($connection);
 $campSiteList = $campSiteRepo->getLists();
 $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
 // TODO: Handle review and booking form submissions. Get the value of "campsite_id" input element in each POST request.
+if (isset($_POST["review_submit"])) {
+    if (!SessionManager::checkIfUserLoggedIn()) {
+        echo "Cannot make review if you aren't logged in";
+        header("Location: login.php");
+    }else{
+        $siteId = $_POST["site_id"];
+        $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"], $_SESSION["user"]["id"], $siteId);
+        $reviewRepo->insert($newReview);
+        echo "Review has been inserted";
+    }
+}
+
+
+if (isset($_POST["booking_submit"])) {
+    if (!SessionManager::checkIfUserLoggedIn()) {
+        echo "Cannot make booking if you aren't logged in";
+        header("Location: login.php");
+    }else{
+        $siteId = $_POST["site_id"];
+//        $bookingCampSite = $campSiteRepo->searchById($siteId);
+        $booking = new Booking($_POST["check_in_date"], $_POST["check_out_date"], $_SESSION["user"]["id"], $siteId);
+        $bookingRepo->insert($booking);
+        echo "Booking has been inserted";
+    }
+}
+
 ?>
 
-<!-- Use Implode and Explode -->
-<!-- Implode -> Array to string -->
-<!-- Explode -> String to Array -->
 
 <section class="campsite__searchbox">
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="searchbox">
@@ -71,8 +96,8 @@ if (SessionManager::checkAdmin()) {
                     <option value="4">Average</option>
                     <option value="5">Bad</option>
                 </select>
-                <input type="hidden" name="campsite_id" value="<?php echo $campSite->getSiteId() ?>">
-                <input type="submit" value="Submit" name="submit_review">
+                <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
+                <input type="submit" value="Submit" name="review_submit">
             </form>
         </div>
     </div>
@@ -95,10 +120,10 @@ if (SessionManager::checkAdmin()) {
                     <p>Price: <?php echo $campSite->getPrice() ?></p>
                 </div>
 
-                <input type="hidden" name="campsite_id" value="<?php echo $campSite->getSiteId() ?>">
+                <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
                 <input type="date" name="check_in_date" id="calender_input">
                 <input type="date" name="check_out_date" id="calender_input">
-                <input type="submit" value="Book" name="submit_booking">
+                <input type="submit" value="Book" name="booking_submit">
             </form>
         </div>
     </div>

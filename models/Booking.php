@@ -3,15 +3,15 @@ class Booking{
     private int $bookingId;
     private $checkIn;
     private $checkOut;
-    private int $userId;
-    private int $siteId;
+    private User $user;
+    private CampSite $site;
 
-    public function __construct($checkIn, $checkOut, int $userId, int $siteId)
+    public function __construct($checkIn, $checkOut, User $user,CampSite $site)
     {
         $this->checkIn = $checkIn;
         $this->checkOut = $checkOut;
-        $this->userId = $userId;
-        $this->siteId = $siteId;
+        $this->user = $user;
+        $this->site = $site;
     }
 
     // Getter
@@ -30,14 +30,14 @@ class Booking{
         return $this->checkOut;
     }
 
-    public function getUserId(): int
+    public function getUser():User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function getSiteId(): int
+    public function getSite():CampSite
     {
-        return $this->siteId;
+        return $this->site;
     }
 
     // Setters
@@ -56,13 +56,13 @@ class Booking{
         $this->checkOut = $checkOut;
     }
 
-    public function setUserId(int $userId): void
+    public function setUser(User $user): void
     {
-        $this->userId = $userId;
+        $this->user = $user;
     }
 
-    public function setSiteId(int $siteId): void
+    public function setSite(CampSite $site):void
     {
-        $this->siteId = $siteId;
+        $this->site = $site;
     }
 }

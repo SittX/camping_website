@@ -2,6 +2,7 @@
 class CampSite
 {
     private int $siteId;
+    private string $name;
     private string $location;
     private string $description;
     private string $localAttraction;
@@ -11,8 +12,9 @@ class CampSite
     private float $price;
     private $images;
 
-    public function __construct(string $location, string $description, string $localAttraction, string $features, string $noticeNote, int $pitchTypeId, float $price)
+    public function __construct(string $name,string $location, string $description, string $localAttraction, string $features, string $noticeNote, int $pitchTypeId, float $price)
     {
+        $this->name = $name;
         $this->location = $location;
         $this->description = $description;
         $this->localAttraction = $localAttraction;
@@ -67,7 +69,18 @@ class CampSite
         return $this->images;
     }
 
+    public function getName():string
+    {
+        return $this->name;
+    }
+
+
+
     // Setters
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
     public function setSiteId(int $siteId): void
     {
         $this->siteId = $siteId;
@@ -108,7 +121,7 @@ class CampSite
         $this->price = $price;
     }
 
-    public function setImages($images)
+    public function setImages($images):void
     {
         $this->images = $images;
     }

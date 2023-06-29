@@ -3,22 +3,26 @@
 class Contact
 {
     private int $contactId;
-    private $contactDate;
+    private DateTime $contactDate;
     private string $message;
-    private int $userId;
+    private string $status;
+    private User $user;
 
-    public function __construct(string $message, int $userId)
+    public function __construct(string $message, string $status,DateTime $contactDate,User $user )
     {
         $this->message = $message;
-        $this->userId = $userId;
+        $this->status=$status;
+        $this->contactDate=$contactDate;
+        $this->user = $user;
     }
 
+    // Getters
     public function getContactId(): int
     {
         return $this->contactId;
     }
 
-    public function getContactDate()
+    public function getContactDate(): DateTime
     {
         return $this->contactDate;
     }
@@ -28,10 +32,16 @@ class Contact
         return $this->message;
     }
 
-    public function getUserId(): int
+    public function getStatus(): string
     {
-        return $this->userId;
+        return $this->status;
     }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
 
     // Setters
     public function setContactId(int $contactId): void
@@ -39,7 +49,7 @@ class Contact
         $this->contactId = $contactId;
     }
 
-    public function setContactDate($contactDate): void
+    public function setContactDate(DateTime $contactDate): void
     {
         $this->contactDate = $contactDate;
     }
@@ -49,8 +59,14 @@ class Contact
         $this->message = $message;
     }
 
-    public function setUserId(int $userId): void
+    public function setStatus(string $status): void
     {
-        $this->userId = $userId;
+        $this->status = $status;
     }
+
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
+    }
+
 }

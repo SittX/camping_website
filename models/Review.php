@@ -5,16 +5,16 @@ class Review
     private int $rating;
     private string $message;
     private string $title;
-    private int $userId;
-    private int $siteId;
+    private User $user;
+    private CampSite $site;
 
-    public function __construct($rating, $message, $title, $userId, $siteId)
+    public function __construct(int $rating,string $message,string $title,User $user, CampSite $site)
     {
         $this->rating = $rating;
         $this->message = $message;
         $this->title = $title;
-        $this->userId = $userId;
-        $this->siteId = $siteId;
+        $this->user = $user;
+        $this->site = $site;
     }
 
     // Getters
@@ -38,45 +38,45 @@ class Review
         return $this->title;
     }
 
-    public function getUserId(): int
+    public function getUser():User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function getSiteId(): int
+    public function getSite():CampSite
     {
-        return $this->siteId;
+        return $this->site;
     }
 
     // Setters
-    public function setReviewId($reviewId): void
+    public function setReviewId(int $reviewId): void
     {
         $this->reviewId = $reviewId;
     }
 
-    public function setRating($rating): void
+    public function setRating(int $rating): void
     {
         $this->rating = $rating;
     }
 
-    public function setMessage($message): void
+    public function setMessage(string $message): void
     {
         $this->message = $message;
     }
 
-    public function setTitle($title): void
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    public function setUserId($userId): void
+    public function setUser($user): void
     {
-        $this->userId = $userId;
+        $this->user = $user;
     }
 
-    public function setSiteId($siteId): void
+    public function setSite($site): void
     {
-        $this->siteId = $siteId;
+        $this->site = $site;
     }
 
 

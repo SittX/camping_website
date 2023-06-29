@@ -2,10 +2,14 @@
  class BookingDataRepository implements DataRepository
  {
      private mysqli $connection;
+     private UserDataRepository $userRepo;
+     private CampSiteDataRepository $siteRepo;
 
      public function __construct(mysqli $connection)
      {
          $this->connection = $connection;
+         $this->userRepo = new UserDataRepository($connection);
+         $this->siteRepo = new CampSiteDataRepository($connection);
      }
 
      public function searchById($id)
@@ -80,7 +84,9 @@
      // Helper functions
      private function mapRowToBookingObject($row):Booking
      {
-        $newBooking= new Booking($row["check_in"],$row["check_out"],$row["user_id"],$row["site_id"]);
+         $user = $this->userRepo->searchById($row["user_id"]);
+         $site = $this->siteRepo->searchById($row["site_id"]);
+        $newBooking= new Booking($row["check_in"],$row["check_out"],$user,$site);
         $newBooking->setBookingId($row["booking_id"]);
          return $newBooking;
      }
