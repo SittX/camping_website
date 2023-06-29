@@ -1,12 +1,27 @@
   <?php
     include_once(dirname(__DIR__) . "/config.php");
     $pageName = basename($_SERVER["REQUEST_URI"], ".php");
+    require_once("viewCounter.php");
+  function retrieveViewCount() {
+      $db = new DatabaseConnection();
+      $connection = $db->getConnection();
+
+      $query = "SELECT COUNT(DISTINCT ip_address) AS total_ips FROM User_logs";
+      $stmt = $connection->query($query);
+      $row = $stmt->fetch_assoc();
+      return $row["total_ips"];
+  }
+
+  $viewCount = retrieveViewCount();
     ?>
   </main>
   <footer id="footer">
       <section class="footer__top">
           <div class="footer__column-title">
               <?php echo "<p class='you_are_here'>You are at " . $pageName . " page</p>"; ?>
+
+              <?php echo "Total visitor : " . $viewCount?>
+<!--              <p>Total view counter - 1</p>-->
           </div>
 
           <div class="footer__column">
@@ -15,7 +30,7 @@
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "information.php" ?>">Information</a>
                   </li>
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "reviews.php" ?>">Reviews</a></li>
-                  <li><a class="footer__link" href="<?php echo PAGES_PATH . "wearable_technologies.php"?>">Wearable technologies</a></li>
+                  <li><a class="footer__link" href="<?php echo PAGES_PATH . "wearableTechnologies.php"?>">Wearable technologies</a></li>
               </ul>
           </div>
 

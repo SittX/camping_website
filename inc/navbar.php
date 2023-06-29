@@ -60,7 +60,7 @@ foreach ($campSiteList as $campSite) {
                         <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
                         <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
                         <li><a class="nav__link" href="../pages/home.php#about_us">About</a></li>
-                        <li><a class="nav__link" href="../pages/wearable_technologies.php">Wearable technologies</a></li>
+                        <li><a class="nav__link" href="../pages/wearableTechnologies.php">Wearable technologies</a></li>
                     <?php endif ?>
                 </ul>
             </nav>

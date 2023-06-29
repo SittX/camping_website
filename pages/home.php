@@ -2,7 +2,7 @@
 require_once(dirname(__DIR__) . "/inc/header.php");
 include("../inc/lockUser.php");
 $campSiteRepo = new CampSiteDataRepository($connection);
-$campSiteList = $campSiteRepo->getLists();
+$campSites = $campSiteRepo->getLists();
 $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>
 <!-- Google translate element -->
@@ -17,13 +17,23 @@ $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
 <section id="slider__container">
     <div class="slider">
-        <?php foreach ($campSiteList as $campSite) : ?>
+        <?php if(count($campSites) > 4):?>
+        <?php for($i = 0; $i < 4; $i++):?>
         <figure class="slide">
-            <img class="slide__img" src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" alt>
-            <figcaption class="slide__caption"><?php echo $campSite->getLocation() ?>,
-                <?php echo $campSite->getDescription() ?></figcaption>
+            <img class="slide__img" src="<?php echo $imageDirPath . $campSites[$i]->getImages()[0] ?>" alt>
+            <figcaption class="slide__caption"><?php echo $campSites[$i]->getLocation() ?>,
+                <?php echo $campSites[$i]->getDescription() ?></figcaption>
         </figure>
-        <?php endforeach ?>
+        <?php endfor;?>
+        <?php else: ?>
+            <?php for($i = 0; $i < count($campSites); $i++):?>
+                <figure class="slide">
+                    <img class="slide__img" src="<?php echo $imageDirPath . $campSites[$i]->getImages()[0] ?>" alt>
+                    <figcaption class="slide__caption"><?php echo $campSites[$i]->getLocation() ?>,
+                        <?php echo $campSites[$i]->getDescription() ?></figcaption>
+                </figure>
+            <?php endfor;?>
+    <?php endif; ?>
     </div>
 </section>
 
