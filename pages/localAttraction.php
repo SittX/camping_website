@@ -9,12 +9,11 @@ $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
 <?php foreach ($campSiteList as $campSite) : ?>
     <section class="container--flex">
+        <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="campsite__img" style="width:20%;">
         <div>
             <p>Site Name : <?php echo $campSite->getName() ?></p>
-            <p>Features : <?php echo $campSite->getFeatures() ?></p>
-            <p>Description : <?php echo $campSite->getDescription() ?></p>
+            <p>Local attractions : <?php echo $campSite->getLocalAttraction() ?></p>
         </div>
-        <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="campsite__img" style="width:20%;">
     </section>
 <?php endforeach ?>
 

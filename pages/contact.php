@@ -21,12 +21,12 @@ if (isset($_POST["submit_contact_message"])) {
 // redirects to the email client with the user email
 ?>
 
-
-
-<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" style="<?php SessionManager::checkAdmin() ? 'display:block' : 'display:none' ?>">
+<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
     <textarea name="message" id="message" cols="30" rows="10"></textarea>
     <input type="submit" value="Send" name="submit_contact_message">
 </form>
+
+<a href="privacyPolicy.php">Privacy policy</a>
 
 
 <?php require_once(INC_PATH . "footer.php") ?>

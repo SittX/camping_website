@@ -10,8 +10,8 @@ $imageDirPath =  ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 <!--Page banner with some text-->
 <section class="page_banner">
     <div class="page_banner-content">
-        <p>Escape to Nature: Discover Your Perfect Campsite with ExploreCamps!</p>
-        <a href="<?php echo PAGES_PATH . "information.php" ?>">Explore</a>
+        <p>Escape to Nature: Discover Your Perfect Campsite with GWCS!</p>
+        <a href="<?php echo PAGES_PATH . "pitchTypesAndAvailability.php" ?>">Explore</a>
     </div>
 </section>
 

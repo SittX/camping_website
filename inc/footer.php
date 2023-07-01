@@ -27,7 +27,7 @@
           <div class="footer__column">
               <p class="footer__column-title">Categories</p>
               <ul class="footer__link-container">
-                  <li><a class="footer__link" href="<?php echo PAGES_PATH . "information.php" ?>">Information</a>
+                  <li><a class="footer__link" href="<?php echo PAGES_PATH . "pitchTypesAndAvailability.php" ?>">Information</a>
                   </li>
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "reviews.php" ?>">Reviews</a></li>
                   <li><a class="footer__link" href="<?php echo PAGES_PATH . "wearableTechnologies.php"?>">Wearable technologies</a></li>
@@ -41,8 +41,6 @@
 <!--                              class="btn btn--primary">Contact-->
 <!--                              admin</button></a></li>-->
                   <li>
-                      <button class="btn btn--primary" id="sticky-form-open-btn">M</button>
-
                       <!-- The form -->
                       <div class="form-popup" id="myForm">
                           <form action="/action_page.php" class="form-container">

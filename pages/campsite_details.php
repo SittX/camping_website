@@ -14,13 +14,13 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
     <div id="product-details__container">
         <div class="product-details">
-            <h1 class="h1">Men Navy Blue Solid Sweatshirt</h1>
+            <h1 class="h1"><?php echo $site->getName();?></h1>
             <h4 class="h4">Location: <span class="value"><?php echo $site->getLocation(); ?></span></h4>
             <h3 class="price">Price: $<span class="value"><?php echo $site->getPrice(); ?></span></h3>
             <h3 class="description">Description</h3>
             <p class="description"><?php echo $site->getDescription(); ?></p>
             <div class="product-preview-div">
-                <h3>Product Preview</h3>
+                <h3>Campsite images</h3>
                 <div id="preview-img" class="preview-img-div">
                     <?php foreach ($images as $index => $image) : ?>
                     <?php $imgId = "img-" . $index ?>

@@ -4,6 +4,7 @@ require_once(dirname(__DIR__) . "/config.php");
 require_once(dirname(__DIR__) . "/classes/SessionManager.php");
 
 require_once(DB_CONNECTION);
+require_once(UTILS_PATH . "DataRepositoryUtil.php");
 require_once(DATA_PATH . "UserDataRepository.php");
 require_once(DATA_PATH . "CampSiteDataRepository.php");
 require_once(DATA_PATH . "ContactDataRepository.php");

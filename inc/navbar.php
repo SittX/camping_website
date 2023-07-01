@@ -51,15 +51,17 @@ foreach ($campSiteList as $campSite) {
                     if (SessionManager::checkAdmin()) :
                     ?>
                         <li><a class="nav__link" href="../admin/dashboard.php">Dashboard</a></li>
-                        <li><a class="nav__link" href="../pages/information.php">Information</a></li>
+                        <li><a class="nav__link" href="../pages/pitchTypesAndAvailability.php">Information</a></li>
                         <li><a class="nav__link" href="../admin/adminReview.php">Reviews</a></li>
                         <li><a class="nav__link" href="../admin/adminBooking.php">Bookings</a></li>
                         <li><a class="nav__link" href="../admin/adminContact.php">User Contacts</a></li>
                     <?php else : ?>
                         <li><a class="nav__link" href="../pages/information.php">Information</a></li>
-                        <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
+                        <li><a class="nav__link" href="../pages/pitchTypesAndAvailability.php">Pitch Types</a></li>
+                        <li><a class="nav__link" href="../pages/features.php">Features</a></li>
+                        <li><a class="nav__link" href="../pages/localAttraction.php">Local Attractions</a></li>
                         <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
-                        <li><a class="nav__link" href="../pages/home.php#about_us">About</a></li>
+                        <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
                         <li><a class="nav__link" href="../pages/wearableTechnologies.php">Wearable technologies</a></li>
                     <?php endif ?>
                 </ul>
