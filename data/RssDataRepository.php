@@ -1,10 +1,13 @@
 <?php
 require_once("DataRepository.php");
+
 class RssDataRepository implements DataRepository
 {
     private mysqli $connection;
-    public function __construct($connection){
-       $this->connection = $connection;
+
+    public function __construct($connection)
+    {
+        $this->connection = $connection;
     }
 
     public function searchById($id): ?Rss
@@ -82,10 +85,10 @@ class RssDataRepository implements DataRepository
     }
 
     // Helper functions
-    private function mapRowToRssObject($row):Rss
+    private function mapRowToRssObject($row): Rss
     {
         $publishDate = new DateTime($row["publish_date"]);
-        $rss = new Rss($row["title"],$row["link"],$row["description"],$publishDate);
+        $rss = new Rss($row["title"], $row["link"], $row["description"], $publishDate);
         $rss->setId($row["rss_id"]);
         return $rss;
     }

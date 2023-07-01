@@ -1,4 +1,5 @@
 <?php
+
 class CampSite
 {
     private int $siteId;
@@ -8,11 +9,11 @@ class CampSite
     private string $localAttraction;
     private string $features;
     private string $noticeNote;
-    private int $pitchTypeId;
+    private PitchType $pitchType;
     private float $price;
     private $images;
 
-    public function __construct(string $name,string $location, string $description, string $localAttraction, string $features, string $noticeNote, int $pitchTypeId, float $price)
+    public function __construct(string $name, string $location, string $description, string $localAttraction, string $features, string $noticeNote, PitchType $pitchType, float $price)
     {
         $this->name = $name;
         $this->location = $location;
@@ -20,7 +21,7 @@ class CampSite
         $this->localAttraction = $localAttraction;
         $this->features = $features;
         $this->noticeNote = $noticeNote;
-        $this->pitchTypeId = $pitchTypeId;
+        $this->pitchType = $pitchType;
         $this->price = $price;
     }
 
@@ -54,9 +55,9 @@ class CampSite
         return $this->noticeNote;
     }
 
-    public function getPitchTypeId(): int
+    public function getPitchType(): PitchType
     {
-        return $this->pitchTypeId;
+        return $this->pitchType;
     }
 
     public function getPrice(): float
@@ -69,11 +70,10 @@ class CampSite
         return $this->images;
     }
 
-    public function getName():string
+    public function getName(): string
     {
         return $this->name;
     }
-
 
 
     // Setters
@@ -81,6 +81,7 @@ class CampSite
     {
         $this->name = $name;
     }
+
     public function setSiteId(int $siteId): void
     {
         $this->siteId = $siteId;
@@ -111,9 +112,9 @@ class CampSite
         $this->noticeNote = $noticeNote;
     }
 
-    public function setPitchTypeId(int $pitchTypeId): void
+    public function setPitchType(PitchType $pitchType): void
     {
-        $this->pitchTypeId = $pitchTypeId;
+        $this->pitchType = $pitchType;
     }
 
     public function setPrice(float $price): void
@@ -121,7 +122,7 @@ class CampSite
         $this->price = $price;
     }
 
-    public function setImages($images):void
+    public function setImages($images): void
     {
         $this->images = $images;
     }

@@ -1,29 +1,32 @@
 <?php
-    function getIpAddr() {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            return $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            return $_SERVER['REMOTE_ADDR'];
-        }
+function getIpAddr()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        return $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        return $_SERVER['REMOTE_ADDR'];
     }
+}
 
-    function resetIP(){
-        $db = new DatabaseConnection();
-        $connection = $db->getConnection();
+function resetIP()
+{
+    $db = new DatabaseConnection();
+    $connection = $db->getConnection();
 
-        $currentDay = date("d");
-        $result = $connection->query("SELECT DAY(date) FROM User_logs LIMIT 1;");
+    $currentDay = date("d");
+    $result = $connection->query("SELECT DAY(date) FROM User_logs LIMIT 1;");
 
-        $dbCurrentDay = $result->fetch_assoc()["date"];
-        if ($dbCurrentDay != $currentDay) {
-            $truncateQuery = "TRUNCATE TABLE User_logs";
-            $connection->query($truncateQuery);
-        }
+    $dbCurrentDay = $result->fetch_assoc()["date"];
+    if ($dbCurrentDay != $currentDay) {
+        $truncateQuery = "TRUNCATE TABLE User_logs";
+        $connection->query($truncateQuery);
     }
+}
 
-function saveIP($ip): void {
+function saveIP($ip): void
+{
     $db = new DatabaseConnection();
     $connection = $db->getConnection();
 
@@ -44,8 +47,8 @@ function saveIP($ip): void {
 }
 
 
-    $ip = getIpAddr();
-   saveIP($ip);
+$ip = getIpAddr();
+saveIP($ip);
 
 
 

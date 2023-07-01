@@ -71,12 +71,12 @@ function closeForm() {
     formPopupBg.classList.remove('is-visible');
 }
 
-document.addEventListener('DOMContentLoaded',  ()=> {
+document.addEventListener('DOMContentLoaded', () => {
     const openPopupBtn = document.getElementById('open_popup_btn');
     const popupBg = document.querySelector('.popup-form__bg');
 
     /* Contact Form Interactions */
-    openPopupBtn.addEventListener('click', (event)=> {
+    openPopupBtn.addEventListener('click', (event) => {
         event.preventDefault();
         console.log("Open btn clicked")
         popupBg.classList.add('is-visible');
@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded',  ()=> {
 
 
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
+console.log(openModalButtons);
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
 const overlay = document.getElementById('modal-bg')
 
@@ -147,8 +148,25 @@ searchboxInput.addEventListener("input", e => {
             campsite.style.display = "none";
         }
     })
-
 })
+
+
+const pitchTypeSelect = document.getElementById("pitch_type");
+const campsites = document.querySelectorAll(".campsite");
+pitchTypeSelect.addEventListener("change", function() {
+    console.log("Option changed");
+    const selectedValue = pitchTypeSelect.value;
+
+    campsites.forEach(function(campsite) {
+        const campsitePitchType = campsite.getAttribute("data-pitchType");
+        if (selectedValue === "all" || campsitePitchType === selectedValue) {
+            campsite.style.display = "block";
+        } else {
+            campsite.style.display = "none";
+        }
+    });
+});
+
 
 // Details page image preview actions
 var currentImageId = "img-0";
@@ -168,6 +186,7 @@ const stickyFormOpenBtn = document.getElementById("sticky-form-open-btn");
 const stickyFormCloseBtn = document.getElementById("sticky-form-close-btn");
 console.log(stickyFormCloseBtn)
 console.log(stickyFormOpenBtn)
+
 function openForm() {
     console.log("Open form");
     document.getElementById("myForm").style.display = "block";
@@ -176,11 +195,12 @@ function openForm() {
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
-stickyFormOpenBtn.addEventListener("click",()=>{
+
+stickyFormOpenBtn.addEventListener("click", () => {
     console.log("Clicked form");
-   openForm();
+    openForm();
 })
 
-stickyFormCloseBtn.addEventListener("click",()=>{
-   closeForm();
+stickyFormCloseBtn.addEventListener("click", () => {
+    closeForm();
 })

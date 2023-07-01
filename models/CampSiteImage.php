@@ -1,8 +1,10 @@
 <?php
+
 class CampSiteImage
 {
     private int $image_id;
     private string $url;
+
     public function __construct($image_id, $url)
     {
         $this->$image_id = $image_id;

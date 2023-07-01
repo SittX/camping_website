@@ -4,10 +4,17 @@ class PitchType
 {
     private int $pitch_type_id;
     private string $description;
+    private string $title;
 
-    public function __construct(string $description)
+    public function __construct(string $title, string $description)
     {
+        $this->title = $title;
         $this->description = $description;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     public function getPitchTypeId(): int
@@ -18,6 +25,11 @@ class PitchType
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
     }
 
     public function setPitchTypeId(int $pitch_type_id): void

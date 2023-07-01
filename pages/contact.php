@@ -7,7 +7,7 @@ $contactDataRepo = new ContactDataRepository($connection);
 if (isset($_POST["submit_contact_message"])) {
     $msg = htmlspecialchars($_POST["message"]);
     $userId = $_SESSION["user"]["id"];
-    $contact = new Contact($msg, $userId);
+    $contact = new Contact($msg, "NO_REPLY", new DateTime(), $userId);
     if ($contactDataRepo->insert($contact) == 1) {
         echo "Send the contact message to the admin";
     };

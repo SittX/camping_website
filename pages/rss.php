@@ -18,12 +18,12 @@ echo "<?xml version='1.0' encoding='UTF-8'?>
         <description>Global Wild Swimming and Camping provides camping and swimming information for visitors.</description>
         <link>http://localhost/gwsc</link>";
 
-foreach($rssLists as $rss) {
+foreach ($rssLists as $rss) {
     echo "<item>
         <title>" . $rss->getTitle() . "</title>" .
         "<link>" . $rss->getLink() . "</link>" .
         "<description>" . $rss->getDescription() . "</description>" .
-        "<pubDate>".$rss->getPublishDate()->format("D, d M Y")."</pubDate>".
+        "<pubDate>" . $rss->getPublishDate()->format("D, d M Y") . "</pubDate>" .
         "</item>";
 }
 

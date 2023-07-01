@@ -2,11 +2,11 @@
 
 class Rss
 {
-private int $id;
-private string $title;
-private string $link;
-private string $description;
-private DateTime $publishDate;
+    private int $id;
+    private string $title;
+    private string $link;
+    private string $description;
+    private DateTime $publishDate;
 
     public function __construct(string $title, string $link, string $description, DateTime $publishDate)
     {

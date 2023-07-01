@@ -1,4 +1,5 @@
 <?php
+
 class SessionManager
 {
     public static function checkAdmin(): bool
@@ -10,6 +11,7 @@ class SessionManager
         }
         return false;
     }
+
     public static function checkIfUserLoggedIn(): bool
     {
         return isset($_SESSION["logged_in"]) && $_SESSION["logged_in"];
@@ -21,6 +23,7 @@ class SessionManager
         $_SESSION["logged_in"] = true;
         header("Location: ../pages/home.php");
     }
+
     public static function logout(): void
     {
         session_unset();

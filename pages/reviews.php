@@ -37,29 +37,29 @@ if (isset($_POST["submit_review"])) {
 */
 ?>
 
-<div>
-    <?php foreach ($reviewList as $review) : ?>
-        <div>
-            <h3><?php echo $review->getTitle() ?></h3>
-            <p><?php echo $review->getMessage() ?></p>
-        </div>
-    <?php endforeach; ?>
-</div>
+    <div>
+        <?php foreach ($reviewList as $review) : ?>
+            <div>
+                <h3><?php echo $review->getTitle() ?></h3>
+                <p><?php echo $review->getMessage() ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
 
-<p class="review_form_status"></p>
-<form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-    <input type="text" name="title" placeholder="Title" class="form__input">
-    <textarea name="review_message" id="review_message" cols="30" rows="10" placeholder="review message"></textarea>
-    <!-- <input type="number" name="rating" id="rating" placeholder="rating"> -->
-    <select name="rating" id="cars">
-        <option value="1">Excellent</option>
-        <option value="2">Awesome</option>
-        <option value="3">Good</option>
-        <option value="4">Average</option>
-        <option value="5">Bad</option>
-    </select>
-    <input type="submit" value="Submit" name="submit_review">
-</form>
+    <p class="review_form_status"></p>
+    <form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+        <input type="text" name="title" placeholder="Title" class="form__input">
+        <textarea name="review_message" id="review_message" cols="30" rows="10" placeholder="review message"></textarea>
+        <!-- <input type="number" name="rating" id="rating" placeholder="rating"> -->
+        <select name="rating" id="cars">
+            <option value="1">Excellent</option>
+            <option value="2">Awesome</option>
+            <option value="3">Good</option>
+            <option value="4">Average</option>
+            <option value="5">Bad</option>
+        </select>
+        <input type="submit" value="Submit" name="submit_review">
+    </form>
 
 
 <?php

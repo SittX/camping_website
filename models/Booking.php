@@ -1,12 +1,14 @@
 <?php
-class Booking{
+
+class Booking
+{
     private int $bookingId;
     private $checkIn;
     private $checkOut;
     private User $user;
     private CampSite $site;
 
-    public function __construct($checkIn, $checkOut, User $user,CampSite $site)
+    public function __construct($checkIn, $checkOut, User $user, CampSite $site)
     {
         $this->checkIn = $checkIn;
         $this->checkOut = $checkOut;
@@ -30,12 +32,12 @@ class Booking{
         return $this->checkOut;
     }
 
-    public function getUser():User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function getSite():CampSite
+    public function getSite(): CampSite
     {
         return $this->site;
     }
@@ -61,7 +63,7 @@ class Booking{
         $this->user = $user;
     }
 
-    public function setSite(CampSite $site):void
+    public function setSite(CampSite $site): void
     {
         $this->site = $site;
     }

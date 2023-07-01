@@ -1,4 +1,5 @@
 <?php
+
 class Review
 {
     private int $reviewId;
@@ -8,7 +9,7 @@ class Review
     private User $user;
     private CampSite $site;
 
-    public function __construct(int $rating,string $message,string $title,User $user, CampSite $site)
+    public function __construct(int $rating, string $message, string $title, User $user, CampSite $site)
     {
         $this->rating = $rating;
         $this->message = $message;
@@ -38,12 +39,12 @@ class Review
         return $this->title;
     }
 
-    public function getUser():User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function getSite():CampSite
+    public function getSite(): CampSite
     {
         return $this->site;
     }
@@ -78,7 +79,6 @@ class Review
     {
         $this->site = $site;
     }
-
 
 
 }

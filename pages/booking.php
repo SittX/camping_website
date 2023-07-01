@@ -17,29 +17,29 @@ if (isset($_POST["submit_booking"])) {
 }
 ?>
 
-<!-- Need to make sure that the check out date is not earlier than the check in date -->
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-    <!-- We will display the campsite location, name, description and price with diabled inputs -->
-    <div class="form__container">
-        <p>Location :
-            <?php echo $bookingCampSite->getLocation() ?? ""  ?>
-        </p>
-    </div>
-    <div class="form__container">
-        <p>Feature :
-            <?php echo $bookingCampSite->getFeatures() ?? "" ?>
-        </p>
-    </div>
-    <div class="form__container">
-        <p>Price :
-            <?php echo $bookingCampSite->getPrice() ?? "" ?>
-        </p>
-    </div>
+    <!-- Need to make sure that the check out date is not earlier than the check in date -->
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+        <!-- We will display the campsite location, name, description and price with diabled inputs -->
+        <div class="form__container">
+            <p>Location :
+                <?php echo $bookingCampSite->getLocation() ?? "" ?>
+            </p>
+        </div>
+        <div class="form__container">
+            <p>Feature :
+                <?php echo $bookingCampSite->getFeatures() ?? "" ?>
+            </p>
+        </div>
+        <div class="form__container">
+            <p>Price :
+                <?php echo $bookingCampSite->getPrice() ?? "" ?>
+            </p>
+        </div>
 
-    <input type="date" name="check_in_date" id="calender_input">
-    <input type="date" name="check_out_date" id="calender_input">
-    <input type="submit" value="Book" name="submit_booking">
-</form>
+        <input type="date" name="check_in_date" id="calender_input">
+        <input type="date" name="check_out_date" id="calender_input">
+        <input type="submit" value="Book" name="submit_booking">
+    </form>
 
 <?php
 require_once(dirname(__DIR__) . "/inc/footer.php");

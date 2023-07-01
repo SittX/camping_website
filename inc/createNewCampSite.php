@@ -16,7 +16,7 @@ $pitchTypeList = $pitchTypeRepo->getLists();
 if (isset($_POST['create_campsite'])) {
     // Create the CampSite
 //    echo "Pitch type ID : " . $_POST["pitch_type_id"];
-    $newCampSite = new CampSite($_POST["site_name"],$_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $_POST["pitch_type_id"], $_POST["price"]);
+    $newCampSite = new CampSite($_POST["site_name"], $_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $_POST["pitch_type_id"], $_POST["price"]);
     $campSiteID = $campSiteRepo->insert($newCampSite);
 
     // Upload image
@@ -40,7 +40,8 @@ if (isset($_POST['create_campsite'])) {
             <textarea name="description" id="description" cols="50" rows="5" placeholder="Description"></textarea>
             <div class="form__row">
                 <input class="form__input" type="text" name="features" id="features" placeholder="features">
-                <input class="form__input" type="text" name="local_attraction" id="local_attraction" placeholder="Local attraction">
+                <input class="form__input" type="text" name="local_attraction" id="local_attraction"
+                       placeholder="Local attraction">
             </div>
 
             <input class="form__input" type="number" name="price" id="price" placeholder="price">
@@ -50,10 +51,10 @@ if (isset($_POST['create_campsite'])) {
                 <label for="cars">Choose a pitch type :</label>
                 <select name="pitch_type_id" id="pitch_type">
                     <?php foreach ($pitchTypeList as $pitchType) :
-                    ?>
+                        ?>
                         <option value="<?php echo $pitchType->getPitchTypeId();
-                                        ?>"><?php echo $pitchType->getDescription()
-                                            ?>
+                        ?>"><?php echo $pitchType->getDescription()
+                            ?>
                         </option>
                     <?php endforeach;
                     ?>

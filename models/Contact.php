@@ -8,11 +8,11 @@ class Contact
     private string $status;
     private User $user;
 
-    public function __construct(string $message, string $status,DateTime $contactDate,User $user )
+    public function __construct(string $message, string $status, DateTime $contactDate, User $user)
     {
         $this->message = $message;
-        $this->status=$status;
-        $this->contactDate=$contactDate;
+        $this->status = $status;
+        $this->contactDate = $contactDate;
         $this->user = $user;
     }
 

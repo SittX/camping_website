@@ -19,8 +19,8 @@ button {
 }
 
 /* Login form */
-input:focus~label,
-input.used~label {
+input:focus ~ label,
+input.used ~ label {
     top: -20px;
     transform: scale(.75);
     left: -2px;
@@ -28,13 +28,13 @@ input.used~label {
 }
 
 /* active */
-.form__input:focus~.bar:before,
-.form__input:focus~.bar:after {
+.form__input:focus ~ .bar:before,
+.form__input:focus ~ .bar:after {
     width: 50%;
 }
 
 /* active */
-.form__input:focus~.highlight {
+.form__input:focus ~ .highlight {
     animation: inputHighlighter 0.3s ease;
 }
 

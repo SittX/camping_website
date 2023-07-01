@@ -58,19 +58,20 @@ if (isset($_POST['g-recaptcha-response'])) {
 }
 ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-    <input type="text" name="username" id="username" placeholder="Username" class="form__input">
-    <input type="text" placeholder="Password" name="password" class="form__input">
-    <div class="g-recaptcha" data-sitekey="<?php echo $SITE_KEY
-                                            ?>"></div>
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+        <input type="text" name="username" id="username" placeholder="Username" class="form__input">
+        <input type="text" placeholder="Password" name="password" class="form__input">
+        <div class="g-recaptcha" data-sitekey="<?php echo $SITE_KEY
+        ?>"></div>
 
-    <?php if ($_SESSION["login_attempts"] > $loginAttemptLimit) : ?>
-        <?php $_SESSION["locked_time"] = time(); ?>
-        <?php include("timer.php"); ?>
-        <input type="submit" name="login" value="Login" id="submit" style="pointer-events:none" class="btn btn--primary">
-    <?php else : ?>
-        <input type="submit" name="login" value="Login" id="submit" class="btn btn--primary">
-    <?php endif ?>
-</form>
+        <?php if ($_SESSION["login_attempts"] > $loginAttemptLimit) : ?>
+            <?php $_SESSION["locked_time"] = time(); ?>
+            <?php include("timer.php"); ?>
+            <input type="submit" name="login" value="Login" id="submit" style="pointer-events:none"
+                   class="btn btn--primary">
+        <?php else : ?>
+            <input type="submit" name="login" value="Login" id="submit" class="btn btn--primary">
+        <?php endif ?>
+    </form>
 
 <?php include(dirname(__DIR__) . "/inc/footer.php") ?>

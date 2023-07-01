@@ -3,7 +3,7 @@
 //require_once(dirname(__DIR__). "/config.php");
 //require_once(dirname(__DIR__). "/classes/DatabaseConnection.php");
 
-$db  = new DatabaseConnection();
+$db = new DatabaseConnection();
 $connection = $db->getConnection();
 $campSiteRepo = new CampSiteDataRepository($connection);
 $campTypeRepo = new PitchTypeDataRepository($connection);
@@ -49,7 +49,7 @@ foreach ($campSiteList as $campSite) {
                 <ul class="nav__link-container">
                     <?php
                     if (SessionManager::checkAdmin()) :
-                    ?>
+                        ?>
                         <li><a class="nav__link" href="../admin/dashboard.php">Dashboard</a></li>
                         <li><a class="nav__link" href="../pages/pitchTypesAndAvailability.php">Information</a></li>
                         <li><a class="nav__link" href="../admin/adminReview.php">Reviews</a></li>
@@ -70,17 +70,17 @@ foreach ($campSiteList as $campSite) {
 
         <div class="header__right">
             <div class="container--flex">
-                <?php if(SessionManager::checkIfUserLoggedIn()):?>
+                <?php if (SessionManager::checkIfUserLoggedIn()): ?>
                     <a class="nav__link" href="../pages/logout.php" id="login-link">
                         <button class="btn btn--primary" id="logout-btn">Logout</button>
                     </a>
-                <?php else:?>
+                <?php else: ?>
                     <a class="nav__link" href="../pages/login.php" id="login-link">
                         <button class="btn btn--primary" id="login-btn">Login</button>
                     </a>
-                <?php endif?>
-                <a class="nav__link" href="../pages/signup.php">
-                    <button class="btn btn--primary">Sign Up</button>
+                <?php endif ?>
+                <a class="nav__link" href="../pages/register.php">
+                    <button class="btn btn--primary">Register</button>
                 </a>
             </div>
 

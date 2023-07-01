@@ -1,6 +1,7 @@
 <?php
-require_once(MODEL_PATH. "Review.php");
-require_once(UTILS_PATH. "DataRepositoryUtil.php");
+require_once(MODEL_PATH . "Review.php");
+require_once(UTILS_PATH . "DataRepositoryUtil.php");
+
 class ReviewDataRepository implements DataRepository
 {
     private mysqli $connection;
@@ -14,12 +15,33 @@ class ReviewDataRepository implements DataRepository
         $this->siteRepo = new CampSiteDataRepository($connection);
     }
 
+    public function searchBySiteId($id)
+    {
+        $query = "SELECT * FROM Review WHERE site_id = ?";
+        $paramTypes = "i";
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
+
+        $mysqli_result = $stmt->get_result();
+        if ($mysqli_result->num_rows <= 0) {
+            return null;
+        }
+
+        $reviewList = [];
+        while ($row = $mysqli_result->fetch_assoc()) {
+            $review = $this->mapRowToReviewObject($row);
+            $reviewList[] = $review;
+        }
+        $stmt->close();
+
+        return $reviewList;
+    }
+
 
     public function searchById($id)
     {
         $query = "SELECT * FROM Review WHERE review_id = ?";
         $paramTypes = "i";
-        $stmt = prepareAndExecuteQuery($query, $paramTypes, $id);
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
 
         $mysqli_result = $stmt->get_result();
         if ($mysqli_result->num_rows <= 0) {

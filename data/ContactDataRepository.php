@@ -1,11 +1,13 @@
 <?php
 
-require_once(UTILS_PATH. "DataRepositoryUtil.php");
-require_once(MODEL_PATH. "Contact.php");
+require_once(UTILS_PATH . "DataRepositoryUtil.php");
+require_once(MODEL_PATH . "Contact.php");
+
 class ContactDataRepository implements DataRepository
 {
     private mysqli $connection;
     private UserDataRepository $userRepo;
+
     public function __construct(mysqli $connection)
     {
         $this->connection = $connection;
@@ -16,7 +18,7 @@ class ContactDataRepository implements DataRepository
     {
         $query = "SELECT * FROM Contact WHERE contact_id = ?";
         $paramTypes = "i";
-        $stmt = prepareAndExecuteQuery($query, $paramTypes, $id);
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramTypes, $id);
 
         $mysqli_result = $stmt->get_result();
         if ($mysqli_result->num_rows <= 0) {
@@ -49,9 +51,9 @@ class ContactDataRepository implements DataRepository
 
     public function update($existingData, $newData): int|string
     {
-        $query = "UPDATE Contact SET message = ? WHERE contact_id = ?";
-        $paramsType = 'si';
-        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramsType, $newData->getMessage(), $existingData->getContactId());
+        $query = "UPDATE Contact SET  message = ?, status = ?  WHERE contact_id = ?";
+        $paramsType = 'ssi';
+        $stmt = prepareAndExecuteQuery($this->connection, $query, $paramsType, $newData->getMessage(), $newData->getStatus(), $existingData->getContactId());
 
         $affectedRow = $stmt->affected_rows;
         $stmt->close();
@@ -80,14 +82,12 @@ class ContactDataRepository implements DataRepository
         return $affectedRow;
     }
 
-    private function mapRowToContactObject($row):Contact
+    private function mapRowToContactObject($row): Contact
     {
-            $dateTime = new DateTime($row["contact_date"]);
-            $user = $this->userRepo->searchById($row["user_id"]);
-            $contact = new Contact($row['message'], $row['status'],$dateTime,$user);
-            $contact->setContactId($row['contact_id']);
-            return $contact;
+        $dateTime = new DateTime($row["contact_date"]);
+        $user = $this->userRepo->searchById($row["user_id"]);
+        $contact = new Contact($row['message'], $row['status'], $dateTime, $user);
+        $contact->setContactId($row['contact_id']);
+        return $contact;
     }
-
-
 }

@@ -1,15 +1,15 @@
 <?php
-require_once(dirname(__DIR__)."/classes/DatabaseConnection.php");
+require_once(dirname(__DIR__) . "/classes/DatabaseConnection.php");
 
 function uploadImage($campSiteID)
 {
     $db = new DatabaseConnection();
     $conn = $db->getConnection();
 
-    $uploadDir = dirname(__DIR__). "/uploads/";
+    $uploadDir = dirname(__DIR__) . "/uploads/";
     $allowedFileExtensions = array('jpg', 'png', 'jpeg');
 
-    $statusMsg = $errorMsg = $insertSqlValues = $errorUpload  = '';
+    $statusMsg = $errorMsg = $insertSqlValues = $errorUpload = '';
     $fileNames = array_filter($_FILES['files']['name']);
 
     if (empty($fileNames)) {

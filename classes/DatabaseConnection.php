@@ -1,4 +1,5 @@
 <?php
+
 final class DatabaseConnection
 {
     private string $host;
@@ -16,7 +17,7 @@ final class DatabaseConnection
 
     public function getConnection(): mysqli
     {
-        $connection =  new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+        $connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
         if ($connection->error) {
             die("Cannot connect to the database");
         }
