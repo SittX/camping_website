@@ -22,9 +22,11 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
                 <a href="../pages/campsite_details.php?site_id=<?php echo $campSite->getSiteId(); ?>" class="card__link">Details</a>
             </div>
         </div>
+        <?php if($campSite->getMapIframe() != null):?>
+            <?php echo $campSite->getMapIframe();?>
+        <?php endif;?>
     <?php endforeach ?>
 </section>
-
 
 <?php
 require_once(dirname(__DIR__) . "/inc/footer.php"); ?>

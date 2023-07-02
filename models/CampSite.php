@@ -12,6 +12,7 @@ class CampSite
     private PitchType $pitchType;
     private float $price;
     private $images;
+    private string $mapIframe;
 
     public function __construct(string $name, string $location, string $description, string $localAttraction, string $features, string $noticeNote, PitchType $pitchType, float $price)
     {
@@ -75,6 +76,11 @@ class CampSite
         return $this->name;
     }
 
+    public function getMapIframe(): string
+    {
+        return $this->mapIframe;
+    }
+
 
     // Setters
     public function setName(string $name): void
@@ -120,6 +126,11 @@ class CampSite
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    public function setMapIframe(string $mapIframe): void
+    {
+        $this->mapIframe = $mapIframe;
     }
 
     public function setImages($images): void

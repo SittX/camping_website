@@ -72,5 +72,7 @@ $reviews = $reviewRepo->searchBySiteId($siteId);
         <?php endif ?>
     </div>
 
+<h3 class="title">Map</h3>
+<?php echo $site->getMapIframe();?>
 
 <?php require_once(INC_PATH . "footer.php"); ?>

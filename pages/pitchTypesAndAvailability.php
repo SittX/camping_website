@@ -61,7 +61,7 @@ if (SessionManager::checkAdmin()) {
     <section id="campsite__container">
         <?php foreach ($pitchTypes as $currentPitchType) : ?>
         <div class="card__wrapper">
-            <h3 class="title"><?php echo $currentPitchType->getTitle(); ?></h3>
+            <h3 class="title" id="<?php echo $currentPitchType->getTitle()?>"><?php echo $currentPitchType->getTitle(); ?></h3>
 
             <div class="card__container">
             <?php foreach ($campSiteList as $campSite) : ?>

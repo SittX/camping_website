@@ -48,8 +48,15 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
     <section class="container">
         <?php foreach ($pitchTypes as $pitchType): ?>
             <div class="card">
-                <div class="card__title"><?php echo $pitchType->getTitle() ?></div>
-                <div class="card__description"><?php echo $pitchType->getDescription() ?></div>
+                <div class="card__head">
+                    <div class="card__title"><?php echo $pitchType->getTitle() ?></div>
+                </div>
+                <div class="card__body">
+                    <div class="card__description"><?php echo $pitchType->getDescription() ?></div>
+                    <a href="pitchTypesAndAvailability.php#<?php echo $pitchType->getTitle();?>" class="card__link">
+                        View
+                    </a>
+                </div>
             </div>
         <?php endforeach; ?>
     </section>

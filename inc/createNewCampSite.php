@@ -13,7 +13,9 @@ $pitchTypeList = $pitchTypeRepo->getLists();
 
 if (isset($_POST['create_campsite'])) {
     $pitchType = $pitchTypeRepo->searchById($_POST["pitch_type_id"]);
-    $newCampSite = new CampSite($_POST["site_name"], $_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $pitchType, $_POST["price"]);
+    var_dump($pitchType);
+    $newCampSite = new CampSite($_POST["site_name"], $_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"],$_POST["notice_note"], $pitchType, $_POST["price"]);
+    $newCampSite->setMapIframe($_POST["map_iframe"]);
     $campSiteID = $campSiteRepo->insert($newCampSite);
 
     // Upload image
@@ -30,19 +32,20 @@ if (isset($_POST['create_campsite'])) {
     <div class="modal-body">
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data" class="form">
             <div class="form__row">
-                <input type="text" class="form__input" name="site_name" id="site_name" placeholder="Site Name">
-                <input class="form__input" type="text" name="location" id="location" placeholder="Location">
+                <input type="text" class="form__input" name="site_name" id="site_name" placeholder="Site Name" required>
+                <input class="form__input" type="text" name="location" id="location" placeholder="Location" required>
             </div>
 
-            <textarea name="description" id="description" cols="50" rows="5" placeholder="Description"></textarea>
+            <textarea name="description" id="description" cols="50" rows="5" placeholder="Description" required></textarea>
             <div class="form__row">
-                <input class="form__input" type="text" name="features" id="features" placeholder="features">
+                <input class="form__input" type="text" name="features" id="features" placeholder="features" required>
                 <input class="form__input" type="text" name="local_attraction" id="local_attraction"
-                       placeholder="Local attraction">
+                       placeholder="Local attraction" required>
             </div>
 
-            <input class="form__input" type="number" name="price" id="price" placeholder="price">
-            <textarea name="notice_note" id="notice_note" cols="50" rows="5" placeholder="Notice Note"></textarea>
+            <input class="form__input" type="text" name="map_iframe", placeholder="Enter Google Map link iframe of the location" required>
+            <input class="form__input" type="number" name="price" id="price" placeholder="price" required>
+            <textarea name="notice_note" id="notice_note" cols="50" rows="5" placeholder="Notice Note" required></textarea>
 
             <div class="form__row">
                 <label for="cars">Choose a pitch type :</label>
