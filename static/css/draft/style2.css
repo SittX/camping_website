@@ -164,7 +164,7 @@ figure {
     display: flex;
 }
 
-.searchbox__input {
+.search__input {
     width: 300px;
     padding: 0.2rem;
     border-style: none;

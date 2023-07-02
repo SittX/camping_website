@@ -5,8 +5,6 @@ require_once(UTILS_PATH . "ImageUpload.php");
 require_once(DATA_PATH . "CampSiteDataRepository.php");
 require_once(DATA_PATH . "PitchTypeDataRepository.php");
 
-// $db = new DatabaseConnection();
-// $connection = $db->getConnection();
 $pitchTypeRepo = new PitchTypeDataRepository($connection);
 $campSiteRepo = new CampSiteDataRepository($connection);
 
@@ -14,9 +12,8 @@ $campSiteRepo = new CampSiteDataRepository($connection);
 $pitchTypeList = $pitchTypeRepo->getLists();
 
 if (isset($_POST['create_campsite'])) {
-    // Create the CampSite
-//    echo "Pitch type ID : " . $_POST["pitch_type_id"];
-    $newCampSite = new CampSite($_POST["site_name"], $_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $_POST["pitch_type_id"], $_POST["price"]);
+    $pitchType = $pitchTypeRepo->searchById($_POST["pitch_type_id"]);
+    $newCampSite = new CampSite($_POST["site_name"], $_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $pitchType, $_POST["price"]);
     $campSiteID = $campSiteRepo->insert($newCampSite);
 
     // Upload image
@@ -53,7 +50,7 @@ if (isset($_POST['create_campsite'])) {
                     <?php foreach ($pitchTypeList as $pitchType) :
                         ?>
                         <option value="<?php echo $pitchType->getPitchTypeId();
-                        ?>"><?php echo $pitchType->getDescription()
+                        ?>"><?php echo $pitchType->getTitle()
                             ?>
                         </option>
                     <?php endforeach;
@@ -61,7 +58,7 @@ if (isset($_POST['create_campsite'])) {
                 </select>
             </div>
 
-            <input type="file" name="files[]">
+            <input type="file" name="files[]" multiple>
 
 
             <input type="submit" value="Create new campsite" name="create_campsite" class="btn btn--primary">

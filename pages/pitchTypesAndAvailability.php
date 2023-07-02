@@ -43,8 +43,8 @@ if (SessionManager::checkAdmin()) {
 ?>
 
     <section class="campsite__filter">
-            <input type="text" name="campsite_location" placeholder="Search by camp location.." class="searchbox__input"
-                   id="searchbox-input">
+            <input type="text" name="campsite_location" placeholder="Search by camp location.." class="search__input"
+                   id="search__input" oninput="inputFilter();">
     </section>
 
 <section>
@@ -66,7 +66,7 @@ if (SessionManager::checkAdmin()) {
             <div class="card__container">
             <?php foreach ($campSiteList as $campSite) : ?>
                 <?php if ($campSite->getPitchType()->getTitle() === $currentPitchType->getTitle()) : ?>
-                    <div class="card" data-campsite-location="<?php echo $campSite->getLocation() ?>" data-pitchType="<?php echo $campSite->getPitchType()->getTitle();?>">
+                    <div class="card campsite" data-campsite-location="<?php echo $campSite->getLocation() ?>" data-pitchType="<?php echo $campSite->getPitchType()->getTitle();?>">
                         <div class="card__head">
                             <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="card__img">
                         </div>
@@ -105,9 +105,9 @@ if (SessionManager::checkAdmin()) {
         <div class="modal-body">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
                 <input type="text" name="title" placeholder="Title" class="form__input">
-                <textarea name="review_message" id="review_message" cols="30" rows="10"
+                <textarea name="review_message" class="review_message" cols="30" rows="10"
                           placeholder="Review message"></textarea>
-                <select name="rating" id="cars">
+                <select name="rating">
                     <option value="1">Excellent</option>
                     <option value="2">Awesome</option>
                     <option value="3">Good</option>
@@ -139,8 +139,8 @@ if (SessionManager::checkAdmin()) {
                 </div>
 
                 <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
-                <input type="date" name="check_in_date" id="calender_input">
-                <input type="date" name="check_out_date" id="calender_input">
+                <input type="date" name="check_in_date" class="calender_input">
+                <input type="date" name="check_out_date" class="calender_input">
                 <input type="submit" value="Book" name="booking_submit">
             </form>
         </div>

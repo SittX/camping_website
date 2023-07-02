@@ -18,7 +18,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
         </div>
     </section>
 
-    <p class="text">Something related to camping and why people should go camping more often.</p>
+    <p class="text">Escape the daily grind and immerse yourself in the wonders of nature. Explore breathtaking landscapes, find solace in tranquility, and ignite your sense of adventure. Reconnect with the beauty that surrounds us, discover hidden treasures, and experience the transformative power of nature. Answer the call to explore and create lifelong memories. Embrace the great outdoors today.</p>
 
     <h3 class="section-header">Check out all of our camping sites available across the country</h3>
     <section id="slider__container">

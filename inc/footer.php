@@ -88,7 +88,7 @@ $viewCount = retrieveViewCount();
         </ul>
     </section>
 </footer>
-<script src="../static/js/main.js"></script>
+<script src="../static/js/index.js"></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
 </script>
 <script type="text/javascript">

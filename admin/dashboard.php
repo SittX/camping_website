@@ -9,6 +9,18 @@ $campsites = $campsiteRepo->getLists();
 if (!SessionManager::checkAdmin()) {
     header("Location: " . TEMPLATES_PATH . "accessDenied.php");
 }
+
+if (isset($_POST["delete_user"])) {
+    $userId = $_POST["user_id"];
+    $userRepo->remove($userId);
+    header("Location: " . ADMIN_PATH . "dashboard.php");
+}
+
+if (isset($_POST["delete_site"])) {
+    $siteId = $_POST["site_id"];
+    $campsiteRepo->remove($siteId);
+    header("Location: " . ADMIN_PATH . "dashboard.php");
+}
 ?>
     <table class="table">
         <caption class="table__caption">User accounts</caption>
@@ -31,7 +43,11 @@ if (!SessionManager::checkAdmin()) {
                 <td class="table__data"><?php echo $user->getEmail(); ?></td>
                 <td class="table__data"><?php echo $user->getRank(); ?></td>
                 <td class="table__data">
-                    <button class="btn">Delete</button>
+                    <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
+                        <input type="hidden" name="user_id" value="<?php echo $user->getUserId()
+                        ?>">
+                        <input type="submit" value="Delete" name="delete_user" class="btn">
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -60,7 +76,11 @@ if (!SessionManager::checkAdmin()) {
                 <td class="table__data"> <?php echo $campsite->getPrice() ?></td>
                 <td class="table__data"> <?php echo $campsite->getFeatures() ?></td>
                 <td class="table__data">
-                    <button class="btn">Delete</button>
+                    <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
+                        <input type="hidden" name="site_id" value="<?php echo $campsite->getSiteId()
+                        ?>">
+                        <input type="submit" value="Delete" name="delete_site" class="btn">
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>
