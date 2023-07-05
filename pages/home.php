@@ -8,8 +8,6 @@ $pitchTypeRepo = new PitchTypeDataRepository($connection);
 $pitchTypes = $pitchTypeRepo->getLists();
 $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>
-    <!-- Google translate element -->
-
     <!--Page banner with some text-->
     <section class="page_banner">
         <div class="page_banner-content">
@@ -18,34 +16,37 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
         </div>
     </section>
 
-    <p class="text">Escape the daily grind and immerse yourself in the wonders of nature. Explore breathtaking landscapes, find solace in tranquility, and ignite your sense of adventure. Reconnect with the beauty that surrounds us, discover hidden treasures, and experience the transformative power of nature. Answer the call to explore and create lifelong memories. Embrace the great outdoors today.</p>
-
     <h3 class="section-header">Check out all of our camping sites available across the country</h3>
-    <section id="slider__container">
-        <div class="slider">
-            <?php if (count($campSites) > 4): ?>
-                <?php for ($i = 0; $i < 4; $i++): ?>
-                    <figure class="slide">
-                        <img class="slide__img" src="<?php echo $imageDirPath . $campSites[$i]->getImages()[0] ?>" alt>
-                        <figcaption class="slide__caption"><?php echo $campSites[$i]->getLocation() ?>,
-                            <?php echo $campSites[$i]->getDescription() ?></figcaption>
-                    </figure>
-                <?php endfor; ?>
-            <?php else: ?>
-                <?php for ($i = 0; $i < count($campSites); $i++): ?>
-                    <figure class="slide">
-                        <img class="slide__img" src="<?php echo $imageDirPath . $campSites[$i]->getImages()[0] ?>" alt>
-                        <figcaption class="slide__caption"><?php echo $campSites[$i]->getLocation() ?>,
-                            <?php echo $campSites[$i]->getDescription() ?></figcaption>
-                    </figure>
-                <?php endfor; ?>
-            <?php endif; ?>
-        </div>
-    </section>
+
+    <div class="container--flex available-campsite">
+        <p class="text">Escape the daily grind and immerse yourself in the wonders of nature. Explore breathtaking landscapes, find solace in tranquility, and ignite your sense of adventure. Reconnect with the beauty that surrounds us, discover hidden treasures, and experience the transformative power of nature. Answer the call to explore and create lifelong memories. Embrace the great outdoors today.</p>
+
+        <section id="slider__container">
+            <div class="slider">
+                <?php if (count($campSites) > 4): ?>
+                    <?php for ($i = 0; $i < 4; $i++): ?>
+                        <figure class="slide">
+                            <img class="slide__img" src="<?php echo $imageDirPath . $campSites[$i]->getImages()[0] ?>" alt>
+                            <figcaption class="slide__caption"><?php echo $campSites[$i]->getLocation() ?>,
+                                <?php echo $campSites[$i]->getDescription() ?></figcaption>
+                        </figure>
+                    <?php endfor; ?>
+                <?php else: ?>
+                    <?php for ($i = 0; $i < count($campSites); $i++): ?>
+                        <figure class="slide">
+                            <img class="slide__img" src="<?php echo $imageDirPath . $campSites[$i]->getImages()[0] ?>" alt>
+                            <figcaption class="slide__caption"><?php echo $campSites[$i]->getLocation() ?>,
+                                <?php echo $campSites[$i]->getDescription() ?></figcaption>
+                        </figure>
+                    <?php endfor; ?>
+                <?php endif; ?>
+            </div>
+        </section>
+    </div>
 
     <!--Display as cards-->
     <h3 class="section-header">Different campsite types</h3>
-    <section class="container">
+    <section class="card__container">
         <?php foreach ($pitchTypes as $pitchType): ?>
             <div class="card">
                 <div class="card__head">

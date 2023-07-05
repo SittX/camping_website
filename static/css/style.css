@@ -41,7 +41,16 @@ input:focus {
     outline: none;
 }
 
+/*Typography*/
 .title{
+    margin: 1rem;
+}
+.section-header{
+    margin: 1rem;
+}
+
+
+.text{
     margin: 1rem;
 }
 
@@ -88,6 +97,7 @@ input:focus {
 .card__container{
     display: flex;
     column-gap: 2rem;
+    justify-content: center;
 }
 .card__wrapper{
     margin: 1rem;
@@ -98,6 +108,7 @@ input:focus {
     width: 30%;
     border: 1px solid black;
     border-radius: 5px;
+    padding: 1.2rem;
 }
 
 .card__img{
@@ -558,6 +569,10 @@ input:focus {
     margin: 1rem 0;
     display: block;
     width: 100%;
+}
+
+.available-campsite{
+    flex: 1 1;
 }
 
 /* About us */
