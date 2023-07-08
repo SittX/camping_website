@@ -50,19 +50,18 @@ foreach ($campSiteList as $campSite) {
                     <?php
                     if (SessionManager::checkAdmin()) :
                         ?>
-                        <li><a class="nav__link" href="../admin/dashboard.php">Dashboard</a></li>
-                        <li><a class="nav__link" href="../pages/pitchTypesAndAvailability.php">Information</a></li>
-                        <li><a class="nav__link" href="../admin/adminReview.php">Reviews</a></li>
-                        <li><a class="nav__link" href="../admin/adminBooking.php">Bookings</a></li>
-                        <li><a class="nav__link" href="../admin/adminContact.php">User Contacts</a></li>
+                    <li><a class="nav__link" href="../admin/dashboard.php">Dashboard</a></li>
+                    <li><a class="nav__link" href="../pages/pitchTypesAndAvailability.php">Information</a></li>
+                    <li><a class="nav__link" href="../admin/adminReview.php">Reviews</a></li>
+                    <li><a class="nav__link" href="../admin/adminBooking.php">Bookings</a></li>
+                    <li><a class="nav__link" href="../admin/adminContact.php">User Contacts</a></li>
                     <?php else : ?>
-                        <li><a class="nav__link" href="../pages/information.php">Information</a></li>
-                        <li><a class="nav__link" href="../pages/pitchTypesAndAvailability.php">Pitch Types</a></li>
-                        <li><a class="nav__link" href="../pages/features.php">Features</a></li>
-                        <li><a class="nav__link" href="../pages/localAttraction.php">Local Attractions</a></li>
-                        <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
-                        <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
-                        <li><a class="nav__link" href="../pages/wearableTechnologies.php">Wearable technologies</a></li>
+                    <li><a class="nav__link" href="../pages/information.php">Information</a></li>
+                    <li><a class="nav__link" href="../pages/pitchTypesAndAvailability.php">Pitch Types</a></li>
+                    <li><a class="nav__link" href="../pages/features.php">Features</a></li>
+                    <li><a class="nav__link" href="../pages/localAttraction.php">Local Attractions</a></li>
+                    <li><a class="nav__link" href="../pages/contact.php">Contact Us</a></li>
+                    <li><a class="nav__link" href="../pages/reviews.php">Reviews</a></li>
                     <?php endif ?>
                 </ul>
             </nav>
@@ -71,13 +70,13 @@ foreach ($campSiteList as $campSite) {
         <div class="header__right">
             <div class="container--horizontal">
                 <?php if (SessionManager::checkIfUserLoggedIn()): ?>
-                    <a class="nav__link" href="../pages/logout.php" id="login-link">
-                        <button class="btn btn--primary" id="logout-btn">Logout</button>
-                    </a>
+                <a class="nav__link" href="../pages/logout.php" id="login-link">
+                    <button class="btn btn--primary" id="logout-btn">Logout</button>
+                </a>
                 <?php else: ?>
-                    <a class="nav__link" href="../pages/login.php" id="login-link">
-                        <button class="btn btn--primary" id="login-btn">Login</button>
-                    </a>
+                <a class="nav__link" href="../pages/login.php" id="login-link">
+                    <button class="btn btn--primary" id="login-btn">Login</button>
+                </a>
                 <?php endif ?>
                 <a class="nav__link" href="../pages/register.php">
                     <button class="btn btn--primary">Register</button>
@@ -91,22 +90,22 @@ foreach ($campSiteList as $campSite) {
     </div>
 </header>
 <script>
-    // // Get the login link and button elements
-    // const loginLink = document.getElementById('login-link');
-    // const loginButton = document.getElementById('login-btn');
-    //
-    // // Function to toggle the href attribute and button text
-    // function toggleLogin(event) {
-    //     event.preventDefault();
-    //     if (loginLink.getAttribute('href') === '../pages/login.php') {
-    //         loginLink.setAttribute('href', '../pages/logout.php');
-    //         loginButton.textContent = 'Logout';
-    //     } else {
-    //         loginLink.setAttribute('href', '../pages/login.php');
-    //         loginButton.textContent = 'Login';
-    //     }
-    // }
-    //
-    // // Add event listener to the login button
-    // loginButton.addEventListener('click', toggleLogin);
+// // Get the login link and button elements
+// const loginLink = document.getElementById('login-link');
+// const loginButton = document.getElementById('login-btn');
+//
+// // Function to toggle the href attribute and button text
+// function toggleLogin(event) {
+//     event.preventDefault();
+//     if (loginLink.getAttribute('href') === '../pages/login.php') {
+//         loginLink.setAttribute('href', '../pages/logout.php');
+//         loginButton.textContent = 'Logout';
+//     } else {
+//         loginLink.setAttribute('href', '../pages/login.php');
+//         loginButton.textContent = 'Login';
+//     }
+// }
+//
+// // Add event listener to the login button
+// loginButton.addEventListener('click', toggleLogin);
 </script>

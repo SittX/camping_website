@@ -110,8 +110,10 @@ class ReviewDataRepository implements DataRepository
     {
         $user = $this->userRepo->searchById($row["user_id"]);
         $site = $this->siteRepo->searchById($row["site_id"]);
-        $review = new Review($row['rating'], $row['message'], $row['title'], $user, $site);
+        $review = new Review($row['rating'], $row['message'], $row['title']);
         $review->setReviewId($row['review_id']);
+        $review->setUser($user);
+        $review->setSite($site);
         return $review;
     }
 }

@@ -9,13 +9,11 @@ class Review
     private User $user;
     private CampSite $site;
 
-    public function __construct(int $rating, string $message, string $title, User $user, CampSite $site)
+    public function __construct(int $rating, string $message, string $title)
     {
         $this->rating = $rating;
         $this->message = $message;
         $this->title = $title;
-        $this->user = $user;
-        $this->site = $site;
     }
 
     // Getters
@@ -79,6 +77,4 @@ class Review
     {
         $this->site = $site;
     }
-
-
 }

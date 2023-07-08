@@ -4,7 +4,10 @@ require_once(dirname(__DIR__) . "/inc/header.php");
 // $db = new DatabaseConnection();
 // $connection = $db->getConnection();
 $reviewRepo = new ReviewDataRepository($connection);
+$userRepo = new UserDataRepository($connection);
+$siteRepo = new CampSiteDataRepository($connection);
 $reviewList = $reviewRepo->getLists();
+$sites = $siteRepo->getLists();
 
 // TODO : Allow to write review only if the user is logged in ( check user login status )
 if (isset($_POST["submit_review"])) {
@@ -12,24 +15,31 @@ if (isset($_POST["submit_review"])) {
         header("Location: login.php");
         return;
     }
-    $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"], $_SESSION["user"]["id"], 2);
+
+    $user = $userRepo->searchById($_SESSION["user"]["id"]);
+    $site = $siteRepo->searchById($_POST["site_id"]);
+
+    $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"]);
+    $newReview->setUser($user);
+    $newReview->setSite($site);
     $reviewRepo->insert($newReview);
 }
 ?>
 
+<div class="container">
     <div class="review__container">
         <?php foreach ($reviewList as $review) : ?>
-            <div class="review">
-                <p class="review__title">Review for <?php echo $review->getSite()->getName()?></p>
-                <img src="../uploads/<?php echo $review->getSite()->getImages()[1]?>" class="review__img">
-                <p class="review__title"><?php echo $review->getTitle() ?></p>
-                <div class="review__body">
-                    <p class="review__text"><?php echo $review->getMessage() ?></p>
-                    <p class="review__text--bold">***** Rating *****</p>
-                    <p class="review__rating"><?php echo $review->getRating()?> out of 5</p>
-                    <p class="review__user">Reviewed by <?php echo $review->getUser()->getUsername()?></p>
-                </div>
+        <div class="review">
+            <p class="review__title">Review for <?php echo $review->getSite()->getName() ?></p>
+            <img src="../uploads/<?php echo $review->getSite()->getImages()[1] ?>" class="review__img">
+            <p class="review__title"><?php echo $review->getTitle() ?></p>
+            <div class="review__body">
+                <p class="review__text"><?php echo $review->getMessage() ?></p>
+                <p class="review__text--bold">***** Rating *****</p>
+                <p class="review__rating"><?php echo $review->getRating() ?> out of 5</p>
+                <p class="review__user">Reviewed by <?php echo $review->getUser()->getUsername() ?></p>
             </div>
+        </div>
         <?php endforeach; ?>
     </div>
 
@@ -37,9 +47,16 @@ if (isset($_POST["submit_review"])) {
     <form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post" class="form review__form">
         <h4 class="section-header">Write your review !</h4>
         <input type="text" name="title" placeholder="Title" class="form__input">
-        <textarea name="review_message" id="review_message" placeholder="review message" class="review__textarea"></textarea>
-        <!-- <input type="number" name="rating" id="rating" placeholder="rating"> -->
-        <select name="rating" id="cars" class="select">
+        <textarea name="review_message" id="review_message" placeholder="review message"
+            class="review__textarea"></textarea>
+
+        <select class="select" name="site_id" id="sites" class="select">
+            <?php foreach ($sites as $site) : ?>
+            <option value="<?php echo $site->getSiteId(); ?>"><?php echo $site->getName(); ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <select class="select" name="rating" id="ratings">
             <option value="1">Excellent</option>
             <option value="2">Awesome</option>
             <option value="3">Good</option>
@@ -48,7 +65,7 @@ if (isset($_POST["submit_review"])) {
         </select>
         <input type="submit" value="Submit" name="submit_review" class="btn btn--primary">
     </form>
-
+</div>
 
 <?php
 include(INC_PATH . "footer.php");

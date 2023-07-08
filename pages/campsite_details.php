@@ -58,37 +58,22 @@ if (isset($_POST["booking_submit"])) {
                 <div id="preview-img" class="preview-img-container">
                     <?php foreach ($images as $index => $image) : ?>
                         <?php $imgId = "img-" . $index ?>
-                        <img id="<?php echo $imgId ?>" onclick="smallImageClicked('<?php echo $imgId ?>')"
-                             class="detail-img active" src="<?php echo $imageDirPath . $image ?>">
+                        <img id="<?php echo $imgId ?>" onclick="smallImageClicked('<?php echo $imgId ?>')" class="detail-img active" src="<?php echo $imageDirPath . $image ?>">
                     <?php endforeach ?>
                 </div>
             </div>
         </div>
     </div>
-<!---->
-<!--    <div class="details__btn-container">-->
-<!--        <a href="../pages/booking.php?site_id=--><?php //echo $siteId ?><!--">-->
-<!--            <button class="btn btn--primary">Make a-->
-<!--                booking-->
-<!--            </button>-->
-<!--        </a>-->
-<!--        <a href="../pages/reviews.php?site_id=--><?php //echo $siteId ?><!--">-->
-<!--            <button class="btn btn--primary">Write a-->
-<!--                review-->
-<!--            </button>-->
-<!--        </a>-->
-<!--    </div>-->
 
     <div class="details__btn-container">
-        <button class="btn btn--primary" id="review_modal_btn">Review
-        </button>
-        <button class="btn btn--primary" id="booking_modal_btn">Booking</button>
+        <a href="<?php echo PAGES_PATH . 'booking.php?site_id=' . $site->getSiteId(); ?>">Booking</a>
+        <!-- <button class="btn btn--primary" id="booking_modal_btn">Booking</button> -->
     </div>
 
     <div class="product-details__features-container">
         <h3 class="section-header--center">Available features of <?php echo $site->getName() ?></h3>
         <div class="features_container features_container--product-details">
-            <?php foreach ($features as $feature): ?>
+            <?php foreach ($features as $feature) : ?>
                 <li class="feature"><?php echo $feature ?></li>
             <?php endforeach; ?>
         </div>
@@ -98,17 +83,17 @@ if (isset($_POST["booking_submit"])) {
 
     <h3 class="section-title">Reviews of <?php echo $site->getName() ?></h3>
     <div class="container--feature">
-        <?php if ($reviews != null): ?>
+        <?php if ($reviews != null) : ?>
             <div class="review__container">
                 <?php foreach ($reviews as $review) : ?>
                     <div class="review">
-                        <p class="review__title">Review for <?php echo $review->getSite()->getName()?></p>
-                        <img src="../uploads/<?php echo $review->getSite()->getImages()[1]?>" class="review__img">
+                        <p class="review__title">Review for <?php echo $review->getSite()->getName() ?></p>
+                        <img src="../uploads/<?php echo $review->getSite()->getImages()[1] ?>" class="review__img">
                         <p class="review__title"><?php echo $review->getTitle() ?></p>
                         <p class="review__text"><?php echo $review->getMessage() ?></p>
                         <p class="review__text--bold">***** Rating *****</p>
-                        <p class="review__rating"><?php echo $review->getRating()?> out of 5</p>
-                        <p class="review__user">Reviewed by <?php echo $review->getUser()->getUsername()?></p>
+                        <p class="review__rating"><?php echo $review->getRating() ?> out of 5</p>
+                        <p class="review__user">Reviewed by <?php echo $review->getUser()->getUsername() ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -119,60 +104,35 @@ if (isset($_POST["booking_submit"])) {
 
     <h3 class="section-header">Map</h3>
     <div class="details-map">
-        <?php echo $site->getMapIframe();?>
+        <?php echo $site->getMapIframe(); ?>
     </div>
 </div>
 
-<!--Modal forms-->
-    <div class="modal" id="review-modal">
-        <div class="modal-header">
-            <div class="modal__title">Create new review</div>
-            <button data-close-button class="close-button">&times;</button>
-        </div>
-
-        <div class="modal-body">
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-                <input type="text" name="title" placeholder="Title" class="form__input">
-                <textarea name="review_message" class="review_message" cols="30" rows="10"
-                          placeholder="Review message"></textarea>
-                <select name="rating">
-                    <option value="1">Excellent</option>
-                    <option value="2">Awesome</option>
-                    <option value="3">Good</option>
-                    <option value="4">Average</option>
-                    <option value="5">Bad</option>
-                </select>
-                <input type="hidden" name="site_id" value="<?php echo $site->getSiteId() ?>">
-                <input type="submit" value="Submit" name="review_submit">
-            </form>
-        </div>
+<!-- <div class="modal" id="booking-modal">
+    <div class="modal-header">
+        <div class="modal__title">Book Campsite</div>
+        <button data-close-button class="close-button">&times;</button>
     </div>
 
-    <div class="modal" id="booking-modal">
-        <div class="modal-header">
-            <div class="modal__title">Book Campsite</div>
-            <button data-close-button class="close-button">&times;</button>
-        </div>
+    <div class="modal-body">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+            <div class="form__container">
+                <p>Location: <?php echo $site->getLocation() ?></p>
+            </div>
+            <div class="form__container">
+                <p>Features: <?php echo $site->getFeatures() ?></p>
+            </div>
+            <div class="form__container">
+                <p>Price: <?php echo $site->getPrice() ?></p>
+            </div>
 
-        <div class="modal-body">
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-                <div class="form__container">
-                    <p>Location: <?php echo $site->getLocation() ?></p>
-                </div>
-                <div class="form__container">
-                    <p>Features: <?php echo $site->getFeatures() ?></p>
-                </div>
-                <div class="form__container">
-                    <p>Price: <?php echo $site->getPrice() ?></p>
-                </div>
-
-                <input type="hidden" name="site_id" value="<?php echo $site->getSiteId() ?>">
-                <input type="date" name="check_in_date" class="calender_input">
-                <input type="date" name="check_out_date" class="calender_input">
-                <input type="submit" value="Book" name="booking_submit">
-            </form>
-        </div>
+            <input type="hidden" name="site_id" value="<?php echo $site->getSiteId() ?>">
+            <input type="date" name="check_in_date" class="calender_input">
+            <input type="date" name="check_out_date" class="calender_input">
+            <input type="submit" value="Book" name="booking_submit">
+        </form>
     </div>
-    <div id="details-modal-bg"></div>
+</div>
+<div id="details-modal-bg"></div> -->
 
 <?php require_once(INC_PATH . "footer.php"); ?>

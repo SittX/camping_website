@@ -1,8 +1,6 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
-// TODO : Compare the 2 password inputs ( password, retype-password )
-// TODO : Check the user creation status 
-// ( success -> Show user created message , Failed or username already exists -> Show username already exists ) 
+
 if (isset($_POST["register"])) {
     $username = $fName = $lName = $email = "";
     $userRepo = new UserDataRepository($connection);
@@ -12,13 +10,13 @@ if (isset($_POST["register"])) {
         echo "Invalid email address. Please try again";
         return;
     }
-    if (checkIfEmailAlreadyExist($email)) {
+    if (!checkIfEmailAlreadyExist($email)) {
         echo "Email already exists. Please try again.";
         return;
     }
 
     $username = $_POST['username'];
-    if (checkIfUsernameExist($username)) {
+    if (!checkIfUsernameExist($username)) {
         echo "Username already exists. Please try again";
         return;
     }
@@ -46,15 +44,11 @@ function checkIfEmailAlreadyExist($email): bool
     $connection = $db->getConnection();
     $query = "SELECT email FROM USER WHERE email = ?";
     $result = prepareAndExecuteQuery($connection, $query, "s", $email);
-    // If the email does not exist in the db, it will return result with 0 num rows.
+    return $result->num_rows() == 0;
     if ($result->num_rows() == 0) {
         return false;
     }
-
-    $resultEmail = $result->get_result()->fetch_assoc()["email"];
-    $email = strtolower($email);
-    $resultEmail = strtolower($resultEmail);
-    return $resultEmail == $email;
+    return true;
 }
 
 function checkIfUsernameExist($username): bool
@@ -63,15 +57,10 @@ function checkIfUsernameExist($username): bool
     $connection = $db->getConnection();
     $query = "SELECT username FROM USER WHERE username = ?";
     $result = prepareAndExecuteQuery($connection, $query, "s", $username);
-
     if ($result->num_rows() == 0) {
         return false;
     }
-
-    $resultUsername = $result->get_result()->fetch_assoc()["username"];
-    $username = strtolower($username);
-    $resultUsername = strtolower($resultUsername);
-    return $resultUsername == $username;
+    return true;
 }
 
 function isValidEmail($email): bool
@@ -88,14 +77,14 @@ function isValidEmail($email): bool
 ?>
 
 <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" class="form register--form">
-        <div class="form__row">
-            <label for="firstName">FirstName</label>
-            <input class="form__input" type="text" name="firstName" required />
-        </div>
-        <div class="form__row">
-            <label for="lastName">LastName</label>
-            <input class="form__input" type="text" name="lastName" required />
-        </div>
+    <div class="form__row">
+        <label for="firstName">FirstName</label>
+        <input class="form__input" type="text" name="firstName" required />
+    </div>
+    <div class="form__row">
+        <label for="lastName">LastName</label>
+        <input class="form__input" type="text" name="lastName" required />
+    </div>
 
     <div class="form__row">
         <label for="username">Username</label>
@@ -113,14 +102,14 @@ function isValidEmail($email): bool
     </div>
 
     <?php if (SessionManager::checkAdmin()) : ?>
-    <div class="form__row">
-        <label for="role">User Role:</label>
-        <select name="user_role" class="select">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-        </select>
-        </label>
-    </div>
+        <div class="form__row">
+            <label for="role">User Role:</label>
+            <select class="select" name="user_role" class="select">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            </label>
+        </div>
     <?php endif; ?>
     <!--    <div class="form__row">-->
     <!--        <span><i aria-hidden="true" class="fa fa-lock"></i></span>-->

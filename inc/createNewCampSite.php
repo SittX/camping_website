@@ -14,7 +14,7 @@ $pitchTypeList = $pitchTypeRepo->getLists();
 if (isset($_POST['create_campsite'])) {
     $pitchType = $pitchTypeRepo->searchById($_POST["pitch_type_id"]);
     var_dump($pitchType);
-    $newCampSite = new CampSite($_POST["site_name"], $_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"],$_POST["notice_note"], $pitchType, $_POST["price"]);
+    $newCampSite = new CampSite($_POST["site_name"], $_POST["location"], $_POST["description"], $_POST["local_attraction"], $_POST["features"], $_POST["notice_note"], $pitchType, $_POST["price"]);
     $newCampSite->setMapIframe($_POST["map_iframe"]);
     $campSiteID = $campSiteRepo->insert($newCampSite);
 
@@ -36,26 +36,30 @@ if (isset($_POST['create_campsite'])) {
                 <input class="form__input" type="text" name="location" id="location" placeholder="Location" required>
             </div>
 
-            <textarea name="description" id="description" cols="50" rows="5" placeholder="Description" required></textarea>
+            <textarea name="description" id="description" cols="50" rows="5" placeholder="Description"
+                required></textarea>
             <div class="form__row">
-                <input class="form__input" type="text" name="features" id="features" placeholder="features" required>
+                <input class="form__input" type="text" name="features" id="features"
+                    placeholder="features (use CSV format for each feature)" required>
                 <input class="form__input" type="text" name="local_attraction" id="local_attraction"
-                       placeholder="Local attraction" required>
+                    placeholder="Local attraction" required>
             </div>
 
-            <input class="form__input" type="text" name="map_iframe", placeholder="Enter Google Map link iframe of the location" required>
+            <input class="form__input" type="text" name="map_iframe" ,
+                placeholder="Enter Google Map link iframe of the location" required>
             <input class="form__input" type="number" name="price" id="price" placeholder="price" required>
-            <textarea name="notice_note" id="notice_note" cols="50" rows="5" placeholder="Notice Note" required></textarea>
+            <textarea name="notice_note" id="notice_note" cols="50" rows="5" placeholder="Notice Note"
+                required></textarea>
 
             <div class="form__row">
                 <label for="cars">Choose a pitch type :</label>
-                <select name="pitch_type_id" id="pitch_type">
+                <select class="select" name="pitch_type_id" id="pitch_type">
                     <?php foreach ($pitchTypeList as $pitchType) :
-                        ?>
-                        <option value="<?php echo $pitchType->getPitchTypeId();
-                        ?>"><?php echo $pitchType->getTitle()
+                    ?>
+                    <option value="<?php echo $pitchType->getPitchTypeId();
+                                        ?>"><?php echo $pitchType->getTitle()
                             ?>
-                        </option>
+                    </option>
                     <?php endforeach;
                     ?>
                 </select>

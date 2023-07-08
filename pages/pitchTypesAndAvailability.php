@@ -42,8 +42,8 @@ if (isset($_POST["booking_submit"])) {
         include(INC_PATH . "createNewCampSite.php");
     }
     ?>
-        <input type="text" name="campsite_location" placeholder="Search by camp location.." class="search__input"
-               id="search__input">
+    <input type="text" name="campsite_location" placeholder="Search by camp location.." class="search__input"
+        id="search__input">
 
     <section id="campsite__container">
         <?php foreach ($pitchTypes as $currentPitchType) : ?>
@@ -108,7 +108,9 @@ if (isset($_POST["booking_submit"])) {
             <h4 class="product__name">Suunto Outdoor Watch</h4>
             <div class="product__body">
                 <img src="../static/images/alpha-watch.jpg" class="wearable-tech-img" />
-                <a href="https://www.suunto.com/Products/sports-watches/Suunto-Traverse-Alpha/Suunto-Traverse-Alpha-Foliage/">View product</a>
+                <a
+                    href="https://www.suunto.com/Products/sports-watches/Suunto-Traverse-Alpha/Suunto-Traverse-Alpha-Foliage/">View
+                    product</a>
             </div>
         </div>
 
@@ -134,7 +136,7 @@ if (isset($_POST["booking_submit"])) {
             <input type="text" name="title" placeholder="Title" class="form__input">
             <textarea name="review_message" class="review_message" cols="30" rows="10"
                 placeholder="Review message"></textarea>
-            <select name="rating">
+            <select class="select" name="rating">
                 <option value="1">Excellent</option>
                 <option value="2">Awesome</option>
                 <option value="3">Good</option>
@@ -147,31 +149,7 @@ if (isset($_POST["booking_submit"])) {
     </div>
 </div>
 
-<div class="modal" id="booking-modal-<?php echo $campSite->getSiteId() ?>">
-    <div class="modal-header">
-        <div class="modal__title">Book Campsite</div>
-        <button data-close-button class="close-button">&times;</button>
-    </div>
 
-    <div class="modal-body">
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-            <div class="form__container">
-                <p>Location: <?php echo $campSite->getLocation() ?></p>
-            </div>
-            <div class="form__container">
-                <p>Features: <?php echo $campSite->getFeatures() ?></p>
-            </div>
-            <div class="form__container">
-                <p>Price: <?php echo $campSite->getPrice() ?></p>
-            </div>
-
-            <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
-            <input type="date" name="check_in_date" class="calender_input">
-            <input type="date" name="check_out_date" class="calender_input">
-            <input type="submit" value="Book" name="booking_submit">
-        </form>
-    </div>
-</div>
 <?php endforeach ?>
 
 <div id="modal-bg"></div>
