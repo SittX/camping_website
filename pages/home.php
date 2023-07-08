@@ -11,14 +11,14 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
     <!--Page banner with some text-->
     <section class="page_banner">
         <div class="page_banner-content">
-            <p>Escape to Nature: Discover Your Perfect Campsite with GWCS!</p>
-            <a href="<?php echo PAGES_PATH . "pitchTypesAndAvailability.php" ?>">Explore</a>
+            <p>Escape to Nature: Discover Your Perfect Campsite With Us!</p>
+            <a href="<?php echo PAGES_PATH . "information.php" ?>">Explore Now!</a>
         </div>
     </section>
 
     <h3 class="section-header">Check out all of our camping sites available across the country</h3>
 
-    <div class="container--flex available-campsite">
+    <div class="container--horizontal available-campsite">
         <p class="text">Escape the daily grind and immerse yourself in the wonders of nature. Explore breathtaking landscapes, find solace in tranquility, and ignite your sense of adventure. Reconnect with the beauty that surrounds us, discover hidden treasures, and experience the transformative power of nature. Answer the call to explore and create lifelong memories. Embrace the great outdoors today.</p>
 
         <section id="slider__container">
@@ -35,8 +35,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
                     <?php for ($i = 0; $i < count($campSites); $i++): ?>
                         <figure class="slide">
                             <img class="slide__img" src="<?php echo $imageDirPath . $campSites[$i]->getImages()[0] ?>" alt>
-                            <figcaption class="slide__caption"><?php echo $campSites[$i]->getLocation() ?>,
-                                <?php echo $campSites[$i]->getDescription() ?></figcaption>
+                            <figcaption class="slide__caption"><?php echo $campSites[$i]->getName() ?>
                         </figure>
                     <?php endfor; ?>
                 <?php endif; ?>
@@ -46,7 +45,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
     <!--Display as cards-->
     <h3 class="section-header">Different campsite types</h3>
-    <section class="card__container">
+    <section class="card__container card__container--center">
         <?php foreach ($pitchTypes as $pitchType): ?>
             <div class="card">
                 <div class="card__head">
@@ -65,7 +64,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
     <!--About us ( paragraph + map side-by-side )-->
     <h3 class="section-header">About us</h3>
     <section class="about_us" id="about_us">
-        <p>Welcome to ExploreCamps! We are your one-stop destination for booking and exploring a wide range of campsites
+        <p class="text">Welcome to ExploreCamps! We are your one-stop destination for booking and exploring a wide range of campsites
             across the country. With our user-friendly platform, you can easily find and reserve your perfect campsite
             in
             just a few clicks. We offer a diverse selection of campsites, complete with detailed information, amenities,

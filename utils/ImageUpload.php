@@ -10,51 +10,45 @@ function uploadImage($campSiteID)
     $allowedFileExtensions = array('jpg', 'png', 'jpeg');
 
     $statusMsg = $errorMsg = $insertSqlValues = $errorUpload = '';
-    $fileNames = array_filter($_FILES['files']['name']);
+    $fileNames = $_FILES['files']['name'];
 
     if (empty($fileNames)) {
-        return $statusMsg = 'Please select a file to upload.';
+        return 'Please select a file to upload.';
     }
 
-    foreach ($_FILES['files']['name'] as $key => $val) {
-        // File upload path 
+    foreach ($fileNames as $key => $val) {
+        // File upload path
         $fileName = basename($_FILES['files']['name'][$key]);
         $uploadFilePath = $uploadDir . $fileName;
         $fileExtension = pathinfo($uploadFilePath, PATHINFO_EXTENSION);
 
         // Check whether file type is valid
         if (!in_array($fileExtension, $allowedFileExtensions)) {
-            echo "File type is not supported";
-            return;
+            return "File type is not supported";
         }
-        // Upload file to server 
+
+        // Upload file to server
         $isUploaded = move_uploaded_file($_FILES["files"]["tmp_name"][$key], $uploadFilePath);
         if (!$isUploaded) {
-            echo "Error uploading file to the destination";
-            return;
+            return "Error uploading file to the destination";
         }
+
         $insertSqlValues .= "('" . $fileName . "', $campSiteID),";
     }
 
-
     if (empty($insertSqlValues)) {
-        echo "File upload failed";
-        return;
+        return "File upload failed";
     }
 
     // Remove the comma of the last element
     $insertSqlValues = trim($insertSqlValues, ',');
 
-    // Insert image file name into database 
-    $result = $conn->query("INSERT INTO CampSiteImages(url,site_id) VALUES $insertSqlValues");
-    if ($result->num_rows < 0) {
-        echo "Successfully saved data into the database";
+    // Insert image file name into database
+    $result = $conn->query("INSERT INTO CampSiteImages(url, site_id) VALUES $insertSqlValues");
+    if ($result && $result->num_rows > 0) {
+        return "Successfully saved data into the database";
+    } else {
+        return "Sorry, there was an error uploading your file.";
     }
-
-    // $insert = $db->query("INSERT INTO CampSiteImages (url,site_id) VALUES $insertSqlValues");
-    // if ($insert) {
-    //     $statusMsg = "Successfully uploaded." . $errorMsg;
-    // } else {
-    //     $statusMsg = "Sorry, there was an error uploading your file.";
-    // }
 }
+

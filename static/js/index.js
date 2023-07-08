@@ -9,23 +9,34 @@ hamburgerBtn.addEventListener("click", ()=>{
 
 // Search input filtering
 const searchInput = document.getElementById("search__input");
-const campsites = document.querySelectorAll(".campsite");
-// console.log(searchInput);
-// console.log(campsites);
-
-function inputFilter(){
+const campsites = document.querySelectorAll("#campsite-card-container .card--pitchTypes");
+console.log(searchInput);
+console.log(campsites);
+// function inputFilter(){
+//     let inputValue = searchInput.value.toLowerCase();
+//
+//     campsites.forEach(campsite => {
+//         const locationValue = campsite.getAttribute("data-campsite-location").toLowerCase();
+//         if (locationValue.includes(inputValue)) {
+//             campsite.style.display = "block";
+//             console.log(locationValue);
+//         } else {
+//             campsite.style.display = "none";
+//         }
+//     })
+// }
+searchInput.addEventListener("input",()=>{
     let inputValue = searchInput.value.toLowerCase();
-
     campsites.forEach(campsite => {
         const locationValue = campsite.getAttribute("data-campsite-location").toLowerCase();
         if (locationValue.includes(inputValue)) {
             campsite.style.display = "block";
-            // console.log(locationValue);
+            console.log(locationValue);
         } else {
             campsite.style.display = "none";
         }
     })
-}
+});
 
 // Modal
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
@@ -52,18 +63,45 @@ closeModalButtons.forEach(button => {
         closeModal(modal)
     })
 })
-
 function openModal(modal) {
-    if (modal == null) return
-    modal.classList.add('active')
-    overlay.classList.add('active')
+    if (modal == null) return;
+    modal.classList.add('active');
+    detailModalOverlay.classList.add('active');
 }
 
 function closeModal(modal) {
-    if (modal == null) return
-    modal.classList.remove('active')
-    overlay.classList.remove('active')
+    if (modal == null) return;
+    modal.classList.remove('active');
+    detailModalOverlay.classList.remove('active');
 }
+
+
+// Details modal
+const reviewModalBtn = document.getElementById("review_modal_btn");
+const bookingModalBtn = document.getElementById("booking_modal_btn");
+const detailModalOverlay = document.getElementById('details-modal-bg');
+
+reviewModalBtn.addEventListener("click",()=>{
+    console.log("Review modal btn clicked");
+    const reviewModal = document.getElementById("review-modal");
+    reviewModal.classList.add("active");
+});
+
+bookingModalBtn.addEventListener("click",()=>{
+    console.log("Booking modal btn clicked");
+    const bookingModal = document.getElementById("booking-modal");
+    bookingModal.classList.add("active");
+})
+
+detailModalOverlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active');
+    modals.forEach(modal => {
+        closeModal(modal);
+    });
+});
+
+
+
 
 
 // Detailed view image selector

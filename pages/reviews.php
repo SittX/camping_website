@@ -9,56 +9,44 @@ $reviewList = $reviewRepo->getLists();
 // TODO : Allow to write review only if the user is logged in ( check user login status )
 if (isset($_POST["submit_review"])) {
     if (!SessionManager::checkIfUserLoggedIn()) {
-        echo "Cannot make review if you aren't logged in";
-        // header("Location: login.php");
+        header("Location: login.php");
         return;
     }
-    print_r($_POST["rating"]);
     $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"], $_SESSION["user"]["id"], 2);
     $reviewRepo->insert($newReview);
 }
-
-// Check request URL parameters
-// var_dump($_GET);
-
-
-// Login style -> 
-/*
-    Title
-    Rating 
-    Message
-    USERNAME Reviewed-Time    
-
-    e.g 
-    Very welcome atmosphere
-    4 out of 5
-    I like it.
-    David 2023-03-12
-*/
 ?>
 
-    <div>
+    <div class="review__container">
         <?php foreach ($reviewList as $review) : ?>
-            <div>
-                <h3><?php echo $review->getTitle() ?></h3>
-                <p><?php echo $review->getMessage() ?></p>
+            <div class="review">
+                <p class="review__title">Review for <?php echo $review->getSite()->getName()?></p>
+                <img src="../uploads/<?php echo $review->getSite()->getImages()[1]?>" class="review__img">
+                <p class="review__title"><?php echo $review->getTitle() ?></p>
+                <div class="review__body">
+                    <p class="review__text"><?php echo $review->getMessage() ?></p>
+                    <p class="review__text--bold">***** Rating *****</p>
+                    <p class="review__rating"><?php echo $review->getRating()?> out of 5</p>
+                    <p class="review__user">Reviewed by <?php echo $review->getUser()->getUsername()?></p>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>
 
     <p class="review_form_status"></p>
-    <form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+    <form action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post" class="form review__form">
+        <h4 class="section-header">Write your review !</h4>
         <input type="text" name="title" placeholder="Title" class="form__input">
-        <textarea name="review_message" id="review_message" cols="30" rows="10" placeholder="review message"></textarea>
+        <textarea name="review_message" id="review_message" placeholder="review message" class="review__textarea"></textarea>
         <!-- <input type="number" name="rating" id="rating" placeholder="rating"> -->
-        <select name="rating" id="cars">
+        <select name="rating" id="cars" class="select">
             <option value="1">Excellent</option>
             <option value="2">Awesome</option>
             <option value="3">Good</option>
             <option value="4">Average</option>
             <option value="5">Bad</option>
         </select>
-        <input type="submit" value="Submit" name="submit_review">
+        <input type="submit" value="Submit" name="submit_review" class="btn btn--primary">
     </form>
 
 

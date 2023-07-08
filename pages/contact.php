@@ -12,21 +12,17 @@ if (isset($_POST["submit_contact_message"])) {
         echo "Send the contact message to the admin";
     };
 }
-// TODO : Show message box to normal user but don't show all the contact messages
-
-// TODO : For admin, show all the messages from the clients
-
-// TODO : Message should be in one way from client to admin.
-// If the admin wants to reply to the client, it should
-// redirects to the email client with the user email
 ?>
-
-<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-    <textarea name="message" id="message" cols="30" rows="10"></textarea>
-    <input type="submit" value="Send" name="submit_contact_message">
+<p class="text">We would love to hear from you! You can ask us questions, provide feedback, or inquire about our camping services by contacting us. Your pleasure is our main priority, and we are dedicated to offering an unforgettable outdoor experience.  We look forward to supporting you and helping you plan your next experience in the great outdoors.</p>
+<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" class="form">
+    <p class="form__title">Contact us today and let us help you!</p>
+    <textarea name="message" id="message" class="contact__textarea"></textarea>
+    <input type="submit" value="Send" name="submit_contact_message" class="btn btn--primary">
 </form>
+<div class="container--center-element">
+    <p>  By contacting us, you are agreeing to adhere to our  <a href="privacyPolicy.php" class="card__link">Privacy policy</a></p>
+</div>
 
-<a href="privacyPolicy.php">Privacy policy</a>
 
 
 <?php require_once(INC_PATH . "footer.php") ?>

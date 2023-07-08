@@ -30,8 +30,8 @@ if (isset($_POST["register"])) {
     $password = $_POST['password'];
     $rank = "user";
 
-    if(SessionManager::checkAdmin()){
-       $rank = $_POST["user_role"];
+    if (SessionManager::checkAdmin()) {
+        $rank = $_POST["user_role"];
     }
     $affectedRow = $userRepo->insert(new User($fName, $lName, $username, $email, $password, $rank));
     if ($affectedRow == 1) {
@@ -87,49 +87,47 @@ function isValidEmail($email): bool
 
 ?>
 
-    <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" class="form">
-        <div class="form__col">
-            <div class="form__row">
-                <span>FirstName</span>
-                <input class="form__input" type="text" name="firstName" required/>
-            </div>
-            <div class="form__row">
-                <span>LastName</span>
-                <input class="form__input" type="text" name="lastName" required/>
-            </div>
-        </div>
-
+<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" class="form register--form">
         <div class="form__row">
-            <span>Username</span>
-            <input class="form__input" type="text" name="username" required/>
+            <label for="firstName">FirstName</label>
+            <input class="form__input" type="text" name="firstName" required />
         </div>
-
         <div class="form__row">
-            <span>Email</span>
-            <input class="form__input" type="email" name="email" required/>
+            <label for="lastName">LastName</label>
+            <input class="form__input" type="text" name="lastName" required />
         </div>
 
-        <div class="form__row">
-            <span>Password</span>
-            <input class="form__input" type="password" name="password" required/>
-        </div>
+    <div class="form__row">
+        <label for="username">Username</label>
+        <input class="form__input" type="text" name="username" required />
+    </div>
 
-        <?php if(SessionManager::checkAdmin()):?>
-        <div class="form__row">
-            <label for="role">User Role:</label>
-               <select name="user_role">
-                    <option value="user">User</option>
-                   <option value="admin">Admin</option>
-               </select>
-            </label>
-        </div>
-        <?php endif;?>
-        <!--    <div class="form__row">-->
-        <!--        <span><i aria-hidden="true" class="fa fa-lock"></i></span>-->
-        <!--        <input class="form__input" type="password" name="password" placeholder="Re-type Password" required />-->
-        <!--    </div>-->
+    <div class="form__row">
+        <label for="email">Email</label>
+        <input class="form__input" type="email" name="email" required />
+    </div>
 
-        <input class="btn btn--primary" type="submit" value="register" name="register"/>
-    </form>
+    <div class="form__row">
+        <label for="password">Password</label>
+        <input class="form__input" type="password" name="password" required />
+    </div>
+
+    <?php if (SessionManager::checkAdmin()) : ?>
+    <div class="form__row">
+        <label for="role">User Role:</label>
+        <select name="user_role" class="select">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+        </label>
+    </div>
+    <?php endif; ?>
+    <!--    <div class="form__row">-->
+    <!--        <span><i aria-hidden="true" class="fa fa-lock"></i></span>-->
+    <!--        <input class="form__input" type="password" name="password" placeholder="Re-type Password" required />-->
+    <!--    </div>-->
+
+    <input class="btn btn--primary" type="submit" value="register" name="register" />
+</form>
 
 <?php include(INC_PATH . "footer.php"); ?>

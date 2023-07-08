@@ -28,7 +28,7 @@ if (isset($_POST["booking_submit"])) {
         header("Location: login.php");
     } else {
         $siteId = $_POST["site_id"];
-//        $bookingCampSite = $campSiteRepo->searchById($siteId);
+        //        $bookingCampSite = $campSiteRepo->searchById($siteId);
         $booking = new Booking($_POST["check_in_date"], $_POST["check_out_date"], $_SESSION["user"]["id"], $siteId);
         $bookingRepo->insert($booking);
         echo "Booking has been inserted";
@@ -36,118 +36,145 @@ if (isset($_POST["booking_submit"])) {
 }
 
 ?>
-<?php
-if (SessionManager::checkAdmin()) {
-    include(INC_PATH . "createNewCampSite.php");
-}
-?>
-
-    <section class="campsite__filter">
-            <input type="text" name="campsite_location" placeholder="Search by camp location.." class="search__input"
-                   id="search__input" oninput="inputFilter();">
-    </section>
-
-<section>
-    <label for="cars">Choose a pitch type :</label>
-    <select name="pitch_type_id" id="pitch_type">
-        <?php foreach ($pitchTypes as $pitchType) :?>
-            <option value="<?php echo $pitchType->getPitchTypeId(); ?>"><?php echo $pitchType->getTitle() ?>
-            </option>
-        <?php endforeach;
-        ?>
-    </select>
-</section>
+<div class="container">
+    <?php
+    if (SessionManager::checkAdmin()) {
+        include(INC_PATH . "createNewCampSite.php");
+    }
+    ?>
+        <input type="text" name="campsite_location" placeholder="Search by camp location.." class="search__input"
+               id="search__input">
 
     <section id="campsite__container">
         <?php foreach ($pitchTypes as $currentPitchType) : ?>
         <div class="card__wrapper">
-            <h3 class="title" id="<?php echo $currentPitchType->getTitle()?>"><?php echo $currentPitchType->getTitle(); ?></h3>
+            <h3 class="title" id="<?php echo $currentPitchType->getTitle() ?>">
+                <?php echo $currentPitchType->getTitle(); ?></h3>
 
-            <div class="card__container">
-            <?php foreach ($campSiteList as $campSite) : ?>
+            <div class="card__container" id="campsite-card-container">
+                <?php foreach ($campSiteList as $campSite) : ?>
                 <?php if ($campSite->getPitchType()->getTitle() === $currentPitchType->getTitle()) : ?>
-                    <div class="card campsite" data-campsite-location="<?php echo $campSite->getLocation() ?>" data-pitchType="<?php echo $campSite->getPitchType()->getTitle();?>">
-                        <div class="card__head">
-                            <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="card__img">
-                        </div>
-                        <div class="card__body">
-                            <p class="card__title"><?php echo $campSite->getLocation() ?></p>
-                            <p>Features: <?php echo $campSite->getFeatures() ?></p>
-                            <p>Description: <?php echo $campSite->getDescription() ?></p>
+                <div class="card--horizontal card--pitchTypes"
+                    data-campsite-location="<?php echo $campSite->getLocation() ?>"
+                    data-pitchType="<?php echo $campSite->getPitchType()->getTitle(); ?>">
+                    <div class="card__left">
+                        <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>"
+                            class="card__img--horizontal">
+                    </div>
+                    <div class="card__right">
+                        <p class="card__title"><?php echo $campSite->getLocation() ?></p>
+                        <h4>Features</h4>
+                        <p><?php echo $campSite->getFeatures() ?></p>
+                        <h4>Description</h4>
+                        <p><?php echo $campSite->getDescription() ?></p>
 
-                            <div class="card__row">
-                                <button data-modal-target="#review-modal-<?php echo $campSite->getSiteId() ?>"
-                                        class="btn btn--primary">Review
-                                </button>
-                                <button data-modal-target="#booking-modal-<?php echo $campSite->getSiteId() ?>"
-                                        class="btn btn--primary">Booking
-                                </button>
-                            </div>
-                            <a href="../pages/campsite_details.php?site_id=<?php echo $campSite->getSiteId(); ?>" class="card__link">Details</a>
+                        <div class="card__row">
+                            <button data-modal-target="#review-modal-<?php echo $campSite->getSiteId() ?>"
+                                class="btn btn--primary">Review
+                            </button>
+                            <a href="../pages/campsite_details.php?site_id=<?php echo $campSite->getSiteId(); ?>">
+                                <button class="btn btn--primary">Booking</button>
+                            </a>
                         </div>
                     </div>
+                </div>
                 <?php endif; ?>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
             </div>
         </div>
         <?php endforeach; ?>
     </section>
 
+    <h2 class="section-header">Wearable Technologies for camping</h2>
+    <section class="product__container">
+        <div class="product">
+            <h4 class="product__name">Garmin Solar GPS Watch</h4>
+            <div class="product__body">
+                <img src="../static/images/gps-watch.jpeg" class="wearable-tech-img" />
+                <a href="https://www.garmin.com/en-US/p/679335">View product</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <h4 class="product__name">Biolite HeadLamp 330</h4>
+            <div class="product__body">
+                <img src="../static/images/headlamp.jpeg" class="wearable-tech-img" />
+                <a href="https://www.bioliteenergy.com/products/headlamp-330">View product</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <h4 class="product__name">Suunto Outdoor Watch</h4>
+            <div class="product__body">
+                <img src="../static/images/alpha-watch.jpg" class="wearable-tech-img" />
+                <a href="https://www.suunto.com/Products/sports-watches/Suunto-Traverse-Alpha/Suunto-Traverse-Alpha-Foliage/">View product</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <h4 class="product__name">Outdoor Tech Power Bank</h4>
+            <div class="product__body">
+                <img src="../static/images/powerbank.jpg" class="wearable-tech-img" />
+                <a href="https://www.outdoortechnology.com/products/latch?_pos=1&_sid=88375cd9c&_ss=r">View product</a>
+            </div>
+        </div>
+    </section>
+</div>
 
 <?php foreach ($campSiteList as $campSite) : ?>
-    <div class="modal" id="review-modal-<?php echo $campSite->getSiteId() ?>">
-        <div class="modal-header">
-            <div class="modal__title">Create new review</div>
-            <button data-close-button class="close-button">&times;</button>
-        </div>
-
-        <div class="modal-body">
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-                <input type="text" name="title" placeholder="Title" class="form__input">
-                <textarea name="review_message" class="review_message" cols="30" rows="10"
-                          placeholder="Review message"></textarea>
-                <select name="rating">
-                    <option value="1">Excellent</option>
-                    <option value="2">Awesome</option>
-                    <option value="3">Good</option>
-                    <option value="4">Average</option>
-                    <option value="5">Bad</option>
-                </select>
-                <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
-                <input type="submit" value="Submit" name="review_submit">
-            </form>
-        </div>
+<div class="modal" id="review-modal-<?php echo $campSite->getSiteId() ?>">
+    <div class="modal-header">
+        <div class="modal__title">Create new review</div>
+        <button data-close-button class="close-button">&times;</button>
     </div>
 
-    <div class="modal" id="booking-modal-<?php echo $campSite->getSiteId() ?>">
-        <div class="modal-header">
-            <div class="modal__title">Book Campsite</div>
-            <button data-close-button class="close-button">&times;</button>
-        </div>
-
-        <div class="modal-body">
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-                <div class="form__container">
-                    <p>Location: <?php echo $campSite->getLocation() ?></p>
-                </div>
-                <div class="form__container">
-                    <p>Features: <?php echo $campSite->getFeatures() ?></p>
-                </div>
-                <div class="form__container">
-                    <p>Price: <?php echo $campSite->getPrice() ?></p>
-                </div>
-
-                <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
-                <input type="date" name="check_in_date" class="calender_input">
-                <input type="date" name="check_out_date" class="calender_input">
-                <input type="submit" value="Book" name="booking_submit">
-            </form>
-        </div>
+    <div class="modal-body">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+            <input type="text" name="title" placeholder="Title" class="form__input">
+            <textarea name="review_message" class="review_message" cols="30" rows="10"
+                placeholder="Review message"></textarea>
+            <select name="rating">
+                <option value="1">Excellent</option>
+                <option value="2">Awesome</option>
+                <option value="3">Good</option>
+                <option value="4">Average</option>
+                <option value="5">Bad</option>
+            </select>
+            <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
+            <input type="submit" value="Submit" name="review_submit">
+        </form>
     </div>
+</div>
+
+<div class="modal" id="booking-modal-<?php echo $campSite->getSiteId() ?>">
+    <div class="modal-header">
+        <div class="modal__title">Book Campsite</div>
+        <button data-close-button class="close-button">&times;</button>
+    </div>
+
+    <div class="modal-body">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+            <div class="form__container">
+                <p>Location: <?php echo $campSite->getLocation() ?></p>
+            </div>
+            <div class="form__container">
+                <p>Features: <?php echo $campSite->getFeatures() ?></p>
+            </div>
+            <div class="form__container">
+                <p>Price: <?php echo $campSite->getPrice() ?></p>
+            </div>
+
+            <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
+            <input type="date" name="check_in_date" class="calender_input">
+            <input type="date" name="check_out_date" class="calender_input">
+            <input type="submit" value="Book" name="booking_submit">
+        </form>
+    </div>
+</div>
 <?php endforeach ?>
 
-    <div id="modal-bg"></div>
+<div id="modal-bg"></div>
 
 <?php
 include_once(INC_PATH . "footer.php");

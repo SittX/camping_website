@@ -58,7 +58,8 @@ if (isset($_POST['g-recaptcha-response'])) {
 }
 ?>
 
-    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
+<div class="card__container card__container--center">
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form login--form">
         <input type="text" name="username" id="username" placeholder="Username" class="form__input">
         <input type="text" placeholder="Password" name="password" class="form__input">
         <div class="g-recaptcha" data-sitekey="<?php echo $SITE_KEY
@@ -74,4 +75,5 @@ if (isset($_POST['g-recaptcha-response'])) {
         <?php endif ?>
     </form>
 
+</div>
 <?php include(dirname(__DIR__) . "/inc/footer.php") ?>

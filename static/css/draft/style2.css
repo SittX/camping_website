@@ -200,13 +200,13 @@ figure {
     margin-bottom: 40px;
 }
 
-.h1 {
+.product-details-header {
     font-weight: 300;
     font-size: 44px;
     letter-spacing: -2px;
 }
 
-.h4 {
+.product-details-subheader {
     margin-top: 20px;
     font-weight: 200;
     font-size: 20px;
@@ -236,7 +236,7 @@ figure {
     color: rgb(27, 25, 25);
 }
 
-.description {
+.product-details-text {
     margin-top: 20px;
     font-size: 16px;
     font-weight: 300;
@@ -251,14 +251,14 @@ figure {
     color: rgb(27, 25, 25);
 }
 
-.preview-img-div {
+.preview-img-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
     margin-top: 20px;
 }
 
-.preview-img-div img {
+.preview-img-container img {
     margin: 5px;
     width: 15%;
     height: 30%;
@@ -307,7 +307,7 @@ figure {
     }
 
     .price,
-    .description,
+    .product-details-text,
     .Description {
         font-size: 16px;
         margin-top: 10px;
@@ -315,11 +315,11 @@ figure {
 }
 
 @media screen and (max-width: 500px) {
-    .h1 {
+    .product-details-header {
         font-size: 30px;
     }
 
-    .h4 {
+    .product-details-subheader {
         font-size: 20px;
         margin-top: 10px;
     }

@@ -28,7 +28,7 @@ if (isset($_POST["delete"])) {
             <tr class="table__row">
                 <td class="table__data"> <?php echo $review->getTitle(); ?></td>
                 <td class="table__data"> <?php echo $review->getMessage() ?></td>
-                <td class="table__data">
+                <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="review_id" value="<?php echo $review->getReviewId()
                                                                         ?>">

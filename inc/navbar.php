@@ -69,7 +69,7 @@ foreach ($campSiteList as $campSite) {
         </div>
 
         <div class="header__right">
-            <div class="container--flex">
+            <div class="container--horizontal">
                 <?php if (SessionManager::checkIfUserLoggedIn()): ?>
                     <a class="nav__link" href="../pages/logout.php" id="login-link">
                         <button class="btn btn--primary" id="logout-btn">Logout</button>

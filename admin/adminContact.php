@@ -33,7 +33,7 @@ if (isset($_POST["reply"])) {
                     <td class="table__data"> <?php echo $contact->getUser()->getUsername(); ?></td>
                     <td class="table__data"> <?php echo $contact->getMessage() ?></td>
                     <td class="table__data"> <?php echo $contact->getContactDate()->format("Y-m-d H:i"); ?></td>
-                    <td class="table__data">
+                    <td class="table__data action-form">
                         <div class="form__row">
                             <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                                 <input type="hidden" name="contact_id" value="<?php echo $contact->getContactId() ?>">

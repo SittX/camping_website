@@ -34,7 +34,7 @@ if (isset($_POST["delete"])) {
                 <td class="table__data"> <?php echo $booking->getCheckOut() ?></td>
                 <td class="table__data"> <?php echo $booking->getUser()->getUsername() ?></td>
                 <td class="table__data"> <?php echo $booking->getSite()->getName() ?></td>
-                <td class="table__data">
+                <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="booking_id" value="<?php echo $booking->getBookingId() ?>">
                         <input type="submit" value="Delete" name="delete" class="btn">

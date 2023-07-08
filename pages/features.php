@@ -7,6 +7,7 @@ $campSiteList = $campSiteRepo->getLists();
 $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>
 
+
 <div class="card__container--horizontal">
 <?php foreach ($campSiteList as $campSite) : ?>
 <div class="card card--horizontal">
@@ -15,7 +16,12 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
     </div>
     <div class="card__right">
             <p class="card__title"><?php echo $campSite->getName() ?></p>
-            <p>Features : <?php echo $campSite->getFeatures() ?></p>
+            <div class="features_container">
+                <?php $features = explode(", ", $campSite->getFeatures()); ?>
+                <?php foreach ($features as $feature): ?>
+                    <li class="feature"><?php echo $feature ?></li>
+                <?php endforeach; ?>
+            </div>
     </div>
 </div>
 <?php endforeach ?>

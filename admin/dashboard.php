@@ -42,7 +42,7 @@ if (isset($_POST["delete_site"])) {
                 <td class="table__data"><?php echo $user->getLastname(); ?></td>
                 <td class="table__data"><?php echo $user->getEmail(); ?></td>
                 <td class="table__data"><?php echo $user->getRank(); ?></td>
-                <td class="table__data">
+                <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="user_id" value="<?php echo $user->getUserId()
                         ?>">
@@ -75,7 +75,7 @@ if (isset($_POST["delete_site"])) {
                 <td class="table__data"> <?php echo $campsite->getLocation() ?></td>
                 <td class="table__data"> <?php echo $campsite->getPrice() ?></td>
                 <td class="table__data"> <?php echo $campsite->getFeatures() ?></td>
-                <td class="table__data">
+                <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="site_id" value="<?php echo $campsite->getSiteId()
                         ?>">

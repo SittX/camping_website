@@ -1,6 +1,8 @@
 <?php
 include_once(dirname(__DIR__) . "/config.php");
-$pageName = basename($_SERVER["REQUEST_URI"], ".php");
+//$pageName = basename($_SERVER["REQUEST_URI"], ".php");
+$pageName = basename(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), ".php");
+
 require_once("viewCounter.php");
 function retrieveViewCount()
 {
@@ -22,7 +24,6 @@ $viewCount = retrieveViewCount();
             <?php echo "<p class='you_are_here'>You are at " . $pageName . " page</p>"; ?>
 
             <?php echo "Total visitor : " . $viewCount ?>
-            <!--              <p>Total view counter - 1</p>-->
         </div>
 
         <div class="footer__column">
@@ -39,28 +40,6 @@ $viewCount = retrieveViewCount();
         <div class="footer__column">
             <p class="footer__column-title">Contact Us</p>
             <ul class="footer__link-container">
-                <!--                  <li><a class="footer__link" href="-->
-                <?php //echo PAGES_PATH . "contact.php" ?><!--"><button-->
-                <!--                              class="btn btn--primary">Contact-->
-                <!--                              admin</button></a></li>-->
-                <li>
-                    <!-- The form -->
-                    <div class="form-popup" id="myForm">
-                        <form action="/action_page.php" class="form-container">
-                            <h1>Login</h1>
-
-                            <label for="email"><b>Email</b></label>
-                            <input type="text" placeholder="Enter Email" name="email" required>
-
-                            <label for="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required>
-
-                            <button type="submit" class="btn">Login</button>
-                            <button type="button" class="btn cancel" id="sticky-form-close-btn">Close</button>
-                        </form>
-                    </div>
-                </li>
-
                 <li><a class="footer__link" href="<?php echo PAGES_PATH . "privacyPolicy.php" ?>">Privacy Policy</a>
                 </li>
                 <li><a class="footer__link" href="<?php echo PAGES_PATH . "home.php#location_map" ?>">Site

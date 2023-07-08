@@ -7,15 +7,17 @@ $campSiteList = $campSiteRepo->getLists();
 $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>
 
-    <div class="card__container--horizontal">
+    <div class="card__container card__container--center">
         <?php foreach ($campSiteList as $campSite) : ?>
-            <div class="card card--horizontal">
-                <div class="card__left">
-                    <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="card__img--horizontal" >
+            <div class="card card--vertical">
+                <div class="card__head">
+                    <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="card__img" >
                 </div>
-                <div class="card__right">
-                    <p class="card__title"><?php echo $campSite->getName() ?></p>
-                    <p>Local attractions : <?php echo $campSite->getLocalAttraction() ?></p>
+                <div class="card__body">
+                    <p class="card__title">Local attractions for <?php echo $campSite->getName() ?></p>
+                    <p class="card__text">Local attractions : <?php echo $campSite->getLocalAttraction() ?></p>
+                    <a href="../pages/campsite_details.php?site_id=<?php echo $campSite->getSiteId(); ?>"
+                       class="card__link">Details</a>
                 </div>
             </div>
         <?php endforeach ?>
