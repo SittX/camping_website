@@ -8,7 +8,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>
 
 
-<div class="card__container--horizontal">
+<div class="card__container--horizontal card--feature">
 <?php foreach ($campSiteList as $campSite) : ?>
 <div class="card card--horizontal">
     <div class="card__left">

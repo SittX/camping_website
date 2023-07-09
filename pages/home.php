@@ -25,10 +25,12 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
         exhilarating activities, and tranquil fishing sites. Begin planning your outdoor adventure today!
         <br>
         <br>
+        <span  class="desktop-text">
         Escape the daily grind and immerse yourself in the wonders of nature. Explore breathtaking
         landscapes, find solace in tranquility, and ignite your sense of adventure. Reconnect with the beauty that
         surrounds us, discover hidden treasures, and experience the transformative power of nature. Answer the call to
         explore and create lifelong memories. Embrace the great outdoors today.
+        </span>
     </p>
 
     <section id="slider__container">
@@ -55,7 +57,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
 <!--Display as cards-->
 <h3 class="section-header">Different campsite types</h3>
-<section class="card__container card__container--center">
+<section class="card__container card__container--center campsite--type">
     <?php foreach ($pitchTypes as $pitchType) : ?>
     <div class="card">
         <div class="card__head">

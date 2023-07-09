@@ -51,7 +51,7 @@ if (isset($_POST["booking_submit"])) {
             <h3 class="title" id="<?php echo $currentPitchType->getTitle() ?>">
                 <?php echo $currentPitchType->getTitle(); ?></h3>
 
-            <div class="card__container" id="campsite-card-container">
+            <div class="card__container pitchType-card-container" id="campsite-card-container">
                 <?php foreach ($campSiteList as $campSite) : ?>
                 <?php if ($campSite->getPitchType()->getTitle() === $currentPitchType->getTitle()) : ?>
                 <div class="card--horizontal card--pitchTypes"

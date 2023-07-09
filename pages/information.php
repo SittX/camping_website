@@ -18,7 +18,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
     <section class="container--vertical container--center">
         <?php foreach ($campSiteList as $campSite) : ?>
-            <div class="container--horizontal container--center-element">
+            <div class="container--horizontal container--center-element information-container">
                 <div class="card card--information">
                     <div class="card__head card__head--information">
                         <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="card__img card__img--information">
