@@ -203,6 +203,9 @@ input:focus {
     /*height: 250px;*/
     flex-basis: 45%;
 }
+.card__container{
+    margin: 1rem;
+}
 
 .card__container--horizontal {
     display: flex;
@@ -227,7 +230,11 @@ input:focus {
     height: 100%;
 }
 
-.card--pitchTypes {
+.card__container.available-site-container{
+    width: 100%;
+}
+
+.available-site {
     width: 100%;
     border: 1px solid black;
     border-radius: 5px;
@@ -1012,6 +1019,24 @@ input:focus {
     margin-bottom: 5vh;
 }
 
+/*PitchTypes and Availability page*/
+.available-site{
+    display: flex;
+    column-gap: 1rem;
+    width: 60vw;
+}
+
+.available-site-img{
+    width: 300px;
+    height: auto;
+}
+
+.available-site-content{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    padding: .5rem;
+}
 
 /******* Tablet view **********/
 @media only screen and (max-width: 900px) {
@@ -1079,16 +1104,12 @@ input:focus {
     }
 
     /*Pitch Type page*/
-    #campsite-card-container{
+    .available-site{
         width: 100%;
     }
 
-    .card--horizontal{
-        width: auto;
-    }
-
-    .card--pitchTypes{
-        width: auto;
+    .available-site-img{
+        width: 200px;
     }
 }
 
@@ -1155,15 +1176,14 @@ input:focus {
         width: 450px;
     }
 
-    /*PitchType page*/
-    .card__container {
-        display: flex;
-        column-gap: 0;
-        flex-wrap: nowrap;
+    /*Pitch Type page*/
+    .available-site{
+        width: 100%;
+        flex-direction: column;
     }
 
-    #campsite__container > .card__wrapper > .card__container.pitchType-card-container > .card--pitchTypes {
-        width: 500px;
+    .available-site-img{
+        width: 100%;
     }
 
 

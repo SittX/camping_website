@@ -45,23 +45,22 @@ if (isset($_POST["booking_submit"])) {
     <input type="text" name="campsite_location" placeholder="Search by camp location.." class="search__input"
         id="search__input">
 
-    <section id="campsite__container">
         <?php foreach ($pitchTypes as $currentPitchType) : ?>
-        <div class="card__wrapper">
             <h3 class="title" id="<?php echo $currentPitchType->getTitle() ?>">
                 <?php echo $currentPitchType->getTitle(); ?></h3>
 
-            <div class="card__container pitchType-card-container" id="campsite-card-container">
+            <div class="available-site-container">
                 <?php foreach ($campSiteList as $campSite) : ?>
                 <?php if ($campSite->getPitchType()->getTitle() === $currentPitchType->getTitle()) : ?>
-                <div class="card--horizontal card--pitchTypes"
+                <div class="available-site"
                     data-campsite-location="<?php echo $campSite->getLocation() ?>"
                     data-pitchType="<?php echo $campSite->getPitchType()->getTitle(); ?>">
-                    <div class="card__left">
-                        <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>"
-                            class="card__img--horizontal">
-                    </div>
-                    <div class="card__right">
+
+
+                    <img src="<?php echo $imageDirPath . $campSite->getImages()[0] ?>" class="available-site-img">
+
+
+                    <div class="available-site-content">
                         <p class="card__title"><?php echo $campSite->getLocation() ?></p>
                         <h4>Features</h4>
                         <p><?php echo $campSite->getFeatures() ?></p>
@@ -82,9 +81,7 @@ if (isset($_POST["booking_submit"])) {
                 <?php endforeach; ?>
 
             </div>
-        </div>
         <?php endforeach; ?>
-    </section>
 
     <h2 class="section-header">Wearable Technologies for camping</h2>
     <section class="product__container">
