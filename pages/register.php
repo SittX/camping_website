@@ -116,7 +116,7 @@ function isValidEmail($email): bool
     <!--        <input class="form__input" type="password" name="password" placeholder="Re-type Password" required />-->
     <!--    </div>-->
 
-    <input class="btn btn--primary" type="submit" value="register" name="register" />
+    <input class="btn btn--success" type="submit" value="register" name="register" />
 </form>
 
 <?php include(INC_PATH . "footer.php"); ?>

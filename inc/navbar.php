@@ -67,26 +67,30 @@ foreach ($campSiteList as $campSite) {
             </nav>
         </div>
 
-        <div class="header__right">
-            <div class="container--horizontal">
-                <?php if (SessionManager::checkIfUserLoggedIn()): ?>
-                <a class="nav__link" href="../pages/logout.php" id="login-link">
-                    <button class="btn btn--primary" id="logout-btn">Logout</button>
-                </a>
-                <?php else: ?>
-                <a class="nav__link" href="../pages/login.php" id="login-link">
-                    <button class="btn btn--primary" id="login-btn">Login</button>
-                </a>
-                <?php endif ?>
-                <a class="nav__link" href="../pages/register.php">
-                    <button class="btn btn--primary">Register</button>
-                </a>
+        <section class="header__right">
+            <button id="account-container-btn" class="btn btn--success">Account</button>
+            <div class="account-container-wrapper">
+                <div class="account-container">
+                    <?php if (SessionManager::checkIfUserLoggedIn()): ?>
+                        <a class="nav__link" href="../pages/logout.php" id="login-link">
+                            <button class="btn btn--primary" id="logout-btn">Logout</button>
+                        </a>
+                    <?php else: ?>
+                        <a class="nav__link" href="../pages/login.php" id="login-link">
+                            <button class="btn btn--primary" id="login-btn">Login</button>
+                        </a>
+                    <?php endif ?>
+                    <a class="nav__link" href="../pages/register.php">
+                        <button class="btn btn--primary">Register</button>
+                    </a>
+                </div>
             </div>
+
 
             <button id="hamburger-menu" aria-label="hamburger menu" aria-haspopup="true" aria-expanded="false">
                 <i class="fa-solid fa-bars"></i>
             </button>
-        </div>
+        </section>
     </div>
 </header>
 <script>

@@ -37,9 +37,9 @@ if (isset($_POST["reply"])) {
                         <div class="form__row">
                             <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                                 <input type="hidden" name="contact_id" value="<?php echo $contact->getContactId() ?>">
-                                <input type="submit" value="Reply" name="reply" class="btn">
+                                <input type="submit" value="Reply" name="reply" class="btn btn--success">
                             </form>
-                            <a href="mailto:<?php echo $contact->getUser()->getEmail(); ?>"><button class="btn">Send
+                            <a href="mailto:<?php echo $contact->getUser()->getEmail(); ?>"><button class="btn btn--success">Send
                                     Email</button></a>
                         </div>
                     </td>

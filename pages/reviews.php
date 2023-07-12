@@ -63,7 +63,7 @@ if (isset($_POST["submit_review"])) {
             <option value="4">Average</option>
             <option value="5">Bad</option>
         </select>
-        <input type="submit" value="Submit" name="submit_review" class="btn btn--primary">
+        <input type="submit" value="Submit" name="submit_review" class="btn btn--success">
     </form>
 </div>
 

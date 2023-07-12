@@ -28,7 +28,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
                         <p class="card__title"><?php echo $campSite->getName() ?></p>
                         <h4>Description</h4>
                         <p class="card__text"><?php echo $campSite->getDescription() ?></p>
-                        <a href="../pages/campsite_details.php?site_id=<?php echo $campSite->getSiteId(); ?>"><button class="btn btn--primary">Details</button></a>
+                        <a href="../pages/campsite_details.php?site_id=<?php echo $campSite->getSiteId(); ?>"><button class="btn btn--success">Details</button></a>
                     </div>
                 </div>
                 <div class="information-map-container">

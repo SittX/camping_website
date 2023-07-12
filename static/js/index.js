@@ -74,3 +74,33 @@ function smallImageClicked(imgId) {
     currentOnActiveEl.className = "non";
     // currentActiveId = newElement;
 }
+
+// Accept Cookie section
+const cookieBanner = document.getElementById("cookie-banner");
+const cookieAcceptBtn = document.getElementById("cookie-accept-btn");
+const cookieDeclineBtn = document.getElementById("cookie-decline-btn");
+
+cookieAcceptBtn.addEventListener("click",()=>{
+    console.log("Accept btn clicked");
+   cookieBanner.classList.add("close-btn");
+});
+
+cookieDeclineBtn.addEventListener("click",()=>{
+    console.log("Decline btn clicked");
+    cookieBanner.classList.add("close-btn");
+});
+
+// Account
+const accountBtn = document.getElementById("account-container-btn");
+const accountContainer = document.getElementById("account-container-wrapper");
+let btnClicked = false;
+
+accountBtn.addEventListener("click",()=>{
+    if(!btnClicked){
+        console.log("Button clicked");
+        accountContainer.classList.add("active");
+    }else{
+        accountContainer.classList.remove("active");
+    }
+    btnClicked = !btnClicked;
+})

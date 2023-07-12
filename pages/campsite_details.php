@@ -66,8 +66,11 @@ if (isset($_POST["booking_submit"])) {
     </div>
 
     <div class="details__btn-container">
-        <a href="<?php echo PAGES_PATH . 'booking.php?site_id=' . $site->getSiteId(); ?>">Booking</a>
-        <!-- <button class="btn btn--primary" id="booking_modal_btn">Booking</button> -->
+        <a href="<?php echo PAGES_PATH . 'booking.php?site_id=' . $site->getSiteId(); ?>">
+           <button class="btn btn--success">
+               Booking
+           </button>
+            </a>
     </div>
 
     <div class="product-details__features-container">
@@ -78,8 +81,6 @@ if (isset($_POST["booking_submit"])) {
             <?php endforeach; ?>
         </div>
     </div>
-
-
 
     <h3 class="section-title">Reviews of <?php echo $site->getName() ?></h3>
     <div class="container--feature">
@@ -107,32 +108,5 @@ if (isset($_POST["booking_submit"])) {
         <?php echo $site->getMapIframe(); ?>
     </div>
 </div>
-
-<!-- <div class="modal" id="booking-modal">
-    <div class="modal-header">
-        <div class="modal__title">Book Campsite</div>
-        <button data-close-button class="close-button">&times;</button>
-    </div>
-
-    <div class="modal-body">
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form">
-            <div class="form__container">
-                <p>Location: <?php echo $site->getLocation() ?></p>
-            </div>
-            <div class="form__container">
-                <p>Features: <?php echo $site->getFeatures() ?></p>
-            </div>
-            <div class="form__container">
-                <p>Price: <?php echo $site->getPrice() ?></p>
-            </div>
-
-            <input type="hidden" name="site_id" value="<?php echo $site->getSiteId() ?>">
-            <input type="date" name="check_in_date" class="calender_input">
-            <input type="date" name="check_out_date" class="calender_input">
-            <input type="submit" value="Book" name="booking_submit">
-        </form>
-    </div>
-</div>
-<div id="details-modal-bg"></div> -->
 
 <?php require_once(INC_PATH . "footer.php"); ?>

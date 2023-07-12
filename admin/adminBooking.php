@@ -37,7 +37,7 @@ if (isset($_POST["delete"])) {
                 <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="booking_id" value="<?php echo $booking->getBookingId() ?>">
-                        <input type="submit" value="Delete" name="delete" class="btn">
+                        <input type="submit" value="Delete" name="delete" class="btn btn--warning">
                     </form>
                 </td>
             </tr>

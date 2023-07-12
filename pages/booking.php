@@ -45,7 +45,7 @@ if (isset($_POST["submit_booking"])) {
             <label for="calender_output">Check-Out</label>
             <input type="date" name="check_out_date" id="calender_input">
         </div>
-        <input type="submit" value="Book" name="submit_booking" class="btn btn--primary">
+        <input type="submit" value="Book" name="submit_booking" class="btn btn--success">
     </form>
 </div>
 <?php

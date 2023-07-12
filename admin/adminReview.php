@@ -32,7 +32,7 @@ if (isset($_POST["delete"])) {
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="review_id" value="<?php echo $review->getReviewId()
                                                                         ?>">
-                        <input type="submit" value="Delete" name="delete" class="btn">
+                        <input type="submit" value="Delete" name="delete" class="btn btn--warning">
                     </form>
                 </td>
             </tr>

@@ -141,7 +141,7 @@ if (isset($_POST["booking_submit"])) {
                 <option value="5">Bad</option>
             </select>
             <input type="hidden" name="site_id" value="<?php echo $campSite->getSiteId() ?>">
-            <input type="submit" value="Submit" name="review_submit">
+            <input type="submit" value="Submit" name="review_submit" class="btn btn--success">
         </form>
     </div>
 </div>

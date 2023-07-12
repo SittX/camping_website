@@ -46,7 +46,7 @@ if (isset($_POST["delete_site"])) {
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="user_id" value="<?php echo $user->getUserId()
                         ?>">
-                        <input type="submit" value="Delete" name="delete_user" class="btn">
+                        <input type="submit" value="Delete" name="delete_user" class="btn btn--warning">
                     </form>
                 </td>
             </tr>
@@ -79,7 +79,7 @@ if (isset($_POST["delete_site"])) {
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="site_id" value="<?php echo $campsite->getSiteId()
                         ?>">
-                        <input type="submit" value="Delete" name="delete_site" class="btn">
+                        <input type="submit" value="Delete" name="delete_site" class="btn btn--warning">
                     </form>
                 </td>
             </tr>

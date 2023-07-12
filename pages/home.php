@@ -87,4 +87,15 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>
 
+<section id="cookie-banner-container">
+    <section id="cookie-banner">
+        <p>Our website use cookies to enhance your browsing experience. By using our website, you agree to our privacy policy including the cookie usage.</p>
+        <div class="cookie-banner-btn">
+            <button id="cookie-accept-btn" class="btn">Accept cookie</button>
+            <button id="cookie-decline-btn" class="btn">Decline cookie</button>
+        </div>
+    </section>
+</section>
+
+
 <?php require_once(INC_PATH . "footer.php") ?>
