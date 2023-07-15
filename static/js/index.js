@@ -11,7 +11,7 @@ hamburgerBtn.addEventListener("click", () => {
 
 // Search input filtering
 const searchInput = document.getElementById("search__input");
-if (searchInput != null){
+if (searchInput != null) {
     const campsites = document.querySelectorAll("#campsite-card-container .card--pitchTypes");
 
     searchInput.addEventListener("input", () => {
@@ -32,7 +32,7 @@ if (searchInput != null){
 const openModalButtons = document.querySelectorAll('[data-modal-target]');
 const closeModalButtons = document.querySelectorAll('[data-close-button]');
 const overlay = document.getElementById('modal-bg');
-if(overlay != null){
+if (overlay != null) {
 
     openModalButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -85,22 +85,24 @@ function smallImageClicked(imgId) {
 const cookieBanner = document.getElementById("cookie-banner-container");
 const cookieAcceptBtn = document.getElementById("cookie-accept-btn");
 const cookieDeclineBtn = document.getElementById("cookie-decline-btn");
+if (cookieAcceptBtn != null) {
+    cookieAcceptBtn.addEventListener("click", () => {
+        console.log("Accept btn clicked");
+        cookieBanner.classList.add("close");
+    });
 
-cookieAcceptBtn.addEventListener("click",()=>{
-    console.log("Accept btn clicked");
-    cookieBanner.classList.add("close");
-});
+    cookieDeclineBtn.addEventListener("click", () => {
+        console.log("Decline btn clicked");
+        cookieBanner.classList.add("close");
+    });
+}
 
-cookieDeclineBtn.addEventListener("click",()=>{
-    console.log("Decline btn clicked");
-    cookieBanner.classList.add("close");
-});
 
 // Account
 const accountBtn = document.getElementById("account-container-btn");
 const accountContainer = document.getElementById("account-container-wrapper");
 
-accountBtn.addEventListener("click",()=>{
+accountBtn.addEventListener("click", () => {
     console.log("Button clicked");
     accountContainer.classList.toggle("active");
 })
