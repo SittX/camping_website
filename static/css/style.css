@@ -3,7 +3,7 @@
     --black: #171717;
     --dark-grey: #333333;
     --medium-grey: #636363;
-    --light-grey: rgba(189, 187, 187, 0.825);
+    --light-grey: rgba(235, 233, 233, 0.937);
     --primary-color: #4380fc;
     --warning-color: rgb(227, 71, 71);
     --white: white;
@@ -499,9 +499,10 @@ input:focus {
     margin: 0 auto;
     padding: 1rem;
     background: var(--white);
-    border: 1px solid var(--white);
+    border: 1px solid var(--light-grey);
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(59, 58, 58, 0.82) 0px 1px 2px 0px;
+    box-shadow: 3px 2px 18px 1px rgba(0, 0, 0, 0.67);
+    background-color: var(--light-grey);
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
@@ -520,14 +521,14 @@ input:focus {
 }
 
 .form__input {
-    font-size: 14px;
-    padding: 5px;
+    font-size: 16px;
+    padding: 10px;
     display: block;
-    background: var(--white);
+    background-color: var(--light-grey);
     color: var(--dark-grey);
     width: 100%;
     border: none;
-    border-bottom: 1px solid var(--light-grey);
+    border-bottom: 1px solid black;
 }
 
 .form__row {
@@ -544,7 +545,7 @@ input:focus {
 
 .form__title {
     text-align: center;
-    font-size: 16px;
+    font-size: 1.1rem;
     font-weight: 500;
 }
 
@@ -979,7 +980,9 @@ input:focus {
 }
 
 .review__form {
-    width: 350px;
+    width: 400px;
+    /* Remove the margin to center the form */
+    margin: 2rem;
 }
 
 .review__body {
@@ -1033,6 +1036,13 @@ input:focus {
 
 .select {
     padding: .2rem;
+}
+
+.contact-us-text {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1.5rem;
 }
 
 /* Booking */

@@ -18,7 +18,8 @@ if (isset($_POST["submit_contact_message"])) {
     };
 }
 ?>
-<p class="text">We would love to hear feedbacks and suggestions from you! We look forward to supporting you and helping
+<p class="contact-us-text">We would love to hear feedbacks and suggestions from you! We look forward to supporting you
+    and helping
     you plan your next experience in the great
     outdoors.</p>
 <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" class="form">
