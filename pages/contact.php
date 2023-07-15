@@ -5,6 +5,11 @@ require_once(dirname(__DIR__) . "/inc/header.php");
 $contactDataRepo = new ContactDataRepository($connection);
 
 if (isset($_POST["submit_contact_message"])) {
+
+    if (!SessionManager::checkIfUserLoggedIn()) {
+        header("Location: login.php");
+    }
+
     $msg = htmlspecialchars($_POST["message"]);
     $userId = $_SESSION["user"]["id"];
     $contact = new Contact($msg, "NO_REPLY", new DateTime(), $userId);

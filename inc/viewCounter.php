@@ -18,14 +18,12 @@ function resetIP()
     $currentDay = date("d");
     $result = $connection->query("SELECT DAY(date) FROM User_logs LIMIT 1;");
 
-    if($result->num_rows >= 1){
+    if ($result->num_rows >= 1) {
         $dbCurrentDay = $result->fetch_assoc()["date"];
         if ($dbCurrentDay != $currentDay) {
-            $truncateQuery = "TRUNCATE TABLE User_logs";
-            $connection->query($truncateQuery);
+            $connection->query("TRUNCATE TABLE User_logs");
         }
     }
-
 }
 
 function saveIP($ip): void
@@ -52,9 +50,3 @@ function saveIP($ip): void
 
 $ip = getIpAddr();
 saveIP($ip);
-
-
-
-
-
-

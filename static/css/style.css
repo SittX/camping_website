@@ -107,11 +107,11 @@ input:focus {
     border: none;
 }
 
-.btn--success{
-   background-color: var(--navy-blue);
+.btn--success {
+    background-color: var(--primary-color);
 }
 
-.btn--warning{
+.btn--warning {
     background-color: var(--warning-color);
 }
 
@@ -215,7 +215,8 @@ input:focus {
     /*height: 250px;*/
     flex-basis: 45%;
 }
-.card__container{
+
+.card__container {
     margin: 1rem;
 }
 
@@ -242,7 +243,7 @@ input:focus {
     height: 100%;
 }
 
-.card__container.available-site-container{
+.card__container.available-site-container {
     width: 100%;
 }
 
@@ -279,11 +280,14 @@ input:focus {
     align-items: center;
 }
 
+
 .nav {
     position: relative;
 }
 
 .nav__logo {
+    font-size: 1.3rem;
+    font-weight: 800;
     margin-right: 1.2rem;
 }
 
@@ -870,7 +874,7 @@ input:focus {
 }
 
 .value {
-    color: #009688;
+    color: var(--primary-color);
     font-weight: bold;
     margin-left: 5px;
 }
@@ -911,6 +915,11 @@ input:focus {
     justify-content: start;
     column-gap: 1rem;
     padding: 1rem;
+}
+
+.non {
+    width: 85px;
+    height: 50px;
 }
 
 .details-map {
@@ -1033,18 +1042,18 @@ input:focus {
 }
 
 /*PitchTypes and Availability page*/
-.available-site{
+.available-site {
     display: flex;
     column-gap: 1rem;
     width: 60vw;
 }
 
-.available-site-img{
+.available-site-img {
     width: 300px;
     height: auto;
 }
 
-.available-site-content{
+.available-site-content {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
@@ -1052,7 +1061,7 @@ input:focus {
 }
 
 /* Cookie accept section */
-#cookie-banner-container{
+#cookie-banner-container {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -1060,7 +1069,7 @@ input:focus {
     color: white;
 }
 
-#cookie-banner{
+#cookie-banner {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1070,13 +1079,17 @@ input:focus {
     background-color: var(--cookie-container-color);
 }
 
-.cookie-banner-btn{
+.cookie-banner-btn {
     display: flex;
     column-gap: 2rem;
 }
 
+#cookie-banner-container.close {
+    display: none;
+}
+
 /*Account navbar*/
-.account-container{
+#account-container {
     position: absolute;
     width: 120px;
     height: 120px;
@@ -1090,13 +1103,14 @@ input:focus {
     z-index: 20000;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: var(--light-grey);
+    background-color: var(--nav-color);
 }
 
-.account-container-wrapper{
+#account-container-wrapper {
     display: none;
 }
-.account-container-wrapper.active{
+
+#account-container-wrapper.active {
     display: inline-block;
 }
 
@@ -1120,7 +1134,7 @@ input:focus {
         z-index: 10000;
     }
 
-    .nav.show{
+    .nav.show {
         display: flex;
     }
 
@@ -1142,35 +1156,35 @@ input:focus {
         margin: 0;
     }
 
-    .nav__link-container > li:not(:last-child) {
+    .nav__link-container>li:not(:last-child) {
         padding-bottom: 0.5rem;
         border-bottom: var(--border);
     }
 
     /*Homepage*/
     /*Showcase section */
-     .desktop-text{
-         display: none;
-     }
+    .desktop-text {
+        display: none;
+    }
 
     /*Information page*/
-    .information-container{
+    .information-container {
         display: flex;
         flex-direction: column;
     }
 
 
-    .card--information{
+    .card--information {
         width: 70%;
         margin-top: 2rem;
     }
 
     /*Pitch Type page*/
-    .available-site{
+    .available-site {
         width: 100%;
     }
 
-    .available-site-img{
+    .available-site-img {
         width: 200px;
     }
 }
@@ -1182,7 +1196,7 @@ input:focus {
     }
 
     /*Footer*/
-    .footer__bottom{
+    .footer__bottom {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1190,61 +1204,65 @@ input:focus {
     }
 
     /*Home page*/
-    .container--horizontal.available-campsite{
+    .container--horizontal.available-campsite {
         display: flex;
         flex-direction: column;
         padding: .5rem;
     }
 
-    .slide__img{
+    .slide__img {
         height: 200px;
     }
 
-    .card__container.card__container--center.campsite--type{
+    .card__container.card__container--center.campsite--type {
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
     }
-    .card{
+
+    .card {
         width: 90%;
     }
 
-    #about_us{
+    #about_us {
         display: flex;
         flex-direction: column;
         padding: 1rem;
         justify-content: center;
         align-items: center;
     }
-    #location_map{
+
+    #location_map {
         width: 98%;
     }
 
     /*Information page*/
-    .information-map-container{
+    .information-map-container {
         width: 85%;
     }
-    .information-map-container iframe{
+
+    .information-map-container iframe {
         width: 100%;
     }
 
     /*Features page*/
-    .card__container--horizontal.card--feature{
+    .card__container--horizontal.card--feature {
         display: flex;
         flex-direction: column;
     }
+
     /*Form*/
-    .form{
+    .form {
         width: 450px;
     }
 
     /*Pitch Type page*/
-    .available-site{
+    .available-site {
         width: 100%;
         flex-direction: column;
     }
 
-    .available-site-img{
+    .available-site-img {
         width: 100%;
     }
 }
