@@ -3,6 +3,7 @@ require_once(dirname(__DIR__) . "/inc/header.php");
 // $database = new DatabaseConnection();
 // $connection = $database->getConnection();
 $contactDataRepo = new ContactDataRepository($connection);
+$userDataRepo = new UserDataRepository($connection);
 
 if (isset($_POST["submit_contact_message"])) {
 
@@ -12,7 +13,8 @@ if (isset($_POST["submit_contact_message"])) {
 
     $msg = htmlspecialchars($_POST["message"]);
     $userId = $_SESSION["user"]["id"];
-    $contact = new Contact($msg, "NO_REPLY", new DateTime(), $userId);
+    $user = $userDataRepo->searchById($userId);
+    $contact = new Contact($msg, "NO_REPLY", new DateTime(), $user);
     if ($contactDataRepo->insert($contact) == 1) {
         echo "Send the contact message to the admin";
     };

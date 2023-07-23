@@ -6,8 +6,8 @@ $userRepo = new UserDataRepository($connection);
 $SITE_KEY = "6Ld_-bcmAAAAAITLLdHrs6VJPERiHKIo5WRGl_Fm";
 $SECRET_KEY = "6Ld_-bcmAAAAAHIji4wWC1MC2KSLBavfQZXDs-Kk";
 
-$failedLoginDuration = 10; // Seconds
-$loginAttemptLimit = 1;
+$failedLoginDuration = 600; // Seconds
+$loginAttemptLimit = 3;
 
 //  Check if timer is up and reset the SESSION variables related to blocking user from logging in 
 if (isset($_SESSION["locked_time"])) {
@@ -61,12 +61,16 @@ if (isset($_POST['g-recaptcha-response'])) {
 <div class="card__container card__container--center">
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form login--form">
         <input type="text" name="username" id="username" placeholder="Username" class="form__input">
-        <input type="text" placeholder="Password" name="password" class="form__input">
+        <input type="password" placeholder="Password" name="password" class="form__input">
         <div class="g-recaptcha" data-sitekey="<?php echo $SITE_KEY
         ?>"></div>
+        <?php if($_SESSION["login_attempts"] > 0) : ?>
+            <?php echo "<p class='error-msg'> Failed login attempts : ".$_SESSION["login_attempts"]."</p>"?>
+        <?php endif?>
 
         <?php if ($_SESSION["login_attempts"] > $loginAttemptLimit) : ?>
             <?php $_SESSION["locked_time"] = time(); ?>
+            <?php echo "<p class='error-msg'>Login attempts exceeded. Please try again.</p>"?>
             <?php include("timer.php"); ?>
             <input type="submit" name="login" value="Login" id="submit" style="pointer-events:none"
                    class="btn btn--primary">

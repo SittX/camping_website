@@ -63,7 +63,7 @@ foreach ($campSiteList as $campSite) {
 
 
             <button id="hamburger-menu" aria-label="hamburger menu" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-bars"></i>
+                <i class="fa fa-bars"></i>
             </button>
         </section>
     </div>

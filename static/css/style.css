@@ -13,7 +13,7 @@
     --transparant-bg-color: rgba(51, 51, 51, 0.52);
     /*--nav-color: #4c648c;*/
     --footer-color: rgba(148, 176, 220, 0.68);
-    --nav-color: rgba(148, 176, 220, 0.68);
+    --nav-color: rgb(148, 176, 220);
     --cookie-container-color: rgb(124, 133, 141);
     --border: 1px solid var(--light-grey);
     --shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
@@ -246,6 +246,10 @@ input:focus {
 .card__container.available-site-container {
     width: 100%;
 }
+.card--feature .card{
+    width: 400px;
+    height: auto;
+}
 
 .available-site {
     width: 100%;
@@ -279,7 +283,6 @@ input:focus {
     display: flex;
     align-items: center;
 }
-
 
 .nav {
     position: relative;
@@ -365,19 +368,19 @@ input:focus {
     margin-bottom: 4px
 }
 
-/*.social-links {*/
-/*    width: 40px;*/
-/*    height: 40px;*/
-/*    line-height: 40px;*/
-/*    margin-left: 6px;*/
-/*    margin-right: 0;*/
-/*    border-radius: 100%;*/
-/*    background-color: var(--transparant-bg-color)*/
-/*}*/
+.social-links {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 6px;
+    margin-right: 0;
+    border-radius: 100%;
+    background-color: var(--dark-grey)
+}
 
 .social-links {
     background-color: var(--white);
-    color: var(--light-grey);
+    color: var(--dark-grey);
     font-size: 16px;
     display: inline-block;
     line-height: 44px;
@@ -936,11 +939,10 @@ input:focus {
 
 /*Information*/
 .information-map-container {
-    height: 350px;
+    height: 380px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: space-between;
 }
 
 .information-map-container iframe {
@@ -964,10 +966,17 @@ input:focus {
     align-items: center;
     row-gap: 1rem;
     border-radius: 5px;
+    width: 400px;
+    box-shadow: var(--shadow);
 }
 
 .review__text {
     text-align: center;
+    width: 100%;
+    word-wrap: anywhere;
+}
+.review__text--bold{
+    font-weight: 800;
 }
 
 .review__title {
@@ -981,8 +990,9 @@ input:focus {
 
 .review__form {
     width: 400px;
+    margin-top: 2rem;
     /* Remove the margin to center the form */
-    margin: 2rem;
+    /*margin: 2rem;*/
 }
 
 .review__body {
@@ -1006,6 +1016,10 @@ input:focus {
 
 .feature {
     list-style-position: inside;
+}
+
+.feature-page-container{
+    display: flex;
 }
 
 /* Wearable tech */
@@ -1124,8 +1138,47 @@ input:focus {
     display: inline-block;
 }
 
+.error-msg{
+    color: red;
+}
+
 /******* Tablet view **********/
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1100px) {
+    .details__container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #campsite-showcase__container{
+        width: 100%;
+    }
+
+    .details-img{
+        width: 100%;
+    }
+
+    #product-details__container,
+    .product-details{
+        width: 100%;
+    }
+
+    .campsite-showcase__container{
+        display: flex;
+    }
+
+    .preview-img-container{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .feature-page-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .mobile-view{
+        display: none;
+    }
+
     #hamburger-menu {
         display: block;
     }
@@ -1155,6 +1208,7 @@ input:focus {
         row-gap: 1rem;
         padding: 1rem;
         width: 100%;
+        background-color: var(--nav-color);
     }
 
     .nav__link-container .nav__link {
@@ -1183,6 +1237,11 @@ input:focus {
         flex-direction: column;
     }
 
+    /* Details page */
+    .details__container {
+        flex-direction: row;
+    }
+
 
     .card--information {
         width: 70%;
@@ -1200,7 +1259,43 @@ input:focus {
 }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
+
+    /* Details page */
+    .details__container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #campsite-showcase__container{
+        width: 100%;
+    }
+
+    .details-img{
+        width: 100%;
+    }
+
+    #product-details__container,
+    .product-details{
+        width: 100%;
+    }
+
+    .campsite-showcase__container{
+        display: flex;
+    }
+
+    .preview-img-container{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .product-details__container{
+        width: 100%;
+    }
+
+    .nav__link-container{
+        background-color: var(--nav-color);
+    }
     .header__login-signup {
         display: none;
     }
@@ -1255,8 +1350,14 @@ input:focus {
         width: 100%;
     }
 
+
     /*Features page*/
     .card__container--horizontal.card--feature {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .feature-page-container{
         display: flex;
         flex-direction: column;
     }
@@ -1274,5 +1375,9 @@ input:focus {
 
     .available-site-img {
         width: 100%;
+    }
+
+    .mobile-view{
+        display: none;
     }
 }

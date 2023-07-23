@@ -7,6 +7,7 @@ $userRepo = new UserDataRepository($connection);
 if (!SessionManager::checkIfUserLoggedIn()) {
     header("Location: login.php");
 }
+$siteId= 0;
 
 if (isset($_GET["site_id"])) {
     $siteId = $_GET["site_id"];
@@ -22,7 +23,7 @@ if (isset($_POST["submit_booking"])) {
 ?>
 <div class="container">
     <h2 class="section-header">Booking for <?php echo $bookingCampSite->getName() ?></h2>
-    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form booking-form">
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>?site_id=<?php echo $_GET["site_id"]?>" method="post" class="form booking-form">
         <div class="form__container">
             <p>Location :
                 <?php echo $bookingCampSite->getLocation() ?? "" ?>

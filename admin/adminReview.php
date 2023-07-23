@@ -18,7 +18,7 @@ if (isset($_POST["delete"])) {
     <caption class="table__caption">Booking</caption>
     <thead class="table__header">
         <tr class="table__row">
-            <th class="table__column">Title</th>
+            <th class="table__column mobile-view">Title</th>
             <th class="table__column">Message</th>
             <th class="table__column">Actions</th>
         </tr>
@@ -26,7 +26,7 @@ if (isset($_POST["delete"])) {
     <tbody class="table__body">
         <?php foreach ($reviews as $review) : ?>
             <tr class="table__row">
-                <td class="table__data"> <?php echo $review->getTitle(); ?></td>
+                <td class="table__data mobile-view"> <?php echo $review->getTitle(); ?></td>
                 <td class="table__data"> <?php echo $review->getMessage() ?></td>
                 <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">

@@ -26,22 +26,22 @@ if (isset($_POST["delete_site"])) {
         <caption class="table__caption">User accounts</caption>
         <thead class="table__header">
         <tr class="table__row">
-            <th scope="col" class="table__column">UserId</th>
+            <th scope="col" class="table__column mobile-view">UserId</th>
             <th scope="col" class="table__column">Firstname</th>
-            <th scope="col" class="table__column">Lastname</th>
+            <th scope="col" class="table__column  mobile-view">Lastname</th>
             <th scope="col" class="table__column">Email</th>
-            <th scope="col" class="table__column">Rank</th>
+            <th scope="col" class="table__column mobile-view">Rank</th>
             <th scope="col" class="table__column">Actions</th>
         </tr>
         </thead>
         <tbody class="table__body">
         <?php foreach ($users as $user): ?>
             <tr class="table__row">
-                <td class="table__data"><?php echo $user->getUserId(); ?></td>
+                <td class="table__data mobile-view"><?php echo $user->getUserId(); ?></td>
                 <td class="table__data"><?php echo $user->getFirstname(); ?></td>
-                <td class="table__data"><?php echo $user->getLastname(); ?></td>
+                <td class="table__data mobile-view"><?php echo $user->getLastname(); ?></td>
                 <td class="table__data"><?php echo $user->getEmail(); ?></td>
-                <td class="table__data"><?php echo $user->getRank(); ?></td>
+                <td class="table__data mobile-view"><?php echo $user->getRank(); ?></td>
                 <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="user_id" value="<?php echo $user->getUserId()
@@ -60,10 +60,10 @@ if (isset($_POST["delete_site"])) {
         <thead class="table__header">
         <tr class="table__row">
             <th class="table__column">Camp name</th>
-            <th class="table__column">Description</th>
+            <th class="table__column mobile-view">Description</th>
             <th class="table__column">Location</th>
             <th class="table__column">Price($)</th>
-            <th class="table__column">Features</th>
+            <th class="table__column mobile-view">Features</th>
             <th class="table__column">Actions</th>
         </tr>
         </thead>
@@ -71,10 +71,10 @@ if (isset($_POST["delete_site"])) {
         <?php foreach ($campsites as $campsite): ?>
             <tr class="table__row">
                 <td class="table__data"> <?php echo $campsite->getName() ?></td>
-                <td class="table__data"> <?php echo $campsite->getDescription() ?></td>
+                <td class="table__data mobile-view"> <?php echo $campsite->getDescription() ?></td>
                 <td class="table__data"> <?php echo $campsite->getLocation() ?></td>
                 <td class="table__data"> <?php echo $campsite->getPrice() ?></td>
-                <td class="table__data"> <?php echo $campsite->getFeatures() ?></td>
+                <td class="table__data mobile-view"> <?php echo $campsite->getFeatures() ?></td>
                 <td class="table__data action-form">
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                         <input type="hidden" name="site_id" value="<?php echo $campsite->getSiteId()

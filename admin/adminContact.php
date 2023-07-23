@@ -22,7 +22,7 @@ if (isset($_POST["reply"])) {
         <tr class="table__row">
             <th class="table__column">User</th>
             <th class="table__column">Contact message</th>
-            <th class="table__column">Date</th>
+            <th class="table__column mobile-view">Date</th>
             <th class="table__column">Actions</th>
         </tr>
     </thead>
@@ -32,14 +32,14 @@ if (isset($_POST["reply"])) {
                 <tr class="table__row">
                     <td class="table__data"> <?php echo $contact->getUser()->getUsername(); ?></td>
                     <td class="table__data"> <?php echo $contact->getMessage() ?></td>
-                    <td class="table__data"> <?php echo $contact->getContactDate()->format("Y-m-d H:i"); ?></td>
+                    <td class="table__data mobile-view"> <?php echo $contact->getContactDate()->format("Y-m-d H:i"); ?></td>
                     <td class="table__data action-form">
                         <div class="form__row">
                             <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
                                 <input type="hidden" name="contact_id" value="<?php echo $contact->getContactId() ?>">
                                 <input type="submit" value="Reply" name="reply" class="btn btn--success">
                             </form>
-                            <a href="mailto:<?php echo $contact->getUser()->getEmail(); ?>"><button class="btn btn--success">Send
+                            <a href="mailto:<?php echo $contact->getUser()->getEmail(); ?>" class="mobile-view"><button class="btn btn--success">Send
                                     Email</button></a>
                         </div>
                     </td>

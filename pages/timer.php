@@ -2,8 +2,8 @@
 
 <script>
     function millisToMinutesAndSeconds(millis) {
-        var minutes = Math.floor(millis / 60000);
-        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        let minutes = Math.floor(millis / 60000);
+        let seconds = ((millis % 60000) / 1000).toFixed(0);
         return (
             seconds == 60 ?
                 (minutes + 1) + ":00" :
@@ -11,12 +11,13 @@
         );
     }
 
-    // Waiting time in Miliseconds
-    let totalWaitTime = 60000;
+    // Waiting time in Milliseconds
+    let totalWaitTime = 600000;
     let timerInterval = setInterval(() => {
         // console.log(totalWaitTime);
         if (totalWaitTime == 0) {
             clearInterval(timerInterval);
+            window.location.href="http://localhost/camping_website/pages/login.php";
             return;
         }
 

@@ -11,10 +11,13 @@ hamburgerBtn.addEventListener("click", () => {
 
 // Search input filtering
 const searchInput = document.getElementById("search__input");
+// console.log(searchInput);
 if (searchInput != null) {
-    const campsites = document.querySelectorAll("#campsite-card-container .card--pitchTypes");
+    // const campsites = document.querySelectorAll("#campsite-card-container .card--pitchTypes");
+    const campsites = document.querySelectorAll(".available-site-container .available-site");
 
     searchInput.addEventListener("input", () => {
+        // console.log("Input changed");
         let inputValue = searchInput.value.toLowerCase();
         campsites.forEach(campsite => {
             const locationValue = campsite.getAttribute("data-campsite-location").toLowerCase();
@@ -65,7 +68,7 @@ function openModal(modal) {
 function closeModal(modal) {
     if (modal == null) return;
     modal.classList.remove('active');
-    detailModalOverlay.classList.remove('active');
+    // detailModalOverlay.classList.remove('active');
 }
 
 // Detailed view image selector

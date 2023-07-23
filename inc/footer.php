@@ -32,7 +32,7 @@ $viewCount = retrieveViewCount();
                 <li><a class="footer__link" href="<?php echo PAGES_PATH . "pitchTypesAndAvailability.php" ?>">Information</a>
                 </li>
                 <li><a class="footer__link" href="<?php echo PAGES_PATH . "reviews.php" ?>">Reviews</a></li>
-                <li><a class="footer__link" href="<?php echo PAGES_PATH . "wearableTechnologies.php" ?>">Wearable
+                <li><a class="footer__link" href="<?php echo PAGES_PATH . "features.php?wearable-technology" ?>">Wearable
                         technologies</a></li>
             </ul>
         </div>
@@ -54,7 +54,7 @@ $viewCount = retrieveViewCount();
     <section class="footer__bottom">
         <div class="footer__column">
             <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
-                <a href="#">CampSite website</a>.
+                <a href="<?php echo PAGES_PATH ."home.php"?>">GWCS</a>.
             </p>
         </div>
 
