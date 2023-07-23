@@ -15,38 +15,6 @@ $userRepo = new UserDataRepository($connection);
 
 // Features List
 $features = explode(", ", $site->getFeatures());
-
-if (isset($_POST["review_submit"])) {
-    if (!SessionManager::checkIfUserLoggedIn()) {
-        echo "Cannot make review if you aren't logged in";
-        header("Location: login.php");
-    } else {
-
-        $userId = $_SESSION["user"]["id"];
-        $siteId = $_POST["site_id"];
-        $user = $userRepo->searchById($userId);
-        $campSiteRepo->searchById($siteId);
-
-        $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"]);
-        $newReview->setUser($user);
-        $newReview->setSite($site);
-        $reviewRepo->insert($newReview);
-        echo "Review has been inserted";
-    }
-}
-
-
-if (isset($_POST["booking_submit"])) {
-    if (!SessionManager::checkIfUserLoggedIn()) {
-        echo "Cannot make booking if you aren't logged in";
-        header("Location: login.php");
-    } else {
-        $siteId = $_POST["site_id"];
-        $booking = new Booking($_POST["check_in_date"], $_POST["check_out_date"], $_SESSION["user"]["id"], $siteId);
-        $bookingRepo->insert($booking);
-        echo "Booking has been inserted";
-    }
-}
 ?>
 <div class="container">
 

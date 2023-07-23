@@ -1,7 +1,8 @@
 <?php
-require_once(dirname(__DIR__) . "/inc/header.php"); ?>
+require_once(dirname(__DIR__) . "/inc/header.php");
 
-<?php
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 $campSiteRepo = new CampSiteDataRepository($connection);
 $campSiteList = $campSiteRepo->getLists();
 $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;

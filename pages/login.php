@@ -1,8 +1,10 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
 require_once(INC_PATH . "lockUser.php");
-
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 $userRepo = new UserDataRepository($connection);
+
 $SITE_KEY = "6Ld_-bcmAAAAAITLLdHrs6VJPERiHKIo5WRGl_Fm";
 $SECRET_KEY = "6Ld_-bcmAAAAAHIji4wWC1MC2KSLBavfQZXDs-Kk";
 
@@ -28,7 +30,7 @@ if (isset($_POST['g-recaptcha-response'])) {
     $captchaResponse = $_POST['g-recaptcha-response'];
 
     if (!$captchaResponse) {
-        echo '<h2>Please check the captcha form.</h2>';
+        echo '<h2 class="error-msg">Please check the captcha form.</h2>';
         exit;
     }
 

@@ -1,5 +1,7 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 
 if (isset($_POST["register"])) {
     $username = $fName = $lName = $email = "";
@@ -45,10 +47,6 @@ function checkIfEmailAlreadyExist($email): bool
     $query = "SELECT email FROM USER WHERE email = ?";
     $result = prepareAndExecuteQuery($connection, $query, "s", $email);
     return $result->num_rows() == 0;
-    if ($result->num_rows() == 0) {
-        return false;
-    }
-    return true;
 }
 
 function checkIfUsernameExist($username): bool
@@ -111,11 +109,6 @@ function isValidEmail($email): bool
             </label>
         </div>
     <?php endif; ?>
-    <!--    <div class="form__row">-->
-    <!--        <span><i aria-hidden="true" class="fa fa-lock"></i></span>-->
-    <!--        <input class="form__input" type="password" name="password" placeholder="Re-type Password" required />-->
-    <!--    </div>-->
-
     <input class="btn btn--success" type="submit" value="register" name="register" />
 </form>
 

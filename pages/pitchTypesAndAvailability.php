@@ -1,15 +1,18 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
+
 $campSiteRepo = new CampSiteDataRepository($connection);
 $reviewRepo = new ReviewDataRepository($connection);
 $userRepo = new UserDataRepository($connection);
 $pitchTypeRepo = new PitchTypeDataRepository($connection);
 $bookingRepo = new BookingDataRepository($connection);
+
 $campSiteList = $campSiteRepo->getLists();
 $pitchTypes = $pitchTypeRepo->getLists();
 $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 
-// TODO: Handle review and booking form submissions. Get the value of "campsite_id" input element in each POST request.
 if (isset($_POST["review_submit"])) {
     if (!SessionManager::checkIfUserLoggedIn()) {
         echo "Cannot make review if you aren't logged in";
@@ -26,23 +29,8 @@ if (isset($_POST["review_submit"])) {
         echo "<h2 class='section-header'>Your review has been submitted</h2>";
     }
 }
-
-
-if (isset($_POST["booking_submit"])) {
-    if (!SessionManager::checkIfUserLoggedIn()) {
-        echo "Cannot make booking if you aren't logged in";
-        header("Location: login.php");
-    } else {
-        $siteId = $_POST["site_id"];
-        //        $bookingCampSite = $campSiteRepo->searchById($siteId);
-
-        $booking = new Booking($_POST["check_in_date"], $_POST["check_out_date"], $_SESSION["user"]["id"], $siteId);
-        $bookingRepo->insert($booking);
-        echo "Booking has been inserted";
-    }
-}
-
 ?>
+
 <div class="container">
     <?php
     if (SessionManager::checkAdmin()) {

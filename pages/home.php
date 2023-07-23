@@ -1,10 +1,12 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
 include("../inc/lockUser.php");
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 $campSiteRepo = new CampSiteDataRepository($connection);
-$campSites = $campSiteRepo->getLists();
-
 $pitchTypeRepo = new PitchTypeDataRepository($connection);
+
+$campSites = $campSiteRepo->getLists();
 $pitchTypes = $pitchTypeRepo->getLists();
 $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 ?>

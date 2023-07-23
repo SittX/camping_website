@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
-// $database = new DatabaseConnection();
-// $connection = $database->getConnection();
+ $database = new DatabaseConnection();
+ $connection = $database->getConnection();
 $contactDataRepo = new ContactDataRepository($connection);
 $userDataRepo = new UserDataRepository($connection);
 
