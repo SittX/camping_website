@@ -17,7 +17,7 @@ foreach ($campSiteList as $campSite) {
     <div class="header__container">
         <div class="header__left">
             <a class="nav__logo" href="../pages/home.php">
-                GWCS
+                GWSC
             </a>
 
             <nav class="nav">

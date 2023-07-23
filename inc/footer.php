@@ -54,7 +54,7 @@ $viewCount = retrieveViewCount();
     <section class="footer__bottom">
         <div class="footer__column">
             <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
-                <a href="<?php echo PAGES_PATH ."home.php"?>">GWCS</a>.
+                <a href="<?php echo PAGES_PATH ."home.php"?>">GWSC</a>.
             </p>
         </div>
 

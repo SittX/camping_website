@@ -14,7 +14,7 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
         cozy cabin buried in the woods, we offer it all. From lakefront locations for water enthusiasts to remote
         locations for those seeking peace and quiet, our variety guarantees that every camper finds their ideal fit.
     </p>
-    <h3 class="section-header">All GWCS campsites</h3>
+    <h3 class="section-header">All GWSC campsites</h3>
 
     <section class="container--vertical container--center">
         <?php foreach ($campSiteList as $campSite) : ?>
