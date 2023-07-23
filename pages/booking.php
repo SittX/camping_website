@@ -1,5 +1,7 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 $campSiteRepo = new CampSiteDataRepository($connection);
 $bookingRepo = new BookingDataRepository($connection);
 $userRepo = new UserDataRepository($connection);
@@ -7,8 +9,8 @@ $userRepo = new UserDataRepository($connection);
 if (!SessionManager::checkIfUserLoggedIn()) {
     header("Location: login.php");
 }
-$siteId= 0;
 
+$siteId= 0;
 if (isset($_GET["site_id"])) {
     $siteId = $_GET["site_id"];
     $bookingCampSite = $campSiteRepo->searchById($siteId);

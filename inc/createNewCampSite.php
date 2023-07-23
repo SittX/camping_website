@@ -5,6 +5,8 @@ require_once(UTILS_PATH . "ImageUpload.php");
 require_once(DATA_PATH . "CampSiteDataRepository.php");
 require_once(DATA_PATH . "PitchTypeDataRepository.php");
 
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 $pitchTypeRepo = new PitchTypeDataRepository($connection);
 $campSiteRepo = new CampSiteDataRepository($connection);
 

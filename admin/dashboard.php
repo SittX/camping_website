@@ -1,8 +1,11 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 
 $userRepo = new UserDataRepository($connection);
 $campsiteRepo = new CampSiteDataRepository($connection);
+
 $users = $userRepo->getLists();
 $campsites = $campsiteRepo->getLists();
 

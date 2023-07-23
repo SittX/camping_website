@@ -4,6 +4,9 @@ require_once(dirname(__DIR__) . "/inc/header.php");
 if (!SessionManager::checkAdmin()) {
     header("Location: " . TEMPLATES_PATH . "accessDenied.php");
 }
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
+
 $bookingRepo = new BookingDataRepository($connection);
 $bookings = $bookingRepo->getLists();
 

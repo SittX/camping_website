@@ -1,5 +1,7 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
+$db = new DatabaseConnection();
+$connection = $db->getConnection();
 
 $campSiteRepo = new CampSiteDataRepository($connection);
 $siteId = $_GET["site_id"];
@@ -9,8 +11,9 @@ $imageDirPath = ".." . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR;
 $bookingRepo = new BookingDataRepository($connection);
 $reviewRepo = new ReviewDataRepository($connection);
 $reviews = $reviewRepo->searchBySiteId($siteId);
+$userRepo = new UserDataRepository($connection);
 
-// Features
+// Features List
 $features = explode(", ", $site->getFeatures());
 
 if (isset($_POST["review_submit"])) {
@@ -18,8 +21,15 @@ if (isset($_POST["review_submit"])) {
         echo "Cannot make review if you aren't logged in";
         header("Location: login.php");
     } else {
+
+        $userId = $_SESSION["user"]["id"];
         $siteId = $_POST["site_id"];
-        $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"], $_SESSION["user"]["id"], $siteId);
+        $user = $userRepo->searchById($userId);
+        $campSiteRepo->searchById($siteId);
+
+        $newReview = new Review($_POST["rating"], $_POST["review_message"], $_POST["title"]);
+        $newReview->setUser($user);
+        $newReview->setSite($site);
         $reviewRepo->insert($newReview);
         echo "Review has been inserted";
     }

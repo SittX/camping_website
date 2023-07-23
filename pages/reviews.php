@@ -1,15 +1,14 @@
 <?php
 require_once(dirname(__DIR__) . "/inc/header.php");
 
-// $db = new DatabaseConnection();
-// $connection = $db->getConnection();
+ $db = new DatabaseConnection();
+ $connection = $db->getConnection();
 $reviewRepo = new ReviewDataRepository($connection);
 $userRepo = new UserDataRepository($connection);
 $siteRepo = new CampSiteDataRepository($connection);
 $reviewList = $reviewRepo->getLists();
 $sites = $siteRepo->getLists();
 
-// TODO : Allow to write review only if the user is logged in ( check user login status )
 if (isset($_POST["submit_review"])) {
     if (!SessionManager::checkIfUserLoggedIn()) {
         header("Location: login.php");
